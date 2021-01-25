@@ -1,5 +1,5 @@
 package com.hardgforgif.dragonboatracing.testing;
 
-public class MenuUI {
+public class MenuUITest {
     
 }
