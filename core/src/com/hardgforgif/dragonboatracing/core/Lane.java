@@ -103,4 +103,32 @@ public class Lane {
         }
     }
 
+    //getters
+    public float[][] getLeftBoundary(){
+        return this.leftBoundry;
+    }
+
+    public int getLeftIterator(){
+        return this.leftIterator;
+    }
+
+    public float[][] getRightBoundary(){
+        return this.rightBoundry;
+    }
+
+    public int getRightIterator(){
+        return this.rightIterator;
+    }
+
+    public MapLayer getLeftLayer(){
+        return this.leftLayer;
+    }
+
+    public MapLayer getRightLayer(){
+        return this.rightLayer;
+    }
+
+    public Obstacle[] getObstacles(){
+        return this.obstacles;
+    }
 }

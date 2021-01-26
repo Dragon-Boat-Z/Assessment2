@@ -140,4 +140,33 @@ public class ResultsUI extends UI{
 
         }
     }
+
+    //getters
+    public Texture getBackground(){
+        return this.background;
+    }
+
+    public Sprite getBackgroundSprite(){
+        return this.backgroundSprite;
+    }
+
+    public Texture getEntryTexture(){
+        return this.entryTexture;
+    }
+
+    public Sprite[] getEntrySprites(){
+        return this.entrySprites;
+    }
+
+    public BitmapFont[] getResultFonts(){
+        return this.resultFonts;
+    }
+
+    public BitmapFont getTitleFont(){
+        return this.getTitleFont();
+    }
+
+    public BitmapFont getTimerFont(){
+        return this.timerFont;
+    }
 }
