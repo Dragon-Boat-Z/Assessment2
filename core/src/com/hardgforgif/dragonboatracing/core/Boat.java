@@ -228,4 +228,69 @@ public class Boat {
 
         boatBody.setTransform(boatBody.getPosition(), newAngle * MathUtils.degRad);
     }
+
+    //getters
+    public float getRobustness(){
+        return this.robustness;
+    }
+
+    public float getStamina(){
+        return this.stamina;
+    }
+
+    public float getManeuverability(){
+        return this.maneuverability;
+    }
+
+    public float getSpeed(){
+        return this.speed;
+    }
+
+    public float getAcceleration(){
+        return this.acceleration;
+    }
+
+    public float getcurrent_speed(){
+        return this.current_speed;
+    }
+
+    public float getTurningSpeed(){
+        return this.turningSpeed;
+    }
+
+    public float getTargetAngle(){
+        return this.targetAngle;
+    }
+
+    public Sprite getBoatSprite(){
+        return this.boatSprite;
+    }
+
+    public Texture getBoatTexture(){
+        return this.boatTexture;
+    }
+
+    public Body getBoatBody(){
+        return this.boatBody;
+    }
+
+    public TextureAtlas getTextureAtlas(){
+        return this.textureAtlas;
+    }
+
+    public Animation getAnimation(){
+        return this.animation;
+    }
+
+    public Lane getLane(){
+        return this.lane;
+    }
+
+    public float getLeftLimit(){
+        return this.leftLimit;
+    }
+
+    public float getRightLimit(){
+        return this.rightLimit;
+    }
 }
