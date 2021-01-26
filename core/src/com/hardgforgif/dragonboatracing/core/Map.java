@@ -162,4 +162,40 @@ public class Map {
         finishLineSprite.setSize(width, 100);
     }
 
+    //getters
+    public TiledMap getTiledMap(){
+        return this.tiledMap;
+    }
+
+    public TiledMapRenderer getTiledMapRenderer(){
+        return this.tiledMapRenderer;
+    }
+
+    public float getScreenWidth(){
+        return this.screenWidth;
+    }
+
+    public int getMapWidth(){
+        return this.mapWidth;
+    }
+
+    public int getMapHeight(){
+        return this.mapHeight;
+    }
+
+    public float getUnitScale(){
+        return this.unitScale;
+    }
+
+    public Lane[] getLanes(){
+        return this.lanes;
+    }
+
+    public Texture getFinishLineTexture(){
+        return this.finishLineTexture;
+    }
+
+    public Sprite getFinishLineSprite(){
+        return this.finishLineSprite;
+    }
 }

@@ -161,4 +161,41 @@ public class ChoosingUI extends UI{
     @Override
     public void drawPlayerUI(Batch batch, Player playerBoat) {
     }
+
+    //getters
+    public Texture getBackground(){
+        return this.background;
+    }
+
+    public Sprite getBackgroundSprite(){
+        return this.background_sprite;
+    }
+
+    public Texture getBar(){
+        return this.bar;
+    }
+
+    public Sprite[] getBarSprites(){
+        return this.barSprites;
+    }
+
+    public Texture getBoatTexture(){
+        return this.boatTexture;
+    }
+
+    public Sprite[] getBoatSprites(){
+        return this.boatSprites;
+    }
+
+    public BitmapFont getLabel(){
+        return this.label;
+    }
+
+    public float[] getCurrentStats(){
+        return this.currentStats;
+    }
+
+    public ScrollingBackground getScrollingBackground(){
+        return this.scrollingBackground;
+    }
 }

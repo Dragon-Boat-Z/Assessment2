@@ -67,4 +67,17 @@ public class Obstacle {
                 obstacleSprite.getScaleY(), obstacleSprite.getRotation());
         batch.end();
     }
+
+    //getters
+    public Sprite getObstacleSprite(){
+        return this.obstacleSprite;
+    }
+
+    public Texture getObstaclTexture(){
+        return this.obstacleTexture;
+    }
+
+    public Body getObstacleBody(){
+        return this.obstacleBody;
+    }
 }

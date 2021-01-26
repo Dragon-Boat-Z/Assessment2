@@ -107,8 +107,30 @@ public class MenuUI extends UI {
         ) {
             Gdx.app.exit();
         }
+    }
 
+    //getters
+    public Texture getPlayButtonActive(){
+        return this.playButtonActive;
+    }
 
+    public Texture getPlayButtonInactive(){
+        return this.playButtonInactive;
+    }
 
+    public Texture getExitButtonActive(){
+        return this.exitButtonActive;
+    }
+
+    public Texture getExitButtonInactive(){
+        return this.exitButtonInactive;
+    }
+
+    public Texture getLogo(){
+        return this.logo;
+    }
+
+    public ScrollingBackground getScrollingBackground(){
+        return this.scrollingBackground;
     }
 }

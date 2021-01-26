@@ -511,4 +511,53 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	public boolean scrolled(int amount) {
 		return false;
 	}
+
+	//getters
+	public Player getPlayer(){
+		return this.player;
+	}
+
+	public AI[] getOpponents(){
+		return this.opponents;
+	}
+
+	public Map[] getMap(){
+		return this.map;
+	}
+
+	public Batch getBatch(){
+		return this.batch;
+	}
+
+	public Batch getUIBatch(){
+		return this.UIbatch;
+	}
+
+	public OrthographicCamera getCamera(){
+		return this.camera;
+	}
+
+	public World[] getWorld(){
+		return this.world;
+	}
+
+	public Vector2 getMousePosition(){
+		return this.mousePosition;
+	}
+
+	public Vector2 getClickPosition(){
+		return this.clickPosition;
+	}
+
+	public boolean[] getPressedKeys(){
+		return this.pressedKeys;
+	}
+
+	public ArrayList<Body> getToBeRemovedBodies(){
+		return this.toBeRemovedBodies;
+	}
+
+	public ArrayList<Body> getToUpdateHealth(){
+		return this.toUpdateHealth;
+	}
 }

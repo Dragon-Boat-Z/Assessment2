@@ -76,4 +76,41 @@ public class GamePlayUI extends UI{
     public void getInput(float screenWidth, Vector2 mousePos) {
 
     }
+
+    //getters
+    public BitmapFont getPositionLabel(){
+        return this.positionLabel;
+    }
+
+    public BitmapFont getRobustnessLabel(){
+        return this.robustnessLabel;
+    }
+
+    public BitmapFont getStaminaLabel(){
+        return this.staminaLabel;
+    }
+
+    public BitmapFont getTimerLabel(){
+        return this.timerLabel;
+    }
+
+    public BitmapFont getLegLabel(){
+        return this.legLabel;
+    }
+
+    public Texture getStamina(){
+        return this.stamina;
+    }
+
+    public Texture getRobustness(){
+        return this.robustness;
+    }
+
+    public Sprite getRBar(){
+        return this.rBar;
+    }
+
+    public Sprite getSBar(){
+        return this.sBar;
+    }
 }

@@ -70,4 +70,25 @@ public class GameOverUI extends UI{
             GameData.music = Gdx.audio.newMusic(Gdx.files.internal("Vibing.ogg"));
         }
     }
+
+    //getters
+    public Texture getGameOverTexture(){
+        return this.gameOverTexture;
+    }
+
+    public Sprite getGameOverSprite(){
+        return this.gameOverSprite;
+    }
+
+    public Texture getVictoryTexture(){
+        return this.victoryTexture;
+    }
+
+    public Sprite getVictorySprite(){
+        return this.victorySprite;
+    }
+
+    public ScrollingBackground getScrollingBackground(){
+        return this.scrollingBackground;
+    }
 }

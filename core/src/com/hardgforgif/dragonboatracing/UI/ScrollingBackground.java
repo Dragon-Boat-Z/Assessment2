@@ -83,4 +83,37 @@ public class ScrollingBackground {
     public void setSpeedFixed(boolean speedFixed) {
         this.speedFixed = speedFixed;
     }
+
+    //getters
+    public Texture getImage(){
+        return this.image;
+    }
+
+    public float getY1(){
+        return this.y1;
+    }
+
+    public float getY2(){
+        return this.y2;
+    }
+
+    public int getSpeed(){
+        return this.speed;
+    }
+
+    public int getTargetSpeed(){
+        return this.targetSpeed;
+    }
+
+    public boolean getSpeedFixed(){
+        return this.speedFixed;
+    }
+
+    public float getImageScale(){
+        return this.imageScale;
+    }
+
+    public float getScaledHeight(){
+        return this.scaledHeight;
+    }
 }
