@@ -1,0 +1,7 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive", 
+    "java.project.referencedLibraries": [
+        "lib/*/.jar",
+            "C:\\Users\\James\\Desktop\\Computer Science\\ENG1\\org_junit_platform_junit-platform-console-standalone_1.6.0_junit-platform-console-standalone-1.6.0.jar"
+        ]
+}
