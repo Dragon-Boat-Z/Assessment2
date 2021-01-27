@@ -44,10 +44,10 @@ public class Boat {
         turningSpeed *= this.maneuverability / 100;
 
 
-        boatTexture = new Texture("Boat" + (boatType + 1) + ".png");
+        //boatTexture = new Texture("Boat" + (boatType + 1) + ".png");
 
-        textureAtlas = new TextureAtlas(Gdx.files.internal("Boats/Boat" + (boatType + 1) +  ".atlas"));
-        animation = new Animation(1/15f, textureAtlas.getRegions());
+        //textureAtlas = new TextureAtlas(Gdx.files.internal("Boats/Boat" + (boatType + 1) +  ".atlas"));
+        //animation = new Animation(1/15f, textureAtlas.getRegions());
 
         this.lane = lane;
     }
