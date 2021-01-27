@@ -1,3 +1,2 @@
-include 'desktop', 'core'
-include 'test'
+include 'desktop', 'core', 'tests'
 
