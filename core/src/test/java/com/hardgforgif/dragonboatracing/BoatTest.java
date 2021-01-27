@@ -27,6 +27,6 @@ public class BoatTest {
     @Test
     void boatConstructor() {
         Boat testBoat = new Boat(120f, 90f, 100f, 110f, 2, mockLane);
-        Assertions.assertEquals(10f, testBoat.getRobustness());
+        Assertions.assertEquals(120f, testBoat.getRobustness());
     }
 }
