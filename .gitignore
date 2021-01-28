@@ -126,6 +126,8 @@ Thumbs.db
 !/ios-moe/xcode/*.xcodeproj/project.pbxproj
 /ios-moe/xcode/native/
 
+settings.json
+
 ##testing
 /tests/build/reports/*
 /tests/build/tmp/*
