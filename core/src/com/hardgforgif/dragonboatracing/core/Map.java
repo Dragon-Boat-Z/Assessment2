@@ -31,10 +31,12 @@ public class Map {
     // The width of each tile in Pixels
     private float unitScale;
 
-    public Lane[] lanes = new Lane[4];
+    private Lane[] lanes = new Lane[4];
 
     private Texture finishLineTexture;
     private Sprite finishLineSprite;
+    private Texture startLineTexture;
+    private Sprite startLineSprite;
 
     public Map(String tmxFile, float width){
         tiledMap = new TmxMapLoader().load(tmxFile);
@@ -107,6 +109,12 @@ public class Map {
                 finishLineSprite.getOriginY(),
                 finishLineSprite.getWidth(), finishLineSprite.getHeight(), finishLineSprite.getScaleX(),
                 finishLineSprite.getScaleY(), finishLineSprite.getRotation());
+
+        batch.draw(startLineSprite, startLineSprite.getX(), startLineSprite.getY(), startLineSprite.getOriginX(),
+                startLineSprite.getOriginY(),
+                startLineSprite.getWidth(),startLineSprite.getHeight(),startLineSprite.getScaleX(),
+                startLineSprite.getScaleY(),startLineSprite.getRotation());
+
         batch.end();
     }
 
@@ -118,7 +126,7 @@ public class Map {
         MapLayer leftLayer = tiledMap.getLayers().get("CollisionLayerLeft");
         MapLayer rightLayer = tiledMap.getLayers().get("Lane1");
 
-        lanes[0] = new Lane(mapHeight, leftLayer, rightLayer, 30);
+        lanes[0] = new Lane(mapHeight, leftLayer, rightLayer, 25);
         lanes[0].constructBoundries(unitScale);
         lanes[0].spawnObstacles(world, mapHeight / GameData.PIXELS_TO_TILES);
 
@@ -132,14 +140,14 @@ public class Map {
         leftLayer = tiledMap.getLayers().get("Lane2");
         rightLayer = tiledMap.getLayers().get("Lane3");
 
-        lanes[2] = new Lane(mapHeight, leftLayer, rightLayer, 30);
+        lanes[2] = new Lane(mapHeight, leftLayer, rightLayer, 35);
         lanes[2].constructBoundries(unitScale);
         lanes[2].spawnObstacles(world, mapHeight / GameData.PIXELS_TO_TILES);
 
         leftLayer = tiledMap.getLayers().get("Lane3");
         rightLayer = tiledMap.getLayers().get("CollisionLayerRight");
 
-        lanes[3] = new Lane(mapHeight, leftLayer, rightLayer, 30);
+        lanes[3] = new Lane(mapHeight, leftLayer, rightLayer, 40);
         lanes[3].constructBoundries(unitScale);
         lanes[3].spawnObstacles(world, mapHeight / GameData.PIXELS_TO_TILES);
     }
@@ -162,6 +170,20 @@ public class Map {
         finishLineSprite.setSize(width, 100);
     }
 
+    public void createStartLine(String textureFile){
+        // Create the texture and the sprite of the finish line
+        startLineTexture = new Texture(textureFile);
+        startLineSprite = new Sprite(startLineTexture);
+
+        // Find out where it's going to start at, and how wide it will be, based on the limits of the edge lanes
+        float startpoint = lanes[0].getLimitsAt(350f)[0];
+        float width = lanes[3].getLimitsAt(350f)[1] - startpoint;
+
+        // Set it's new found position and width
+        startLineSprite.setPosition(startpoint, 350f);
+        startLineSprite.setSize(width, 100);
+    }
+  
     //getters
     public TiledMap getTiledMap(){
         return this.tiledMap;
@@ -198,4 +220,6 @@ public class Map {
     public Sprite getFinishLineSprite(){
         return this.finishLineSprite;
     }
+
+    public Sprite getStartLineSprite() { return this.startLineSprite; }
 }

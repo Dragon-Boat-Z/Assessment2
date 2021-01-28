@@ -12,9 +12,9 @@ import com.hardgforgif.dragonboatracing.GameData;
 import com.hardgforgif.dragonboatracing.BodyEditorLoader;
 
 public class Obstacle {
-    public Sprite obstacleSprite;
+    private Sprite obstacleSprite;
     private Texture obstacleTexture;
-    public Body obstacleBody;
+    private Body obstacleBody;
 
     public Obstacle(String textureName){
         obstacleTexture = new Texture(textureName);
@@ -80,4 +80,6 @@ public class Obstacle {
     public Body getObstacleBody(){
         return this.obstacleBody;
     }
+
+    public void setObstacleBody( Body b ) { this.obstacleBody = b; }
 }

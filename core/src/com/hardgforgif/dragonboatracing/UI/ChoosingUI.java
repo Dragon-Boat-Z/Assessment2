@@ -32,7 +32,7 @@ public class ChoosingUI extends UI{
     public ChoosingUI() {
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setSpeed(ScrollingBackground.DEFAULT_SPEED);
+        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed());
 
         background = new Texture(Gdx.files.internal("Background.png"));
         background_sprite = new Sprite(background);

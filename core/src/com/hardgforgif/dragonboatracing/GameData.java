@@ -29,8 +29,8 @@ public class GameData {
 
     // Create a list of possible boat stats
     // Ordered by: robustness, speed, acceleration, maneuverability
-    public static float[][] boatsStats = new float[][] {{120, 110, 100, 80}, {55, 110, 130, 60},
-                                                        {90, 110, 100, 130}, {65, 120, 90, 55}};
+    public static float[][] boatsStats = new float[][] {{120, 110, 100, 80}, {55, 115, 130, 60},
+                                                        {90, 100, 100, 130}, {65, 120, 90, 55}};
 
     // Store information about each lane's boat
     // Boat's starting location
@@ -41,6 +41,8 @@ public class GameData {
     public static int[] standings = new int[4];
     // Boat's penalties
     public static float[] penalties = new float[4];
+    // Player warning
+    public static boolean playerWarning = false;
     // Result of the boat as a Pair<lane number, result>
     public static List<Float[]> results = new ArrayList<>();
 
@@ -50,4 +52,6 @@ public class GameData {
 
     // Difficulty constants for the AI
     public static float[] difficulty = new float[]{0.92f, 0.97f, 1f};
+
+    //Testing.
 }

@@ -64,6 +64,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			// Create the lanes, and the obstacles in the physics game world
 			map[i].createLanes(world[i]);
 
+			// Create the start line
+			map[i].createStartLine("finishLine.png");
+
 			// Create the finish line
 			map[i].createFinishLine("finishLine.png");
 
@@ -124,7 +127,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	 * @param player The target player
 	 */
 	private void updateCamera(Player player) {
-		camera.position.set(camera.position.x, player.boatSprite.getY() + 600, 0);
+		camera.position.set(camera.position.x, player.getBoatSprite().getY() + 600, 0);
 		camera.update();
 	}
 
@@ -139,7 +142,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 			// For every AI that is ahead, increment by 1
 			for (Boat boat: opponents)
-				if  (boat.boatSprite.getY() + boat.boatSprite.getHeight() / 2 > player.boatSprite.getY() + player.boatSprite.getHeight() / 2){
+				if  (boat.getBoatSprite().getY() + boat.getBoatSprite().getHeight() / 2 > player.getBoatSprite().getY() + player.getBoatSprite().getHeight() / 2){
 					GameData.standings[0]++;
 				}
 
@@ -153,12 +156,12 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 				GameData.standings[i + 1] = 1;
 
 				// If the player is ahead, increment the standing by 1
-				if (player.boatSprite.getY() > opponents[i].boatSprite.getY())
+				if (player.getBoatSprite().getY() > opponents[i].getBoatSprite().getY())
 					GameData.standings[i + 1]++;
 
 				// For every other AI that is ahead, increment by 1
 				for (int j = 0; j < 3; j++)
-					if(opponents[j].boatSprite.getY() > opponents[i].boatSprite.getY())
+					if(opponents[j].getBoatSprite().getY() > opponents[i].getBoatSprite().getY())
 						GameData.standings[i + 1]++;
 			}
 	}
@@ -168,7 +171,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	 */
 	private void checkForResults(){
 		// If the player has finished and we haven't added his result already...
-		if(player.hasFinished() && player.acceleration > 0 && GameData.results.size() < 4){
+		if(player.hasFinished() && player.getAcceleration() > 0 && GameData.results.size() < 4){
 			// Add the result to the list with key 0, the player's lane
 			GameData.results.add(new Float[]{0f, GameData.currentTimer});
 
@@ -177,18 +180,18 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			GameData.currentUI = new ResultsUI();
 
 			// Change the player's acceleration so the boat stops moving
-			player.acceleration = -200f;
+			player.setAcceleration(-200f);
 		}
 
 		// Iterate through the AI to see if any of them finished the race
 		for (int i = 0; i < 3; i++){
 			// If the AI has finished and we haven't added his result already...
-			if(opponents[i].hasFinished() && opponents[i].acceleration > 0 && GameData.results.size() < 4){
+			if(opponents[i].hasFinished() && opponents[i].getAcceleration() > 0 && GameData.results.size() < 4){
 				// Add the result to the list with the his lane numer as key
 				GameData.results.add(new Float[]{Float.valueOf(i + 1), GameData.currentTimer});
 
 				// Change the AI's acceleration so the boat stops moving
-				opponents[i].acceleration = -200f;
+				opponents[i].setAcceleration(-200f);
 			}
 		}
 	}
@@ -198,15 +201,18 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	 */
 	private void updatePenalties() {
 		// Update the penalties for the player, if he is outside his lane
-		float boatCenter = player.boatSprite.getX() + player.boatSprite.getWidth() / 2;
-		if (!player.hasFinished() && player.robustness > 0 && (boatCenter < player.leftLimit || boatCenter > player.rightLimit)){
+		float boatCenter = player.getBoatSprite().getX() + player.getBoatSprite().getWidth() / 2;
+		if (!player.hasFinished() && player.getRobustness() > 0 && (boatCenter < player.getLeftLimit() || boatCenter > player.getRightLimit())){
 			GameData.penalties[0] += Gdx.graphics.getDeltaTime();
+			GameData.playerWarning = true;
+		} else {
+			GameData.playerWarning = false;
 		}
 
 		// Update the penalties for the opponents, if they are outside the lane
 		for (int i = 0; i < 3; i++){
-			boatCenter = opponents[i].boatSprite.getX() + opponents[i].boatSprite.getWidth() / 2;
-			if (!opponents[i].hasFinished() && opponents[i].robustness > 0 &&(boatCenter < opponents[i].leftLimit || boatCenter > opponents[i].rightLimit)){
+			boatCenter = opponents[i].getBoatSprite().getX() + opponents[i].getBoatSprite().getWidth() / 2;
+			if (!opponents[i].hasFinished() && opponents[i].getRobustness() > 0 &&(boatCenter < opponents[i].getLeftLimit() || boatCenter > opponents[i].getRightLimit())){
 				GameData.penalties[i + 1] += Gdx.graphics.getDeltaTime();
 			}
 		}
@@ -218,7 +224,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	 */
 	private void dnfRemainingBoats() {
 		// If the player hasn't finished
-		if (!player.hasFinished() && player.robustness > 0 && GameData.results.size() < 4){
+		if (!player.hasFinished() && player.getRobustness() > 0 && GameData.results.size() < 4){
 			// Add a dnf result
 			GameData.results.add(new Float[]{0f, Float.MAX_VALUE});
 
@@ -229,7 +235,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 		// Iterate through the AI and add a dnf result for any who haven't finished
 		for (int i = 0; i < 3; i++){
-			if (!opponents[i].hasFinished() && opponents[i].robustness > 0 && GameData.results.size() < 4)
+			if (!opponents[i].hasFinished() && opponents[i].getRobustness() > 0 && GameData.results.size() < 4)
 				GameData.results.add(new Float[]{Float.valueOf(i + 1), Float.MAX_VALUE});
 		}
 	}
@@ -256,14 +262,14 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 				int playerBoatType = GameData.boatTypes[0];
 				player = new Player(GameData.boatsStats[playerBoatType][0], GameData.boatsStats[playerBoatType][1],
 						GameData.boatsStats[playerBoatType][2], GameData.boatsStats[playerBoatType][3],
-						playerBoatType, map[GameData.currentLeg].lanes[0]);
+						playerBoatType, map[GameData.currentLeg].getLanes()[0]);
 				player.createBoatBody(world[GameData.currentLeg], GameData.startingPoints[0][0], GameData.startingPoints[0][1], "Boat1.json");
 				// Create the AI boats
 				for (int i = 1; i <= 3; i++){
 					int AIBoatType = GameData.boatTypes[i];
 					opponents[i - 1] = new AI(GameData.boatsStats[AIBoatType][0], GameData.boatsStats[AIBoatType][1],
 							GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
-							AIBoatType, map[GameData.currentLeg].lanes[i]);
+							AIBoatType, map[GameData.currentLeg].getLanes()[i]);
 					opponents[i - 1].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i][0], GameData.startingPoints[i][1], "Boat1.json");
 				}
 			}
@@ -272,10 +278,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			for (Body body : toBeRemovedBodies){
 				// Find the obstacle that has this body and mark it as null
 				// so it's sprite doesn't get rendered in future frames
-				for (Lane lane : map[GameData.currentLeg].lanes)
-					for (Obstacle obstacle : lane.obstacles)
-						if (obstacle.obstacleBody == body) {
-							obstacle.obstacleBody = null;
+				for (Lane lane : map[GameData.currentLeg].getLanes())
+					for (Obstacle obstacle : lane.getObstacles())
+						if (obstacle.getObstacleBody() == body) {
+							obstacle.setObstacleBody(null);
 						}
 
 				// Remove the body from the world to avoid other collisions with it
@@ -285,15 +291,15 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			// Iterate through the bodies marked to be damaged after a collision
 			for (Body body : toUpdateHealth){
 				// if it's the player body
-				if (player.boatBody == body && !player.hasFinished()){
+				if (player.getBoatBody() == body && !player.hasFinished()){
 					// Reduce the health and the speed
-					player.robustness -= 10f;
-					player.current_speed -= 30f;
+                    player.setRobustness(player.getRobustness()-10f);
+                    player.setCurrentSpeed(player.getCurrentSpeed()-10f);
 
 					// If all the health is lost
-					if(player.robustness <= 0 && GameData.results.size() < 4){
+					if(player.getRobustness() <= 0 && GameData.results.size() < 4){
 						// Remove the body from the world, but keep it's sprite in place
-						world[GameData.currentLeg].destroyBody(player.boatBody);
+						world[GameData.currentLeg].destroyBody(player.getBoatBody());
 
 						// Add a DNF result
 						GameData.results.add(new Float[]{0f, Float.MAX_VALUE});
@@ -307,13 +313,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 				// Otherwise, one of the AI has to be updated similarly
 				else {
 					for (int i = 0; i < 3; i++){
-						if (opponents[i].boatBody == body && !opponents[i].hasFinished()) {
+						if (opponents[i].getBoatBody() == body && !opponents[i].hasFinished()) {
 
-							opponents[i].robustness -= 10f;
-							opponents[i].current_speed -= 30f;
+							opponents[i].setRobustness(opponents[i].getRobustness()-10f);
+							opponents[i].setCurrentSpeed(opponents[i].getCurrentSpeed()-10f);
 
-							if(opponents[i].robustness < 0&& GameData.results.size() < 4){
-								world[GameData.currentLeg].destroyBody(opponents[i].boatBody);
+							if(opponents[i].getRobustness() < 0 && GameData.results.size() < 4){
+								world[GameData.currentLeg].destroyBody(opponents[i].getBoatBody());
 								GameData.results.add(new Float[]{Float.valueOf(i + 1), Float.MAX_VALUE});
 							}
 						}
@@ -348,9 +354,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 				opponent.drawBoat(batch);
 
 			// Render the objects that weren't destroyed yet
-			for (Lane lane : map[GameData.currentLeg].lanes)
-				for (Obstacle obstacle : lane.obstacles){
-					if (obstacle.obstacleBody != null)
+			for (Lane lane : map[GameData.currentLeg].getLanes())
+				for (Obstacle obstacle : lane.getObstacles()){
+					if (obstacle.getObstacleBody() != null)
 						obstacle.drawObstacle(batch);
 				}
 
@@ -430,6 +436,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 					// Create the finish line
 					map[i].createFinishLine("finishLine.png");
+
+					// Create the start line
+					map[i].createStartLine("finishLine.png");
 
 					// Create a new collision handler for the world
 					createContactListener(world[i]);

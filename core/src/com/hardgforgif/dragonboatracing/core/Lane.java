@@ -10,14 +10,14 @@ import com.hardgforgif.dragonboatracing.GameData;
 import java.util.Random;
 
 public class Lane {
-    public float[][] leftBoundry;
-    public int leftIterator = 0;
-    public float[][] rightBoundry;
-    public int rightIterator = 0;
+    private float[][] leftBoundry;
+    private int leftIterator = 0;
+    private float[][] rightBoundry;
+    private int rightIterator = 0;
     private MapLayer leftLayer;
     private MapLayer rightLayer;
 
-    public Obstacle[] obstacles;
+    private Obstacle[] obstacles;
 
     public Lane(int mapHeight, MapLayer left, MapLayer right, int nrObstacles){
         leftBoundry = new float[mapHeight][2];
