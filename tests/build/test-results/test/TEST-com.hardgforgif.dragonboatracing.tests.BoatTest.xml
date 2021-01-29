@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.hardgforgif.dragonboatracing.tests.BoatTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-01-28T09:57:50" hostname="Monty" time="0.053">
-  <properties/>
-  <testcase name="testConstructor" classname="com.hardgforgif.dragonboatracing.tests.BoatTest" time="0.053"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
