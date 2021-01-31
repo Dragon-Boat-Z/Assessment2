@@ -183,6 +183,7 @@ public class Map {
         startLineSprite.setPosition(startpoint, 350f);
         startLineSprite.setSize(width, 100);
     }
+    
     //getters
     public TiledMap getTiledMap(){
         return this.tiledMap;
