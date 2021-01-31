@@ -13,8 +13,8 @@ public class AI extends Boat{
     private boolean isBraking = false;
     private float detectedObstacleYPos;
 
-    public AI(float robustness, float stamina, float handling, float speed, int boatType, Lane lane) {
-        super(robustness, stamina, handling, speed, boatType, lane);
+    public AI(float robustness, float speed, float acceleration, float maneuverability, int boatType, Lane lane) {
+        super(robustness, speed, acceleration, maneuverability, boatType, lane);
         this.setRobustness(this.getRobustness()* GameData.difficulty[GameData.currentLeg]);
         this.setStamina(this.getStamina() * GameData.difficulty[GameData.currentLeg]);
         this.setManeuverability(this.getManeuverability() * GameData.difficulty[GameData.currentLeg]);
