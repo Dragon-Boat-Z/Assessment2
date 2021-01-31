@@ -17,26 +17,45 @@ public class Player extends Boat{
     public void updatePlayer(boolean[] pressedKeys, float delta) {
         // Check which angle you need to rotate to, then apply the roation
         if (pressedKeys[1])
-            targetAngle = 90f;
+            this.setTargetAngle(90f);
         else if (pressedKeys[3])
-            targetAngle = -90f;
+            this.setTargetAngle(-90f);
         else
-            targetAngle = 0f;
-        rotateBoat(targetAngle);
+            this.setTargetAngle(0f);
+        rotateBoat(this.getTargetAngle());
 
         // Move the boat
-        moveBoat();
+        if (pressedKeys[0])
+            moveBoat(1);
+        else if (pressedKeys[2])
+            moveBoat(-1);
+        else
+            moveBoat(0);
 
         // Update the sprite location to match the body
-        boatSprite.setRotation((float)Math.toDegrees(boatBody.getAngle()));
-        boatSprite.setPosition((boatBody.getPosition().x * GameData.METERS_TO_PIXELS) - boatSprite.getWidth() / 2,
-                (boatBody.getPosition().y * GameData.METERS_TO_PIXELS) - boatSprite.getHeight() / 2);
+        this.getBoatSprite().setRotation((float)Math.toDegrees(this.getBoatBody().getAngle()));
+        this.getBoatSprite().setPosition((this.getBoatBody().getPosition().x * GameData.METERS_TO_PIXELS) - this.getBoatSprite().getWidth() / 2,
+                (this.getBoatBody().getPosition().y * GameData.METERS_TO_PIXELS) - this.getBoatSprite().getHeight() / 2);
 
 
         // Update the lane limits
         updateLimits();
-        if (stamina > 30f)
-            stamina -= 1.5 * delta;
+
+        //Update stamina
+        if (this.getStamina() > 30f) //Did this mean it was impossible to reach <30% stamina before?
+            //stamina -= 1.5 * delta;
+            if(pressedKeys[0] || pressedKeys[1] || pressedKeys[3]) {
+                //Holding W, A, or D.
+                this.setStamina(this.getStamina() - 2 * delta);
+            }
+            else if(pressedKeys[2]) {
+                //Holding S.
+                this.setStamina(this.getStamina() - 1 * delta);
+            }
+            else {
+                //Not pressing any buttons.
+                this.setStamina(this.getStamina() - 1.5f * delta);
+            }
 
     }
 }

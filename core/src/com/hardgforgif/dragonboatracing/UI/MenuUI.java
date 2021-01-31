@@ -16,7 +16,7 @@ public class MenuUI extends UI {
 
     private static final int PLAY_BUTTON_WIDTH = 300;
     private static final int PLAY_BUTTON_HEIGHT = 120;
-    private static final int PLAY_BUTTON_Y = 230;
+    private static final int PLAY_BUTTON_Y = 280;
 
     private static final int EXIT_BUTTON_WIDTH = 250;
     private static final int EXIT_BUTTON_HEIGHT = 120;
@@ -28,13 +28,14 @@ public class MenuUI extends UI {
     Texture exitButtonInactive;
     Texture logo;
 
-    ScrollingBackground scrollingBackground = new ScrollingBackground();
+    ScrollingBackground scrollingBackground;
 
 
     public MenuUI(){
+        scrollingBackground = new ScrollingBackground();
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setSpeed(ScrollingBackground.DEFAULT_SPEED);
+        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed());
 
         playButtonActive = new Texture("PlaySelected.png");
         playButtonInactive = new Texture("PlayUnselected.png");

@@ -6,17 +6,17 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class ScrollingBackground {
 
-    public static final int DEFAULT_SPEED = 80;
-    public static final int ACCELERATION = 50;
-    public static final int TARGET_ACQUIRED_ACCELERATION = 200;
+    private static final int DEFAULT_SPEED = 80;
+    private static final int ACCELERATION = 50;
+    private static final int TARGET_ACQUIRED_ACCELERATION = 200;
 
-    Texture image;
-    float y1, y2;
-    int speed; // in pixels/sec
-    int targetSpeed;
-    boolean speedFixed;
-    float imageScale;
-    float scaledHeight;
+    private Texture image;
+    private float y1, y2;
+    private int speed; // in pixels/sec
+    private int targetSpeed;
+    private boolean speedFixed;
+    private float imageScale;
+    private float scaledHeight;
 
     public ScrollingBackground() {
         image = new Texture("square.png");
@@ -115,5 +115,17 @@ public class ScrollingBackground {
 
     public float getScaledHeight(){
         return this.scaledHeight;
+    }
+
+    public static int getDefaultSpeed() {
+        return DEFAULT_SPEED;
+    }
+
+    public static int getAcceleration() {
+        return ACCELERATION;
+    }
+
+    public static int getTargetAcquiredAcceleration() {
+        return TARGET_ACQUIRED_ACCELERATION;
     }
 }

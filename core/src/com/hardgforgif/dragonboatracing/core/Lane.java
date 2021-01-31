@@ -10,18 +10,18 @@ import com.hardgforgif.dragonboatracing.GameData;
 import java.util.Random;
 
 public class Lane {
-    public float[][] leftBoundry;
-    public int leftIterator = 0;
-    public float[][] rightBoundry;
-    public int rightIterator = 0;
+    private float[][] leftBoundary;
+    private int leftIterator = 0;
+    private float[][] rightBoundary;
+    private int rightIterator = 0;
     private MapLayer leftLayer;
     private MapLayer rightLayer;
 
-    public Obstacle[] obstacles;
+    private Obstacle[] obstacles;
 
     public Lane(int mapHeight, MapLayer left, MapLayer right, int nrObstacles){
-        leftBoundry = new float[mapHeight][2];
-        rightBoundry = new float[mapHeight][2];
+        leftBoundary = new float[mapHeight][2];
+        rightBoundary = new float[mapHeight][2];
 
         leftLayer = left;
         rightLayer = right;
@@ -34,15 +34,15 @@ public class Lane {
      * Construct bodies that match the lane separators
      * @param unitScale The size of a tile in pixels
      */
-    public void constructBoundries(float unitScale){
+    public void constructBoundaries(float unitScale){
         MapObjects objects = leftLayer.getObjects();
 
         for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)){
             Rectangle rectangle = rectangleObject.getRectangle();
             float height = rectangle.getY() * unitScale;
             float limit = (rectangle.getX() * unitScale) + (rectangle.getWidth() * unitScale);
-            leftBoundry[leftIterator][0] = height;
-            leftBoundry[leftIterator++][1] = limit;
+            leftBoundary[leftIterator][0] = height;
+            leftBoundary[leftIterator++][1] = limit;
         }
 
         objects = rightLayer.getObjects();
@@ -51,8 +51,8 @@ public class Lane {
             Rectangle rectangle = rectangleObject.getRectangle();
             float height = rectangle.getY() * unitScale;
             float limit = rectangle.getX() * unitScale;
-            rightBoundry[rightIterator][0] = height;
-            rightBoundry[rightIterator++][1] = limit;
+            rightBoundary[rightIterator][0] = height;
+            rightBoundary[rightIterator++][1] = limit;
         }
     }
 
@@ -60,18 +60,18 @@ public class Lane {
         float[] lst = new float[2];
         int i;
         for (i = 1; i < leftIterator; i++){
-            if (leftBoundry[i][0] > yPosition) {
+            if (leftBoundary[i][0] > yPosition) {
                 break;
             }
         }
-        lst[0] = leftBoundry[i - 1][1];
+        lst[0] = leftBoundary[i - 1][1];
 
         for (i = 1; i < rightIterator; i++){
-            if (rightBoundry[i][0] > yPosition) {
+            if (rightBoundary[i][0] > yPosition) {
                 break;
             }
         }
-        lst[1] = rightBoundry[i - 1][1];
+        lst[1] = rightBoundary[i - 1][1];
         return lst;
     }
 
@@ -105,7 +105,7 @@ public class Lane {
 
     //getters
     public float[][] getLeftBoundary(){
-        return this.leftBoundry;
+        return this.leftBoundary;
     }
 
     public int getLeftIterator(){
@@ -113,7 +113,7 @@ public class Lane {
     }
 
     public float[][] getRightBoundary(){
-        return this.rightBoundry;
+        return this.rightBoundary;
     }
 
     public int getRightIterator(){

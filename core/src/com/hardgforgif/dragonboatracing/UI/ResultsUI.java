@@ -23,8 +23,8 @@ public class ResultsUI extends UI{
     private BitmapFont timerFont;
 
     public ResultsUI(){
-        entrySprites = new Sprite[4];
-        resultFonts = new BitmapFont[4];
+        entrySprites = new Sprite[GameData.numberOfBoats];
+        resultFonts = new BitmapFont[GameData.numberOfBoats];
         titleFont = new BitmapFont();
         titleFont.getData().setScale(1.8f);
         titleFont.setColor(Color.BLACK);
@@ -41,7 +41,7 @@ public class ResultsUI extends UI{
         entryTexture = new Texture(Gdx.files.internal("Background.png"));
 
         // Give the position of all the entries in the result table
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < GameData.numberOfBoats; i++){
             entrySprites[i] = new Sprite(entryTexture);
             entrySprites[i].setSize(backgroundSprite.getWidth() - 100,50);
             entrySprites[i].setPosition(backgroundSprite.getX() + 50,
@@ -123,12 +123,12 @@ public class ResultsUI extends UI{
     @Override
     public void getInput(float screenWidth, Vector2 mousePos) {
         // When the user clicks anywhere on the screen, switch the game state as necessary
-        if(mousePos.x != 0f && mousePos.y != 0f && GameData.results.size() == 4) {
+        if(mousePos.x != 0f && mousePos.y != 0f && GameData.results.size() == GameData.numberOfBoats) {
             GameData.gamePlayState = false;
             float playerResult = GameData.results.get(GameData.standings[0] - 1)[1];
 
             // If the game is over due to player's dnf or victory, switch to the endgame screen
-            if (GameData.currentLeg == 2 || playerResult == Float.MAX_VALUE || GameData.standings[0] == 4){
+            if (GameData.currentLeg == 2 || playerResult == Float.MAX_VALUE){
                 GameData.showResultsState = false;
                 GameData.GameOverState = true;
                 GameData.currentUI = new GameOverUI();

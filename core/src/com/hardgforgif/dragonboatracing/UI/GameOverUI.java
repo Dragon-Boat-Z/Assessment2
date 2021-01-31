@@ -15,6 +15,12 @@ public class GameOverUI extends UI{
     private Sprite gameOverSprite;
     private Texture victoryTexture;
     private Sprite victorySprite;
+    private Texture firstPlaceTexture;
+    private Sprite firstPlaceSprite;
+    private Texture secondPlaceTexture;
+    private Sprite secondPlaceSprite;
+    private Texture thirdPlaceTexture;
+    private Sprite thirdPlaceSprite;
 
     private ScrollingBackground scrollingBackground = new ScrollingBackground();
 
@@ -22,19 +28,36 @@ public class GameOverUI extends UI{
     public GameOverUI(){
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setSpeed(ScrollingBackground.DEFAULT_SPEED);
+        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed());
 
         gameOverTexture = new Texture(Gdx.files.internal("gameOver.png"));
         victoryTexture = new Texture(Gdx.files.internal("victory.png"));
+        firstPlaceTexture = new Texture(Gdx.files.internal("1stPlace.png"));
+        secondPlaceTexture = new Texture(Gdx.files.internal("2ndPlace.png"));
+        thirdPlaceTexture = new Texture(Gdx.files.internal("3rdPlace.png"));
 
         gameOverSprite = new Sprite(gameOverTexture);
         victorySprite = new Sprite(victoryTexture);
+        firstPlaceSprite = new Sprite(firstPlaceTexture);
+        secondPlaceSprite = new Sprite(secondPlaceTexture);
+        thirdPlaceSprite = new Sprite(thirdPlaceTexture);
 
-        gameOverSprite.setPosition(400, 200);
+        int gameOverX = 400;
+        int gameOverY = 200;
+        gameOverSprite.setPosition(gameOverX, gameOverY);
         gameOverSprite.setSize(500, 500);
 
         victorySprite.setPosition(400, 200);
         victorySprite.setSize(500, 500);
+
+        int placementX = 400;
+        int placementY = 200;
+        firstPlaceSprite.setPosition(placementX, placementY);
+        firstPlaceSprite.setSize(500, 500);
+        secondPlaceSprite.setPosition(placementX, placementY);
+        secondPlaceSprite.setSize(500, 500);
+        thirdPlaceSprite.setPosition(placementX, placementY);
+        thirdPlaceSprite.setSize(500, 500);
 
     }
 
@@ -44,7 +67,13 @@ public class GameOverUI extends UI{
         scrollingBackground.updateAndRender(delta, batch);
         // If this was the last leg and the player won, show the victory screen
         if (GameData.currentLeg == 2 && GameData.standings[0] == 1)
-            victorySprite.draw(batch);
+            firstPlaceSprite.draw(batch);
+        else if(GameData.currentLeg == 2 && GameData.standings[0] == 2) {
+            secondPlaceSprite.draw(batch);
+        }
+        else if(GameData.currentLeg == 2 && GameData.standings[0] == 3) {
+            thirdPlaceSprite.draw(batch);
+        }
         // Otherwise, the game is over with a loss
         else
             gameOverSprite.draw(batch);

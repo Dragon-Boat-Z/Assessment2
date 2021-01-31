@@ -14,26 +14,26 @@ import com.hardgforgif.dragonboatracing.BodyEditorLoader;
 
 public class Boat {
     // Boat specs
-    public float robustness;
-    public float stamina = 120f;
-    public float maneuverability;
-    public float speed;
-    public float acceleration;
+    private float robustness;
+    private float stamina = 120f;
+    private float maneuverability;
+    private float speed;
+    private float acceleration;
 
-    public float current_speed = 20f;
-    public float turningSpeed = 0.25f;
-    public float targetAngle = 0f;
+    private float current_speed = 20f;
+    private float turningSpeed = 0.25f;
+    private float targetAngle = 0f;
 
-    public Sprite boatSprite;
-    public Texture boatTexture;
-    public Body boatBody;
+    private Sprite boatSprite;
+    private Texture boatTexture;
+    private Body boatBody;
 
     private TextureAtlas textureAtlas;
     private Animation animation;
 
-    public Lane lane;
-    public float leftLimit;
-    public float rightLimit;
+    private Lane lane;
+    private float leftLimit;
+    private float rightLimit;
 
 
     public Boat(float robustness, float speed, float acceleration, float maneuverability, int boatType, Lane lane) {
@@ -43,9 +43,7 @@ public class Boat {
         this.maneuverability = maneuverability;
         turningSpeed *= this.maneuverability / 100;
 
-
         boatTexture = new Texture("Boat" + (boatType + 1) + ".png");
-
         textureAtlas = new TextureAtlas(Gdx.files.internal("Boats/Boat" + (boatType + 1) +  ".atlas"));
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
@@ -66,6 +64,7 @@ public class Boat {
         // Define the body
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
+        System.out.println(posX + ", " + posY);
         bodyDef.position.set(posX, posY);
 
         // Create the body
@@ -105,37 +104,37 @@ public class Boat {
      */
     public void updateLimits(){
         int i;
-        for (i = 1; i < lane.leftIterator; i++){
-            if (lane.leftBoundry[i][0] > boatSprite.getY() + (boatSprite.getHeight() / 2)) {
+        for (i = 1; i < lane.getLeftIterator(); i++){
+            if (lane.getLeftBoundary()[i][0] > boatSprite.getY() + (boatSprite.getHeight() / 2)) {
                 break;
             }
         }
-        leftLimit = lane.leftBoundry[i - 1][1];
+        leftLimit = lane.getLeftBoundary()[i - 1][1];
 
-        for (i = 1; i < lane.rightIterator; i++){
-            if (lane.rightBoundry[i][0] > boatSprite.getY() + (boatSprite.getHeight() / 2)) {
+        for (i = 1; i < lane.getRightIterator(); i++){
+            if (lane.getRightBoundary()[i][0] > boatSprite.getY() + (boatSprite.getHeight() / 2)) {
                 break;
             }
         }
-        rightLimit = lane.rightBoundry[i - 1][1];
+        rightLimit = lane.getRightBoundary()[i - 1][1];
     }
 
     public float[] getLimitsAt(float yPosition){
         float[] lst = new float[2];
         int i;
-        for (i = 1; i < lane.leftIterator; i++){
-            if (lane.leftBoundry[i][0] > yPosition) {
+        for (i = 1; i < lane.getLeftIterator(); i++){
+            if (lane.getLeftBoundary()[i][0] > yPosition) {
                 break;
             }
         }
-        lst[0] = lane.leftBoundry[i - 1][1];
+        lst[0] = lane.getLeftBoundary()[i - 1][1];
 
-        for (i = 1; i < lane.rightIterator; i++){
-            if (lane.rightBoundry[i][0] > yPosition) {
+        for (i = 1; i < lane.getRightIterator(); i++){
+            if (lane.getRightBoundary()[i][0] > yPosition) {
                 break;
             }
         }
-        lst[1] = lane.rightBoundry[i - 1][1];
+        lst[1] = lane.getRightBoundary()[i - 1][1];
         return lst;
     }
 
@@ -150,14 +149,39 @@ public class Boat {
     }
 
     /**
-     * Moves the boat forward, based i=on it's rotation
+     * Moves the boat forward, based on its rotation and whether accelerating or decelerating.
+     * move_state = 1     means W is being held
+     * move_state = 0     means no key is being held
+     * move_state = -1    means S is being held.
      */
-    public void moveBoat(){
+    public void moveBoat(int move_state){
+        /*
         current_speed += 0.15f * (acceleration/90)  * (stamina/100);
         if (current_speed > speed)
             current_speed = speed;
         if (stamina < 70f && current_speed > speed * 0.8f)
             current_speed = speed * 0.8f;
+        if (current_speed < 0)
+            current_speed = 0;
+        */
+        if(stamina < 50f) {
+            //Stamina is <50%. Acceleration and top speed capped significantly.
+            current_speed += move_state * 0.15f * ((acceleration * 0.6f)/90)  * (stamina/100);
+            if (current_speed > speed * 0.6f)
+                current_speed = speed * 0.6f;
+        }
+        else if(stamina < 75f) {
+            //Stamina is >50% but <75%. Acceleration and top speed capped slightly.
+            current_speed += move_state * 0.15f * ((acceleration * 0.8f)/90)  * (stamina/100);
+            if (current_speed > speed * 0.8f)
+                current_speed = speed * 0.8f;
+        }
+        else {
+            //Stamina is >75%. Acceleration and top speed are not capped.
+            current_speed += move_state * 0.15f * (acceleration/90)  * (stamina/100);
+            if (current_speed > speed)
+                current_speed = speed;
+        }
         if (current_speed < 0)
             current_speed = 0;
 
@@ -250,7 +274,7 @@ public class Boat {
         return this.acceleration;
     }
 
-    public float getcurrent_speed(){
+    public float getCurrentSpeed(){
         return this.current_speed;
     }
 
@@ -292,5 +316,33 @@ public class Boat {
 
     public float getRightLimit(){
         return this.rightLimit;
+    }
+
+    public void setRobustness(float f) { this.robustness = f; }
+
+    public void setCurrentSpeed( float f ) { this.current_speed = f; }
+
+    public void setStamina(float stamina) {
+        this.stamina = stamina;
+    }
+
+    public void setManeuverability(float maneuverability) {
+        this.maneuverability = maneuverability;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
+
+    public void setAcceleration(float acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public void setTurningSpeed(float turningSpeed) {
+        this.turningSpeed = turningSpeed;
+    }
+
+    public void setTargetAngle(float targetAngle) {
+        this.targetAngle = targetAngle;
     }
 }

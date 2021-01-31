@@ -1,5 +1,6 @@
 package com.hardgforgif.dragonboatracing.UI;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,7 +21,7 @@ public class ChoosingUI extends UI{
     private Texture bar;
     private Sprite[] barSprites = new Sprite[4];
     private Texture boatTexture;
-    private Sprite[] boatSprites = new Sprite[4];
+    private Sprite[] boatSprites = new Sprite[GameData.numberOfBoats];
 
     private BitmapFont label;
 
@@ -32,7 +33,7 @@ public class ChoosingUI extends UI{
     public ChoosingUI() {
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setSpeed(ScrollingBackground.DEFAULT_SPEED);
+        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed());
 
         background = new Texture(Gdx.files.internal("Background.png"));
         background_sprite = new Sprite(background);
@@ -62,18 +63,19 @@ public class ChoosingUI extends UI{
         barSprites[3] = new Sprite(bar);
         barSprites[3].setPosition(430,450);
 
-        for (int i = 1; i <= 4; i++){
+        for (int i = 1; i <= GameData.numberOfBoats; i++){
             boatTexture = new Texture("Boat" + i + ".png");
             boatSprites[i - 1] = new Sprite(boatTexture);
             boatSprites[i - 1].scale(-0.6f);
-            boatSprites[i - 1].setPosition(150 + 300f * (i - 1), -200f);
+            //boatSprites[i - 1].setPosition(150 + 300f * (i - 1), -200f);
+            boatSprites[i - 1].setPosition(150 + 150f * (i - 1), -200f);
         }
     }
 
     @Override
     public void drawUI(Batch batch, Vector2 mousePos, float screenWidth, float delta) {
         //Check if the mouse is hovering over a boat, and update the bars displayed
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < GameData.numberOfBoats; i++){
             // Get the position of the boat
             float boatX = boatSprites[i].getX() + boatSprites[i].getWidth() / 2 -
                     boatSprites[i].getWidth() / 2 * boatSprites[i].getScaleX();
@@ -85,6 +87,7 @@ public class ChoosingUI extends UI{
             // Check if the mouse is hovered over it
             if (mousePos.x > boatX && mousePos.x < boatX + boatWidth &&
                     mousePos.y > boatY && mousePos.y < boatY + boatHeight){
+                //4 stats (robustness, etc.) not 4 boats (now 7).
                 currentStats[0] = GameData.boatsStats[i][0];
                 currentStats[1] = GameData.boatsStats[i][1];
                 currentStats[2] = GameData.boatsStats[i][2];
@@ -110,7 +113,7 @@ public class ChoosingUI extends UI{
 
 
         // Display the boats
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < GameData.numberOfBoats; i++){
             batch.draw(boatSprites[i], boatSprites[i].getX(), boatSprites[i].getY(), boatSprites[i].getOriginX(),
                     boatSprites[i].getOriginY(),
                     boatSprites[i].getWidth(), boatSprites[i].getHeight(), boatSprites[i].getScaleX(),
@@ -124,7 +127,7 @@ public class ChoosingUI extends UI{
     @Override
     public void getInput(float screenWidth, Vector2 mousePos) {
         // Check which of the boat was pressed
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < GameData.numberOfBoats; i++){
             float boatX = boatSprites[i].getX() + boatSprites[i].getWidth() / 2 -
                     boatSprites[i].getWidth() / 2 * boatSprites[i].getScaleX();
             float boatY = boatSprites[i].getY() + boatSprites[i].getHeight() / 2 -
@@ -138,12 +141,21 @@ public class ChoosingUI extends UI{
                 GameData.boatTypes[0] = i;
 
                 // Randomise the AI boats
-                ArrayList<Integer> intList = new ArrayList<Integer>(){{add(0); add(1); add(2); add(3);}};
+                //ArrayList<Integer> intList = new ArrayList<Integer>(){{add(0); add(1); add(2); add(3);}};
+                //intList.remove(new Integer(i));
+                //Collections.shuffle(intList);
+                //GameData.boatTypes[1] = intList.get(0);
+                //GameData.boatTypes[2] = intList.get(1);
+                //GameData.boatTypes[3] = intList.get(2);
+                ArrayList<Integer> intList = new ArrayList<Integer>();
+                for(int j = 0; j < GameData.numberOfBoats; j++) {
+                    intList.add(j);
+                }
                 intList.remove(new Integer(i));
                 Collections.shuffle(intList);
-                GameData.boatTypes[1] = intList.get(0);
-                GameData.boatTypes[2] = intList.get(1);
-                GameData.boatTypes[3] = intList.get(2);
+                for(int j = 1; j < GameData.numberOfBoats; j++) {
+                    GameData.boatTypes[j] = intList.get(j - 1);
+                }
 
                 // Change the music
                 GameData.music.stop();

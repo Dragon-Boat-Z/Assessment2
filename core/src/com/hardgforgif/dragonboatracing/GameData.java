@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.hardgforgif.dragonboatracing.UI.MenuUI;
 import com.hardgforgif.dragonboatracing.UI.UI;
+import com.hardgforgif.dragonboatracing.core.Map;
+import com.hardgforgif.dragonboatracing.core.Lane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,31 +18,70 @@ public class GameData {
     public static boolean showResultsState = false;
     public static boolean resetGameState = false;
     public static boolean GameOverState = false;
+    public static boolean pauseState = false;
+    public static boolean saveState = false;
 
     // Create the game UI and the game music
     public static UI currentUI = new MenuUI();
+    public static String previousState = "MenuUI";
+
     public static Music music = Gdx.audio.newMusic(Gdx.files.internal("Vibing.ogg"));
 
     // Set the rations between the pixels, meters and tiles
     public final static float METERS_TO_PIXELS = 100f;
     public static float TILES_TO_METERS;
     public static float PIXELS_TO_TILES;
-
+  
+    //Number of legs
+    public static int numberOfLegs = 3;
 
     // Create a list of possible boat stats
     // Ordered by: robustness, speed, acceleration, maneuverability
-    public static float[][] boatsStats = new float[][] {{120, 110, 100, 80}, {55, 110, 130, 60},
-                                                        {90, 110, 100, 130}, {65, 120, 90, 55}};
+    public static float[][] boatsStats = new float[][] {
+        {120, 110, 100, 80}, 
+        {55, 115, 130, 60},                                  
+        {90, 100, 100, 130},
+        {65, 120, 90, 65},
+        {100, 110, 100, 110},
+        {150, 125, 90, 55},
+        {90, 100, 120, 90}
+    };
 
     // Store information about each lane's boat
+    // Number of boats
+    public static int numberOfBoats = 7;
+
     // Boat's starting location
-    public static float[][] startingPoints = new float[][]{{2.3f, 4f}, {4f, 4f}, {7f, 4f},{10f, 4f}};
+    public static float[][] startingPoints = new float[][]{
+        {1.3496367f, 4f},
+        {3.072728f, 4f},
+        {4.7367244f, 4f},
+            {6.4000597f, 4f},
+        {8.0634f, 4f},
+        {9.72706f, 4f},
+        {11.451699f, 4f}
+    };
+
+    // Boat's starting location
+    public static float[][] generateStartingPoints(Map map) {
+        float[][] startingPoints = new float[numberOfBoats][2];
+        for(int i = 0; i < numberOfBoats; i++) {
+            float[] limits = map.getLanes()[i].getLimitsAt(0);
+            startingPoints[i][0] = (limits[0] + limits[1])/(2*METERS_TO_PIXELS);
+            startingPoints[i][1] = 4f;
+            System.out.println("starting: " + startingPoints[i][0]);
+        }
+        return startingPoints;
+    }
+
     // Boat's type
-    public static int[] boatTypes = new int[4];
+    public static int[] boatTypes = new int[numberOfBoats];
     // Boat's standing
-    public static int[] standings = new int[4];
+    public static int[] standings = new int[numberOfBoats];
     // Boat's penalties
-    public static float[] penalties = new float[4];
+    public static float[] penalties = new float[numberOfBoats];
+    // Player warning
+    public static boolean playerWarning = false;
     // Result of the boat as a Pair<lane number, result>
     public static List<Float[]> results = new ArrayList<>();
 
@@ -50,4 +91,6 @@ public class GameData {
 
     // Difficulty constants for the AI
     public static float[] difficulty = new float[]{0.92f, 0.97f, 1f};
+
+    //Testing.
 }
