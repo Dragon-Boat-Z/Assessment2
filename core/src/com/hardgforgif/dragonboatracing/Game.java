@@ -269,7 +269,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
                     opponents[i - 1] = new AI(GameData.boatsStats[AIBoatType][0], GameData.boatsStats[AIBoatType][1],
                             GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
                             AIBoatType, map[GameData.currentLeg].getLanes()[i]);
-                    System.out.println("starting: " + GameData.startingPoints[i][0]);
                     opponents[i - 1].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i][0], GameData.startingPoints[i][1], "Boat1.json");
                 }
 			}
