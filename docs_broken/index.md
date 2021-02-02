@@ -1,6 +1,6 @@
 ---
 # Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults {% include player.html id="UcfcIwaXtgc" %}
 
 layout: default
 title: Home
@@ -11,9 +11,6 @@ description: "Useful links for team 10"
 # ENG1 - Team 18 - DragonBoatZ
 
 We took over Hard G for GIFs game "York Dragon Boat Racing 2021".
-
-{% include player.html id="UcfcIwaXtgc" %}
-
 
 Individual PDF deliverables are available on each document page. Weekly snapshots are available through our meetings.
 
