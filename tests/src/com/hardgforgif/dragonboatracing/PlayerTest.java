@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PlayerTest {
     
     Lane mockLane;
-    Boat testPlayer;
+    Player testPlayer;
 
     float robustness = 120f;
     float speed = 90f;
@@ -29,6 +29,7 @@ public class PlayerTest {
     boolean[] turnLeft = new boolean[]{false, false, true, true};
     boolean[] moveUp = new boolean[]{true, false, false, false};
     boolean[] moveDown = new boolean[]{false,false,false,true};
+    boolean[] noMovement = new boolean[]{false,false,false,false};
 
     @Before
     public void init(){
@@ -54,18 +55,18 @@ public class PlayerTest {
     @Test
     //Struggling to pass through the keys pressed to the instance method updatePlayer
     public void testTargetingAngle(){
-        //testPlayer.updatePlayer(turnRight, 1f);
+        testPlayer.updatePlayer(turnRight, 2f);
         assertEquals(rightTurningAngle, testPlayer.getTargetAngle());
-        //testPlayer.updatePlayer(turnLeft, 1f);
+        testPlayer.updatePlayer(turnLeft, 2f);
         assertEquals(leftTurningAngle, testPlayer.getTargetAngle());
-        //testPlayer.updatePlayer([false,false,false,false],1f);
+        testPlayer.updatePlayer(noMovement,2f);
         assertEquals(0f, testPlayer.getTargetAngle());
     }
 
     @Test
     public void testVerticalBoatMovement(){
         //testPlayer.updatePlayer(moveUp, 1f);
-        assertEquals();
+        //assertEquals();
         //testPlayer.updatePlayer(moveDown, 1f);
     }
 }
