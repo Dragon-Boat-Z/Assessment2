@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.hardgforgif.dragonboatracing.tests.BoatTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-01-31T21:33:41" hostname="Monty" time="0.004">
+<testsuite name="com.hardgforgif.dragonboatracing.tests.BoatTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-02-02T16:22:25" hostname="Monty" time="0.003">
   <properties/>
-  <testcase name="testConstructor" classname="com.hardgforgif.dragonboatracing.tests.BoatTest" time="0.004"/>
+  <testcase name="testConstructor" classname="com.hardgforgif.dragonboatracing.tests.BoatTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
