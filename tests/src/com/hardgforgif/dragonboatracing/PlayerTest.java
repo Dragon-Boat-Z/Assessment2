@@ -22,6 +22,13 @@ public class PlayerTest {
     float acceleration = 100f;
     float maneuverability = 110f;
     int boatType = 3;
+    float rightTurningAngle = 90f;
+    float leftTurningAngle = -90f;
+    boolean keysPressed[];
+    boolean[] turnRight = new boolean[]{true, true, false, false};
+    boolean[] turnLeft = new boolean[]{false, false, true, true};
+    boolean[] moveUp = new boolean[]{true, false, false, false};
+    boolean[] moveDown = new boolean[]{false,false,false,true};
 
     @Before
     public void init(){
@@ -42,5 +49,23 @@ public class PlayerTest {
         assertEquals(maneuverability, testPlayer.getManeuverability());
         assertEquals(0.25f * (maneuverability / 100), testPlayer.getTurningSpeed());
         assertEquals(mockLane, testPlayer.getLane());
+    }
+
+    @Test
+    //Struggling to pass through the keys pressed to the instance method updatePlayer
+    public void testTargetingAngle(){
+        //testPlayer.updatePlayer(turnRight, 1f);
+        assertEquals(rightTurningAngle, testPlayer.getTargetAngle());
+        //testPlayer.updatePlayer(turnLeft, 1f);
+        assertEquals(leftTurningAngle, testPlayer.getTargetAngle());
+        //testPlayer.updatePlayer([false,false,false,false],1f);
+        assertEquals(0f, testPlayer.getTargetAngle());
+    }
+
+    @Test
+    public void testVerticalBoatMovement(){
+        //testPlayer.updatePlayer(moveUp, 1f);
+        assertEquals();
+        //testPlayer.updatePlayer(moveDown, 1f);
     }
 }
