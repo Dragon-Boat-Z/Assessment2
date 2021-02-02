@@ -43,4 +43,9 @@ public class AITest {
         assertEquals(0.275f, testAI.getTurningSpeed());
         assertEquals(mockLane, testAI.getLane());
     }
+
+    @Test
+    public void getGetAIPredictionVector(){
+        
+    }
 }

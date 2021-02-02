@@ -39,7 +39,7 @@ public class SaveUI extends UI {
         scrollingBackground = new ScrollingBackground();
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed()/3);
+        scrollingBackground.setTargetSpeed(ScrollingBackground.getDefaultSpeed()/3);
     }
     @Override
     public void drawUI(Batch batch, Vector2 mousePos, float screenWidth, float delta) {
