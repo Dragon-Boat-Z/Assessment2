@@ -64,7 +64,6 @@ public class Boat {
         // Define the body
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        System.out.println(posX + ", " + posY);
         bodyDef.position.set(posX, posY);
 
         // Create the body
@@ -344,5 +343,10 @@ public class Boat {
 
     public void setTargetAngle(float targetAngle) {
         this.targetAngle = targetAngle;
+    }
+
+    public void setLimits(float left, float right) {
+        this.leftLimit = left;
+        this.rightLimit = right;
     }
 }
