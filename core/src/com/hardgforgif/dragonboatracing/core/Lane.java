@@ -97,6 +97,7 @@ public class Lane {
             if (randomIndex == 0 || randomIndex == 5)
                 scale = -0.8f;
             obstacles[i] = new Obstacle("Obstacles/Obstacle" + (randomIndex + 1) + ".png");
+            obstacles[i].setObstacleType(randomIndex+1);
             float segmentStart = i * segmentLength;
             float yPos = (float) (600f + (segmentStart + Math.random() * segmentLength));
 
