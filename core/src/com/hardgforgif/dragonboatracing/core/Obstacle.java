@@ -73,7 +73,7 @@ public class Obstacle {
         return this.obstacleSprite;
     }
 
-    public Texture getObstaclTexture(){
+    public Texture getObstacleTexture(){
         return this.obstacleTexture;
     }
 

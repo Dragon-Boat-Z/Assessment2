@@ -31,6 +31,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 	private ArrayList<Body> toBeRemovedBodies = new ArrayList<>();
 	private ArrayList<Body> toUpdateHealth = new ArrayList<>();
+	private ArrayList<Body[]> toApplyPowerUps = new ArrayList<>();
 
 
 	@Override
@@ -86,21 +87,47 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	 * @param world This is the physics world in which the collisions happen
 	 */
 	private void createContactListener(World world){
+
 		world.setContactListener(new ContactListener() {
 			@Override
 			public void beginContact(Contact contact) {
+
 				Fixture fixtureA = contact.getFixtureA();
 				Fixture fixtureB = contact.getFixtureB();
+
+				//if (fixtureA.getBody().getUserData() instanceof Boat) {
+					//toUpdateHealth.add(fixtureA.getBody());
+				//} else if (fixtureB.getBody().getUserData() instanceof Boat) {
+					//toUpdateHealth.add(fixtureB.getBody());
+				//}
+				if(fixtureA.getBody().getUserData() instanceof Boat) {
+					if(fixtureB.getBody().getUserData() instanceof PowerUp) {
+						//Use the power up.
+						//Add [Boat, PowerUp] to a list of boats that need PowerUps applying to them.
+						toApplyPowerUps.add(new Body[]{fixtureA.getBody(), fixtureB.getBody()});
+						//toBeRemovedBodies.add(fixtureB.getBody());
+					}
+					else {
+						//Fixture B is not a PowerUp, so hitting it will hurt.
+						toUpdateHealth.add(fixtureA.getBody());
+					}
+				}
+				else if(fixtureB.getBody().getUserData() instanceof Boat) {
+					if(fixtureA.getBody().getUserData() instanceof PowerUp) {
+						//Use the power up.
+						//Add [Boat, PowerUp] to a list of boats that need PowerUps applying to them.
+						toApplyPowerUps.add(new Body[]{fixtureB.getBody(), fixtureA.getBody()});
+						//toBeRemovedBodies.add(fixtureA.getBody());
+					}
+					else {
+						//Fixture A is not a PowerUp, so hitting it will hurt.
+						toUpdateHealth.add(fixtureB.getBody());
+					}
+				}
 				if (fixtureA.getBody().getUserData() instanceof Obstacle) {
 					toBeRemovedBodies.add(fixtureA.getBody());
 				} else if (fixtureB.getBody().getUserData() instanceof Obstacle) {
 					toBeRemovedBodies.add(fixtureB.getBody());
-				}
-
-				if (fixtureA.getBody().getUserData() instanceof Boat) {
-					toUpdateHealth.add(fixtureA.getBody());
-				} else if (fixtureB.getBody().getUserData() instanceof Boat) {
-					toUpdateHealth.add(fixtureB.getBody());
 				}
 			}
 
@@ -273,6 +300,36 @@ public class Game extends ApplicationAdapter implements InputProcessor {
                 }
 			}
 
+			//Iterate through the PowerUps that need applying.
+			for (Body[] bodyPair : toApplyPowerUps) {
+				if(player.getBoatBody() == bodyPair[0] && !player.hasFinished()) {
+					//The boat in question is the Player.
+					for (Lane lane : map[GameData.currentLeg].getLanes()) {
+						for (Obstacle obstacle : lane.getObstacles()) {
+							if (obstacle.getObstacleBody() == bodyPair[1]) {
+								obstacle.setObstacleBody(null);
+								((PowerUp) obstacle).applyPowerUp(player);
+							}
+						}
+					}
+				}
+				else {
+					//The boat is one of the AI.
+					for(int i = 0; i < GameData.numberOfBoats - 1; i++) {
+						if (opponents[i].getBoatBody() == bodyPair[0] && !opponents[i].hasFinished()) {
+							for (Lane lane : map[GameData.currentLeg].getLanes()) {
+								for (Obstacle obstacle : lane.getObstacles()) {
+									if (obstacle.getObstacleBody() == bodyPair[1]) {
+										obstacle.setObstacleBody(null);
+										((PowerUp) obstacle).applyPowerUp(opponents[i]);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
 			// Iterate through the bodies that need to be removed from the world after a collision
 			for (Body body : toBeRemovedBodies){
 				// Find the obstacle that has this body and mark it as null
@@ -322,14 +379,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 								GameData.results.add(new Float[]{Float.valueOf(i + 1), Float.MAX_VALUE});
 							}
 						}
-
 					}
 				}
-
 			}
 
 			toBeRemovedBodies.clear();
 			toUpdateHealth.clear();
+			toApplyPowerUps.clear();
 
 			// Advance the game world physics
 			world[GameData.currentLeg].step(1f/60f, 6, 2);
