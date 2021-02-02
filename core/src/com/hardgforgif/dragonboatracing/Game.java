@@ -175,7 +175,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		}
 
 		// Iterate through all the AIs to update their standings too
-		for (int i = 0; i < GameData.numberOfBoats - 1; i++)
+		for (int i = 0; i < opponents.length; i++)
 			// If the AI hasn't finished the race...
 			if(!opponents[i].hasFinished()){
 				// Reset his position
@@ -186,7 +186,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 					GameData.standings[i + 1]++;
 
 				// For every other AI that is ahead, increment by 1
-				for (int j = 0; j < GameData.numberOfBoats - 1; j++)
+				for (int j = 0; j < opponents.length; j++)
 					if(opponents[j].getBoatSprite().getY() > opponents[i].getBoatSprite().getY())
 						GameData.standings[i + 1]++;
 			}
@@ -210,7 +210,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		}
 
 		// Iterate through the AI to see if any of them finished the race
-		for (int i = 0; i < GameData.numberOfBoats - 1; i++){
+		for (int i = 0; i < opponents.length; i++){
 			// If the AI has finished and we haven't added his result already...
 			if(opponents[i].hasFinished() && opponents[i].getAcceleration() > 0 && GameData.results.size() < GameData.numberOfBoats){
 				// Add the result to the list with the his lane numer as key
@@ -236,7 +236,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		}
 
 		// Update the penalties for the opponents, if they are outside the lane
-		for (int i = 0; i < GameData.numberOfBoats - 1; i++){
+		for (int i = 0; i < opponents.length; i++){
 			boatCenter = opponents[i].getBoatSprite().getX() + opponents[i].getBoatSprite().getWidth() / 2;
 			if (!opponents[i].hasFinished() && opponents[i].getRobustness() > 0 &&(boatCenter < opponents[i].getLeftLimit() || boatCenter > opponents[i].getRightLimit())){
 				GameData.penalties[i + 1] += Gdx.graphics.getDeltaTime();
@@ -260,7 +260,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		}
 
 		// Iterate through the AI and add a dnf result for any who haven't finished
-		for (int i = 0; i < GameData.numberOfBoats - 1; i++){
+		for (int i = 0; i < opponents.length; i++){
 		  if (!opponents[i].hasFinished() && opponents[i].getRobustness() > 0 && GameData.results.size() < GameData.numberOfBoats)
 				GameData.results.add(new Float[]{Float.valueOf(i + 1), Float.MAX_VALUE});
 		}
@@ -318,7 +318,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 				}
 				else {
 					//The boat is one of the AI.
-					for(int i = 0; i < GameData.numberOfBoats - 1; i++) {
+					for(int i = 0; i < opponents.length; i++) {
 						if (opponents[i].getBoatBody() == bodyPair[0] && !opponents[i].hasFinished()) {
 							for (Lane lane : map[GameData.currentLeg].getLanes()) {
 								for (Obstacle obstacle : lane.getObstacles()) {
@@ -350,7 +350,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			// Iterate through the bodies marked to be damaged after a collision
 			for (Body body : toUpdateHealth){
 				// if it's the player body
-				if (player.getBoatBody() == body && !player.hasFinished()){
+				if (player.getBoatBody() == body && !player.hasFinished() && !player.isInvulnerable()){
 					// Reduce the health and the speed
                     player.setRobustness(player.getRobustness()-10f);
                     player.setCurrentSpeed(player.getCurrentSpeed()-10f);
@@ -371,8 +371,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 				// Otherwise, one of the AI has to be updated similarly
 				else {
-					for (int i = 0; i < GameData.numberOfBoats - 1; i++){
-						if (opponents[i].getBoatBody() == body && !opponents[i].hasFinished()) {
+					for (int i = 0; i < opponents.length; i++){
+						if (opponents[i].getBoatBody() == body && !opponents[i].hasFinished() && !opponents[i].isInvulnerable()) {
 
 							opponents[i].setRobustness(opponents[i].getRobustness()-10f);
 							opponents[i].setCurrentSpeed(opponents[i].getCurrentSpeed()-10f);
@@ -392,8 +392,27 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 			// Advance the game world physics
 			world[GameData.currentLeg].step(1f/60f, 6, 2);
-			// Update the timer
+
+			// Update the timers
 			GameData.currentTimer += Gdx.graphics.getDeltaTime();
+			if(player.getPowerUpTimer() > 0) {
+				player.setPowerUpTimer(player.getPowerUpTimer() - Gdx.graphics.getDeltaTime());
+				if(player.getPowerUpTimer() < 0) {
+					player.setPowerUpTimer(0f);
+					player.setSpeed(GameData.boatsStats[player.getBoatType()][1]);
+					player.setInvulnerability(false);
+				}
+			}
+			for(int i = 0; i < opponents.length; i++) {
+				if(opponents[i].getPowerUpTimer() > 0) {
+					opponents[i].setPowerUpTimer(player.getPowerUpTimer() - Gdx.graphics.getDeltaTime());
+					if(opponents[i].getPowerUpTimer() < 0) {
+						opponents[i].setPowerUpTimer(0f);
+						opponents[i].setSpeed(GameData.boatsStats[opponents[i].getBoatType()][1]);
+						opponents[i].setInvulnerability(false);
+					}
+				}
+			}
 
 			// Update the player's and the AI's movement
 			player.updatePlayer(pressedKeys, Gdx.graphics.getDeltaTime());
@@ -453,10 +472,18 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		// Otherwise we need need to reset elements of the game to prepare for the next race
 		else if(GameData.resetGameState){
 			player = null;
-			for (int i = 0; i < GameData.numberOfBoats - 1; i++)
+			for (int i = 0; i < opponents.length; i++)
 				opponents[i] = null;
 			GameData.results.clear();
 			GameData.currentTimer = 0f;
+			player.setPowerUpTimer(0f);
+			player.setSpeed(GameData.boatsStats[player.getBoatType()][1]);
+			player.setInvulnerability(false);
+			for(int i = 0; i < opponents.length; i++) {
+				opponents[i].setPowerUpTimer(0f);
+				opponents[i].setSpeed(GameData.boatsStats[opponents[i].getBoatType()][1]);
+				opponents[i].setInvulnerability(false);
+			}
 			GameData.penalties = new float[GameData.numberOfBoats];
 
 			// If we're coming from the result screen, then we need to advance to the next leg

@@ -33,6 +33,9 @@ public class Boat {
     @Expose
     private int boatType;
 
+    private float powerupTimer;
+    private boolean invulnerable;
+
     private Sprite boatSprite;
     private Texture boatTexture;
     private Body boatBody;
@@ -54,6 +57,9 @@ public class Boat {
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
         this.lane = lane;
+
+        this.powerupTimer = 0;
+        this.invulnerable = false;
     }
 
     /**
@@ -171,24 +177,24 @@ public class Boat {
         */
         if(stamina < 50f) {
             //Stamina is <50%. Acceleration and top speed capped significantly.
-            current_speed += move_state * 0.15f * ((acceleration * 0.6f)/90)  * (stamina/100);
-            if (current_speed > speed * 0.6f)
-                current_speed = speed * 0.6f;
+            setCurrentSpeed(this.getCurrentSpeed() + move_state * 0.15f * ((acceleration * 0.6f)/90)  * (stamina/100)); 
+            if (this.getCurrentSpeed() > this.getSpeed() * 0.6f)
+                setCurrentSpeed(this.getSpeed() * 0.6f);
         }
         else if(stamina < 75f) {
             //Stamina is >50% but <75%. Acceleration and top speed capped slightly.
-            current_speed += move_state * 0.15f * ((acceleration * 0.8f)/90)  * (stamina/100);
-            if (current_speed > speed * 0.8f)
-                current_speed = speed * 0.8f;
+            setCurrentSpeed(this.getCurrentSpeed() + move_state * 0.15f * ((acceleration * 0.8f)/90)  * (stamina/100)); 
+            if (this.getCurrentSpeed() > this.getSpeed() * 0.8f)
+                setCurrentSpeed(this.getSpeed() * 0.8f);
         }
         else {
             //Stamina is >75%. Acceleration and top speed are not capped.
-            current_speed += move_state * 0.15f * (acceleration/90)  * (stamina/100);
-            if (current_speed > speed)
-                current_speed = speed;
+            setCurrentSpeed(this.getCurrentSpeed() + move_state * 0.15f * (acceleration/90)  * (stamina/100)); 
+            if (this.getCurrentSpeed() > this.getSpeed())
+                setCurrentSpeed(this.getSpeed());
         }
-        if (current_speed < 0)
-            current_speed = 0;
+        if (this.getCurrentSpeed() < 0)
+            setCurrentSpeed(0);
 
 
         // Get the coordinates of the center of the boat
@@ -324,6 +330,14 @@ public class Boat {
     public float getRightLimit(){
         return this.rightLimit;
     }
+    
+    public float getPowerUpTimer() {
+        return this.powerupTimer;
+    }
+
+    public boolean isInvulnerable() {
+        return this.invulnerable;
+    }
 
     public void setRobustness(float f) { this.robustness = f; }
 
@@ -353,5 +367,15 @@ public class Boat {
         this.targetAngle = targetAngle;
     }
 
-    public void setBoatType(int type) { this.boatType = type; }
+    public void setBoatType(int type) { 
+        this.boatType = type; 
+    }
+
+    public void setPowerUpTimer(float time) {
+        this.powerupTimer = time;
+    }
+
+    public void setInvulnerability(boolean toggle) {
+        this.invulnerable = toggle;
+    }
 }

@@ -11,9 +11,14 @@ public class PowerUpHealth extends PowerUp {
     @Override
     public void applyPowerUp(Boat user) {
         //Take the Boat using this PowerUp and give it a health boost.
-        int type = user.getBoatType();
-        user.setRobustness(user.getRobustness() * 1.5f);
-        if(user.getRobustness() > GameData.boatsStats[type][0]);
+        if(user.getPowerUpTimer() <= 0) {
+            int type = user.getBoatType();
+            float maxRobustness = GameData.boatsStats[type][0];
+            user.setRobustness(user.getRobustness() * 1.5f);
+            if(user.getRobustness() > maxRobustness) {
+                user.setRobustness(maxRobustness);
+            };
+        }
     }
     
 }
