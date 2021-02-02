@@ -9,8 +9,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.JsonValue;
+import com.google.gson.*;
 import com.google.gson.annotations.Expose;
-import com.google.gson.InstanceCreator;
 import com.hardgforgif.dragonboatracing.GameData;
 import com.hardgforgif.dragonboatracing.BodyEditorLoader;
 
@@ -262,6 +263,26 @@ public class Boat {
             newAngle += turningSpeed * (this.stamina / 70);
 
         boatBody.setTransform(boatBody.getPosition(), newAngle * MathUtils.degRad);
+    }
+
+    public static class BoatSerializer implements JsonSerializer<Boat> {
+        public JsonElement serialize(Boat aBoat, Type type, JsonSerializationContext jsonSerializationContext) {
+            JsonObject obj = new JsonObject();
+            obj.add("lane", new JsonPrimitive(aBoat.getLane().laneNo));
+            obj.add("robustness", new JsonPrimitive(aBoat.getRobustness()));
+            obj.add("maneuverability", new JsonPrimitive(aBoat.getManeuverability()));
+            obj.add("speed", new JsonPrimitive(aBoat.getSpeed()));
+            obj.add("acceleration", new JsonPrimitive(aBoat.getAcceleration()));
+            obj.add("stamina", new JsonPrimitive(aBoat.getStamina()));
+            obj.add("current_speed", new JsonPrimitive(aBoat.getCurrentSpeed()));
+            obj.add("turning_speed", new JsonPrimitive(aBoat.getTurningSpeed()));
+            obj.add("target_angle", new JsonPrimitive(aBoat.getTargetAngle()));
+            obj.add("boat_type", new JsonPrimitive(aBoat.getBoatType()));
+            obj.add("x_position", new JsonPrimitive(aBoat.getBoatSprite().getX()));
+            obj.add("y_position", new JsonPrimitive(aBoat.getBoatSprite().getY()));
+
+            return obj;
+        }
     }
 
     //getters

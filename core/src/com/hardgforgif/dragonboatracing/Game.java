@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Game extends ApplicationAdapter implements InputProcessor {
 	private Player player;
 	private AI[] opponents = new AI[6];
-	private Map[] map;
+	private static Map[] map;
 	private Batch batch;
 	private Batch UIbatch;
 	private OrthographicCamera camera;
@@ -679,8 +679,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		return this.opponents;
 	}
 
-	public Map[] getMap(){
-		return this.map;
+	public static Map[] getMap(){
+		return map;
 	}
 
 	public Batch getBatch(){

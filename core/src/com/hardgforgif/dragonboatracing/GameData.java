@@ -2,9 +2,9 @@ package com.hardgforgif.dragonboatracing;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.hardgforgif.dragonboatracing.UI.MenuUI;
 import com.hardgforgif.dragonboatracing.UI.UI;
 import com.hardgforgif.dragonboatracing.core.Boat;
@@ -12,6 +12,9 @@ import com.hardgforgif.dragonboatracing.core.Lane;
 import com.hardgforgif.dragonboatracing.core.Map;
 
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,11 +103,31 @@ public class GameData {
     // Difficulty constants for the AI
     public static float[] difficulty = new float[]{0.92f, 0.97f, 1f};
 
-    public static boolean saveGame(int saveSlot) {
+    public static boolean saveGame(int saveSlot, Map map) throws IOException {
+        // Create gson builder for converting from Java objects to Json format.
         GsonBuilder gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setLenient().setPrettyPrinting();
+        // Allocate custom serializers for Lane, Boat and Obstacle classes.
         gson.registerTypeAdapter(Lane.class, new Lane.LaneSerializer());
-        System.out.println(gson.create().toJson(boats));
+        gson.registerTypeAdapter(Boat.class, new Boat.BoatSerializer());
+        gson.registerTypeAdapter(Map.class, new Map.MapSerializer());
+
+        // Create Json object for GameData.
+        JsonObject data = new JsonObject();
+        data.add("leg_number",new JsonPrimitive(GameData.currentLeg));
+        data.add("current_timer", new JsonPrimitive(GameData.currentTimer));
+
+        // Create file handler with set file path in Assessment2/save_data.
+        FileHandle fileHandle = Gdx.files.internal("save_data/save_state_" + saveSlot + ".json");
+        String absolutePath = fileHandle.file().getAbsolutePath();
+        FileWriter writer = new FileWriter(absolutePath);
+
+        // Write all json objects to the file.
+        writer.write("{\n\"boats\": " + gson.create().toJson(boats) + ",\n\"game_data\":" + gson.create().toJson(data) + ",\n\n\"map\": " + gson.create().toJson(map) + "\n}");
+        writer.close();
+
+        // Returns true if no IOException is thrown.
         return true;
     }
+
     //Testing.
 }

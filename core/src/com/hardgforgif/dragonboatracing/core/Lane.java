@@ -111,6 +111,16 @@ public class Lane {
         }
     }
 
+    /**
+     * JSON Serializer for Lane, will just return laneNo (0-6)
+     * @return laneNo in JSON form.
+     */
+    public static class LaneSerializer implements JsonSerializer<Lane> {
+        public JsonElement serialize(Lane aLane, Type type, JsonSerializationContext jsonSerializationContext) {
+            return new JsonPrimitive(aLane.laneNo);
+        }
+    }
+
     //getters
     public float[][] getLeftBoundary(){
         return this.leftBoundary;
@@ -140,9 +150,5 @@ public class Lane {
         return this.obstacles;
     }
 
-    public static class LaneSerializer implements JsonSerializer<Lane> {
-        public JsonElement serialize(Lane aLane, Type type, JsonSerializationContext jsonSerializationContext) {
-            return new JsonPrimitive(aLane.laneNo);
-        }
-    }
+
 }
