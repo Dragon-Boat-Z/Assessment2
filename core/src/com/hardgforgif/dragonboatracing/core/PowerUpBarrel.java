@@ -9,6 +9,9 @@ public class PowerUpBarrel extends PowerUp {
     @Override
     public void applyPowerUp(Boat user) {
         //Take the Boat using this PowerUp and drop a barrel in a neighbouring Lane.
+        if(user.getPowerUpTimer() <= 0) {
+            
+        }
     }
     
 }

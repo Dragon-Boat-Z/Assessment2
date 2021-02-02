@@ -9,6 +9,9 @@ public class PowerUpStamina extends PowerUp {
     @Override
     public void applyPowerUp(Boat user) {
         //Take the Boat using this PowerUp and give it a stamina boost.
+        if(user.getPowerUpTimer() <= 0) {
+            user.setStamina(user.getStamina() * 1.5f);
+        }
     }
     
 }
