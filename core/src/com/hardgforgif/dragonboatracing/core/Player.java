@@ -37,10 +37,6 @@ public class Player extends Boat{
         this.getBoatSprite().setPosition((this.getBoatBody().getPosition().x * GameData.METERS_TO_PIXELS) - this.getBoatSprite().getWidth() / 2,
                 (this.getBoatBody().getPosition().y * GameData.METERS_TO_PIXELS) - this.getBoatSprite().getHeight() / 2);
 
-
-        // Update the lane limits
-        updateLimits();
-
         //Update stamina
         if (this.getStamina() > 30f) //Did this mean it was impossible to reach <30% stamina before?
             //stamina -= 1.5 * delta;

@@ -199,9 +199,6 @@ public class AI extends Boat{
             // 'hold S'
             moveBoat(-1);
 
-        // Update the limits
-        updateLimits();
-
         //if (stamina > 30f)
             //stamina -= 1.5 * delta;
         //Update stamina

@@ -109,34 +109,50 @@ public class SaveUI extends UI {
         if (clickPos.x < x + SLOT_BUTTON_WIDTH && clickPos.x > x) {
             // Slot 1
             if(clickPos.y < SLOT_1_Y + SLOT_BUTTON_HEIGHT && clickPos.y > SLOT_1_Y) {
-                // Save in slot 1
-                try{
-                    if(GameData.saveGame(1, Game.getMap()[GameData.currentLeg])) System.out.println("Saved in slot 1.");
-                } catch(IOException e) {
-                    System.out.println("IOException caught.");
-                }
+                if(GameData.saveState) {
+                    // Save in slot 1
+                    try {
+                        if (GameData.saveGame(1, Game.getMap()[GameData.currentLeg]))
+                            System.out.println("Saved in slot 1.");
+                    } catch (IOException e) {
+                        System.out.println("IOException caught.");
+                    }
+                } else if(GameData.loadState) {
+                    // Load from slot 1
 
+                }
             }
 
             // Slot 2
             if(clickPos.y < SLOT_2_Y + SLOT_BUTTON_HEIGHT && clickPos.y > SLOT_2_Y){
-                // Save in slot 2
-                // Save in slot 1
-                try{
-                    if(GameData.saveGame(2, Game.getMap()[GameData.currentLeg])) System.out.println("Saved in slot 2.");
-                } catch(IOException e) {
-                    System.out.println("IOException caught.");
+                if(GameData.saveState) {
+                    // Save in slot 2
+                    try {
+                        if (GameData.saveGame(2, Game.getMap()[GameData.currentLeg]))
+                            System.out.println("Saved in slot 2.");
+                    } catch (IOException e) {
+                        System.out.println("IOException caught.");
+                    }
+                }
+                else if(GameData.loadState) {
+                    // Load from slot 2
+
                 }
             }
 
             // Slot 3
             if (clickPos.y < SLOT_3_Y + SLOT_BUTTON_HEIGHT && clickPos.y > SLOT_3_Y) {
-                // Save in slot 3
-                // Save in slot 1
-                try{
-                    if(GameData.saveGame(3, Game.getMap()[GameData.currentLeg])) System.out.println("Saved in slot 3.");
-                } catch(IOException e) {
-                    System.out.println("IOException caught.");
+                if(GameData.saveState) {
+                    // Save in slot 3
+                    try {
+                        if (GameData.saveGame(3, Game.getMap()[GameData.currentLeg]))
+                            System.out.println("Saved in slot 3.");
+                    } catch (IOException e) {
+                        System.out.println("IOException caught.");
+                    }
+                } else if(GameData.loadState) {
+                    // Load from slot 3
+
                 }
             }
         }

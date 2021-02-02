@@ -30,6 +30,7 @@ public class GameData {
     public static boolean GameOverState = false;
     public static boolean pauseState = false;
     public static boolean saveState = false;
+    public static boolean loadState = false;
 
     // Create the game UI and the game music
     public static UI currentUI = new MenuUI();
@@ -126,6 +127,13 @@ public class GameData {
         writer.close();
 
         // Returns true if no IOException is thrown.
+        return true;
+    }
+
+    public static boolean loadGame(int saveSlot) throws IOException {
+        // Create file handler with set file path in Assessment2/save_data.
+        FileHandle fileHandle = Gdx.files.internal("save_data/save_state_" + saveSlot + ".json");
+        String absolutePath = fileHandle.file().getAbsolutePath();
         return true;
     }
 
