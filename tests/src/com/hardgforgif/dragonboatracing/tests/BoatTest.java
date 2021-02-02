@@ -53,6 +53,15 @@ public class BoatTest {
 
     @Test
     public void testCreateBoatBody(){
-        assertEquals(2, 2);
+        assertEquals(0.19999999f, testBoat.getBoatSprite().getScaleX());
+        assertEquals(0.19999999f, testBoat.getBoatSprite().getScaleY());
+        assertEquals(BodyDef.BodyType.DynamicBody, testBoat.getBoatBody().getType());
+        assertEquals(new Vector2(100f, 120f), testBoat.getBoatBody().getPosition());
+        assertEquals(testBoat, testBoat.getBoatBody().getUserData());
+    }
+
+    @Test
+    public void testDrawBoat(){
+        
     }
 }
