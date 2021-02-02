@@ -49,7 +49,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void testConstructor(){
+    public void testPlayerConstructor(){
         assertEquals(robustness, testPlayer.getRobustness());
         assertEquals(speed, testPlayer.getSpeed());
         assertEquals(acceleration, testPlayer.getAcceleration());

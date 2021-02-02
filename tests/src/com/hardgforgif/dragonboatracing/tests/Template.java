@@ -29,7 +29,7 @@ public class Template {
     }
 
     @Test
-    public void testConstructor(){
+    public void testTemplateConstructor(){
         assertEquals();
     }
 }

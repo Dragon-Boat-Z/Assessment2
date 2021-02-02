@@ -28,7 +28,7 @@ public class MapTest {
     }
 
     @Test
-    public void testConstructor(){
+    public void testMapConstructor(){
         assertEquals(width, testMap.getScreenWidth());
         assertEquals(100, testMap.getMapWidth());
         assertEquals(1440, testMap.getMapHeight());

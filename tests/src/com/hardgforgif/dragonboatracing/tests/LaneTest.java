@@ -37,7 +37,7 @@ public class LaneTest {
     }
 
     @Test
-    public void testConstructor(){
+    public void testLaneConstructor(){
         //compare left boundary array
         float[][] testLeftBoundary = new float[1200][2];
         for(int i = 0; i < mapHeight; i++){

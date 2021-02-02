@@ -34,7 +34,7 @@ public class ObstacleTest {
     }
 
     @Test
-    public void testConstructor(){
+    public void testObstacleConstructor(){
         Texture texture = testObstacle.getObstaclTexture();
         assertTrue((texture instanceof Texture) && texture != null);
     }

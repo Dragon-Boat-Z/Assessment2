@@ -42,7 +42,7 @@ public class BoatTest {
     }
 
     @Test
-    public void testConstructor(){
+    public void testBoatConstructor(){
         assertEquals(robustness, testBoat.getRobustness());
         assertEquals(speed, testBoat.getSpeed());
         assertEquals(acceleration, testBoat.getAcceleration());

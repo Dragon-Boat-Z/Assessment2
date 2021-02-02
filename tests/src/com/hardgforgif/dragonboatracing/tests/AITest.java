@@ -35,7 +35,7 @@ public class AITest {
     }
 
     @Test
-    public void testConstructor(){
+    public void testAIConstructor(){
         assertEquals(110.4f, Math.round(testAI.getRobustness() * 1000f) / 1000f);
         assertEquals(82.8f, Math.round(testAI.getSpeed() * 1000f) / 1000f);
         assertEquals(92f, Math.round(testAI.getAcceleration() * 1000f) / 1000f);
