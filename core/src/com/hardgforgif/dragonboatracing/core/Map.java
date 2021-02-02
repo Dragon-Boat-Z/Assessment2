@@ -14,7 +14,11 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Json;
+import com.google.gson.*;
 import com.hardgforgif.dragonboatracing.GameData;
+
+import java.lang.reflect.Type;
 
 public class Map {
     // Map components
@@ -183,7 +187,27 @@ public class Map {
         startLineSprite.setPosition(startpoint, 350f);
         startLineSprite.setSize(width, 100);
     }
-    
+
+    public static class MapSerializer implements JsonSerializer<Map> {
+        public JsonElement serialize(Map aMap, Type type, JsonSerializationContext jsonSerializationContext) {
+            JsonObject obj = new JsonObject();
+            for(int i = 0; i < aMap.getLanes().length; i++) {
+                int obstLength = aMap.getLanes()[i].getObstacles().length;
+                JsonArray obstacles = new JsonArray(obstLength);
+                for(Obstacle o : aMap.getLanes()[i].getObstacles()) {
+                    JsonObject obstacle = new JsonObject();
+                    obstacle.add("x_position",new JsonPrimitive(o.getObstacleSprite().getX()));
+                    obstacle.add("y_position",new JsonPrimitive(o.getObstacleSprite().getY()));
+                    obstacle.add("obstacle_type",new JsonPrimitive(o.getObstacleType()));
+
+                    obstacles.add(obstacle);
+                }
+                obj.add("lane_" + i, obstacles);
+            }
+            return obj;
+        }
+    }
+
     //getters
     public TiledMap getTiledMap(){
         return this.tiledMap;

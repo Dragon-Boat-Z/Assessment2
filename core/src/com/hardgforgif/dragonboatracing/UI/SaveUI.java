@@ -4,8 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.hardgforgif.dragonboatracing.Game;
 import com.hardgforgif.dragonboatracing.GameData;
 import com.hardgforgif.dragonboatracing.core.Player;
+
+import java.io.IOException;
 
 public class SaveUI extends UI {
 
@@ -107,17 +110,34 @@ public class SaveUI extends UI {
             // Slot 1
             if(clickPos.y < SLOT_1_Y + SLOT_BUTTON_HEIGHT && clickPos.y > SLOT_1_Y) {
                 // Save in slot 1
-                GameData.saveGame(1);
+                try{
+                    if(GameData.saveGame(1, Game.getMap()[GameData.currentLeg])) System.out.println("Saved in slot 1.");
+                } catch(IOException e) {
+                    System.out.println("IOException caught.");
+                }
+
             }
 
             // Slot 2
             if(clickPos.y < SLOT_2_Y + SLOT_BUTTON_HEIGHT && clickPos.y > SLOT_2_Y){
                 // Save in slot 2
+                // Save in slot 1
+                try{
+                    if(GameData.saveGame(2, Game.getMap()[GameData.currentLeg])) System.out.println("Saved in slot 2.");
+                } catch(IOException e) {
+                    System.out.println("IOException caught.");
+                }
             }
 
             // Slot 3
             if (clickPos.y < SLOT_3_Y + SLOT_BUTTON_HEIGHT && clickPos.y > SLOT_3_Y) {
                 // Save in slot 3
+                // Save in slot 1
+                try{
+                    if(GameData.saveGame(3, Game.getMap()[GameData.currentLeg])) System.out.println("Saved in slot 3.");
+                } catch(IOException e) {
+                    System.out.println("IOException caught.");
+                }
             }
         }
     }

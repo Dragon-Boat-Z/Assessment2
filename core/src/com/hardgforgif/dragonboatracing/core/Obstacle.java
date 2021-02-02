@@ -15,6 +15,7 @@ public class Obstacle {
     private Sprite obstacleSprite;
     private Texture obstacleTexture;
     private Body obstacleBody;
+    private int obstacleType;
 
     public Obstacle(String textureName){
         obstacleTexture = new Texture(textureName);
@@ -82,4 +83,8 @@ public class Obstacle {
     }
 
     public void setObstacleBody( Body b ) { this.obstacleBody = b; }
+
+    public void setObstacleType( int i ) { this.obstacleType = i; }
+
+    public int getObstacleType(){ return this.obstacleType; }
 }
