@@ -1,0 +1,53 @@
+@startuml
+
+scale 2
+header Week 3
+
+Project starts the 2020-10-08
+
+-- Events --
+[Meeting 1] happens 2020-10-08
+[Meeting 2] happens 2020-10-14
+[Meeting 3] happens 2020-10-15 and displays on same row as [Meeting 1]
+[Meeting 4] happens 2020-10-22 and displays on same row as [Meeting 2]
+
+[Customer meeting] happens 2020-10-15
+
+today is 2020-10-22 and is colored in #AAF
+
+-- Documentation --
+
+[Website] starts 2020-10-08 and ends 2020-11-24
+
+[User requirements] starts 2020-10-8 and lasts 7 days
+then [Functional requirements] lasts 14 days
+[User requirements]->[Non-functional requirements]
+[Non-functional requirements] lasts 14 days
+[Constraint requirements] starts 10 days after [User requirements]'s end and lasts 2 days
+
+[User requirements]->[Software engineering methods]
+[Software engineering methods] lasts 14 days
+[User requirements]->[Team organisation]
+[Team organisation] starts 2020-10-15 and lasts 7 days
+then [Systematic plan] lasts 14 days
+
+[Define risk format] starts 4 days before [User requirements]'s end and lasts 7 days
+[Initial found risks] starts 4 day before [Define risk format]'s end and lasts 7 days
+[Risks found in development] starts 4 days after [Initial found risks]'s end and lasts 14 days
+
+[User requirements]->[Abstract architecture]
+[Abstract architecture] lasts 14 days
+[Concrete architecture] starts 7 days before [Abstract architecture]'s end and lasts 8 days
+
+
+-- Game --
+
+[Implementation] starts 2020-10-22 and lasts 30 days
+
+[v0.1 release] happens 2020-10-29
+[v0.2 release] happens 2020-11-11 and displays on same row as [v0.1 release]
+[v1.0 release] happens 2020-11-20 and displays on same row as [v0.1 release]
+
+[Hand-in date] happens 2020-11-25
+
+@enduml

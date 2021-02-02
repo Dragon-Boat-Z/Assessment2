@@ -1,0 +1,90 @@
+@startuml
+
+scale 2
+header Week 5
+
+Project starts the 2020-10-08
+
+-- Events --
+[Meeting 1] happens 2020-10-08
+[Meeting 2] happens 2020-10-14
+[Meeting 3] happens 2020-10-15 and displays on same row as [Meeting 1]
+[Meeting 4] happens 2020-10-22 and displays on same row as [Meeting 2]
+[Meeting 5] happens 2020-10-27 and displays on same row as [Meeting 1]
+[Meeting 6] happens 2020-10-29 and displays on same row as [Meeting 2]
+[Meeting 7] happens 2020-11-03 and displays on same row as [Meeting 1]
+[Meeting 8] happens 2020-11-05 and displays on same row as [Meeting 2]
+
+[Customer meeting #1] happens 2020-10-15
+[Customer meeting #2] happens 2020-10-28
+[Customer meeting #2] displays on same row as [Customer meeting #1]
+
+today is 2020-11-05 and is colored in #AAF
+
+[Website] starts 2020-10-08 and ends 2020-11-24
+
+-- Requirements --
+
+[User requirements] starts 2020-10-8 and lasts 7 days
+then [Functional requirements] lasts 14 days
+[User requirements]->[Non-functional requirements]
+[Non-functional requirements] lasts 14 days
+then [Constraint requirements] lasts 2 days
+
+-- Method selection and planning --
+
+[User requirements]->[Software engineering methods]
+[Software engineering methods] lasts 14 days
+[User requirements]->[Team organisation]
+[Team organisation] starts 2020-10-15 and lasts 7 days
+then [Systematic plan] lasts 16 days
+
+-- Risk assessment --
+
+[Define risk format] starts 4 days before [User requirements]'s end and lasts 7 days
+[Initial found risks] starts 4 day before [Define risk format]'s end and lasts 7 days
+[Early software development risks] starts 7 days after [Initial found risks]'s end and lasts 7 days
+[1st prototype risks] starts 2 days before [Early software development risks]'s end and lasts 2 days
+[Finalising risks] starts 5 days after [1st prototype risks]'s end and lasts 7 days
+
+-- Architecture --
+
+[User requirements]->[Abstract architecture]
+[Abstract architecture] lasts 14 days
+[Concrete architecture] starts 7 days before [Abstract architecture]'s end and lasts 8 days
+
+-- Implementation --
+
+[UR_BOAT_CONTROLS] starts 7 days before [Abstract architecture]'s end and lasts 14 days
+
+[UR_BOAT_CONTROLS]->[UR_DAMAGE]
+[UR_DAMAGE] starts 2020-11-04 and lasts 7 days
+[FR_STATS] starts 1 day after [UR_DAMAGE]'s start and lasts 7 days
+[FR_STATS]->[FR_STAMINA]
+[FR_STAMINA] lasts 7 days
+[FR_STATS]->[FR_ASPECT]
+[FR_ASPECT] lasts 7 days
+[FR_STATS]->[FR_OBSTACLES]
+[FR_OBSTACLES] lasts 8 days and displays on same row as [FR_STATS]
+
+[Abstract architecture]->[UR_UNIQUE_BOATS]
+[UR_UNIQUE_BOATS] starts 2020-10-28 and lasts 7 days
+
+[UR_MAP] starts 7 days before [Abstract architecture]'s end and lasts 30 days
+[UR_LANE] starts 20 days before [UR_MAP]'s end and lasts 20 days
+
+
+
+[UR_HUD] starts 7 days before [Abstract architecture]'s end and lasts 20 days
+
+[UR_MENU] starts 7 days before [Abstract architecture]'s end and lasts 20 days
+
+[v0.1 release] happens 2020-10-29
+[v0.2 release] happens 2020-11-11 and displays on same row as [v0.1 release]
+[v1.0 release] happens 2020-11-23 and displays on same row as [v0.1 release]
+
+[Working boat] happens 10 days after [Abstract architecture]'s start
+
+[Hand-in date] happens 2020-11-25
+
+@enduml
