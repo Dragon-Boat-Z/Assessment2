@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Previous Team Meetings
+title: Meetings
 has_children: true
 ---
 
-# Previous Team Meetings
+# Meetings
 
-These are logs of all the meetings the previous team completed. Includes minutes and attendance.
+These are logs of all the meetings we have completed. Includes minutes and attendance.
 
 ![gantt chart](/assets/static/week8.png "Gantt chart")

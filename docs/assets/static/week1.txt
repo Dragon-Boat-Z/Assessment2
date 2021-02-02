@@ -1,0 +1,24 @@
+@startuml
+
+scale 2
+header Week 1
+
+Project starts the 2020-10-08
+
+today is 2020-10-14 and is colored in #AAF
+
+[Website] starts 2020-10-08 and ends 2020-11-24
+
+[Requirements] starts 2020-10-08 and lasts 14 days
+
+[Method selection and planning] starts 2020-10-12 and lasts 14 days
+
+[Risk assessment and planning] starts 2020-10-16 and lasts 24 days
+
+[Architecture] starts 2020-10-16 and lasts 7 days
+
+[Implementation] starts 2020-10-20 and lasts 30 days
+
+[Hand-in date] happens 2020-11-25
+
+@enduml

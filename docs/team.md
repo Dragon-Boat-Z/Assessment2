@@ -6,28 +6,24 @@ permalink: /team/
 
 # Team Members
 
-These are the members working on the project, feel free to either get in touch with via email or reaching out through github.
+These are the members working on the project, feel free to either get in touch with our group email listed on the [homepage](/) or reaching out through github.
 
-## Ben Jenner
+## Bowen Lyu
 
-[github]() • [email]() 
+[github](https://github.com/stormlyu) • [email](bl1095@york.ac.uk) • [discord](https://discordapp.com/users/627204105252765696/)
 
-## James Wilkinson
+## Dragos Stoican
 
-[github](https://github.com/jamesrwilkinson) • [email](jrm567@york.ac.uk) 
+[github](https://github.com/DragosStoican) • [email](ds1473@york.ac.uk) • [discord](https://discordapp.com/users/220969039562801152/)
 
-## Joe Lonsdale
+## Rhys Milling
 
-[github]() • [email]() 
+[github](https://github.com/rmil) • [email](rdjm502+eng1@york.ac.uk) • [discord](https://discordapp.com/users/99222978230755328/)
 
-## Richard Upton
+## Sam Plane
 
-[github]() • [email]()
+[github](https://github.com/CitricAmoeba) • [email](stp511@york.ac.uk) • [discord](https://discordapp.com/users/487951947379507221/)
 
-## Will Dalgleish
+## Quentin Rothman
 
-[github]() • [email]() 
-
-## Xinyi Zhang
-
-[github]() • [email]() 
+[github](https://github.com/SaltyRex) • [email](qmr500@york.ac.uk) • [discord](https://discordapp.com/users/242929413526650882/)

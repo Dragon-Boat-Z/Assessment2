@@ -8,53 +8,31 @@ nav_order: 1
 description: "Useful links for team 10"
 ---
 
-# ENG1 - Team 18 - DragonBoatZ
+# ENG1 - Team 10 - Hard G for GIFs
 
-We took over Hard G for GIFs game "York Dragon Boat Racing 2021".
+We are attempting to make a game called "York Dragon Boat Racing 2021".
 
 {% include player.html id="UcfcIwaXtgc" %}
 
 
 Individual PDF deliverables are available on each document page. Weekly snapshots are available through our meetings.
 
-[Assessment 1](assessment1){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Assessment 2](assessment2){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Meetings](meetings){: .btn .fs-5 .mb-4 .mb-md-0 }
+[Documentation](docs){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Meetings](meetings){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ## Downloads
 
-[Assessment 1 deliverables (.zip)](/website/assets/deliverables/combined.zip){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Assessment 2 deliverables (.zip)](/website/assets/deliverables/combined.zip){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Game download (.jar)](https://github.com/hardgforgifs/game/releases/download/1.0.3/DragonBoatRacing.v1.0.3.jar){: .btn .fs-5 .mb-4 .mb-md-0 }
+[All deliverables (.zip)](/assets/deliverables/combined.zip){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Game download (.jar)](https://github.com/hardgforgifs/game/releases/download/1.0.3/DragonBoatRacing.v1.0.3.jar){: .btn .fs-5 .mb-4 .mb-md-0 }
 ---
 
 ## Useful links
 
-- [GitHub organisation](https://github.com/Dragon-Boat-Z)
-- [Repository](https://github.com/Dragon-Boat-Z/Assessment2)
+- [GitHub organisation](https://github.com/hardgforgifs)
+- [Game repo](https://github.com/hardgforgifs/game)
+- [Website repo](https://github.com/hardgforgifs/hardgforgifs.github.io)
+- [Team drive public folder](https://drive.google.com/drive/folders/1cAkmU4waNDv5wJghdtnq-_oiVVZdnb_f?usp=sharing)
+- [Discord team invite](https://discord.gg/KqRXdVzFkw)
+
 
 ## Contact
 
-### Team Members
-
-These are the members working on the project, feel free to either get in touch with via email or reaching out through github.
-
-#### Ben Jenner
-
-[github]() • [email]() 
-
-#### James Wilkinson
-
-[github](https://github.com/jamesrwilkinson) • [email](jrm567@york.ac.uk) 
-
-#### Joe Lonsdale
-
-[github]() • [email]() 
-
-#### Richard Upton
-
-[github]() • [email]()
-
-#### Will Dalgleish
-
-[github]() • [email]() 
-
-#### Xinyi Zhang
-
-[github]() • [email]() 
+Either email a team member, use our group email [2020-eng1-team10-group@york.ac.uk](mailto:2020-eng1-team10-group@york.ac.uk) or reach out through [discord](https://discord.gg/KqRXdVzFkw).

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Week 8
-parent: Previous Team Meetings
+parent: Meetings
 ---
 
 # Week 8
