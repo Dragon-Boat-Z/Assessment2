@@ -16,33 +16,31 @@ public class Player extends Boat{
      */
     public void updatePlayer(boolean[] pressedKeys, float delta) {
         // Check which angle you need to rotate to, then apply the roation
-        if (pressedKeys[1])
+        if (pressedKeys[1]){
             this.setTargetAngle(90f);
-        else if (pressedKeys[3])
+        } else if (pressedKeys[3]){
             this.setTargetAngle(-90f);
-        else
+        } else{
             this.setTargetAngle(0f);
+        }
         rotateBoat(this.getTargetAngle());
 
         // Move the boat
-        if (pressedKeys[0])
+        if (pressedKeys[0]){
             moveBoat(1);
-        else if (pressedKeys[2])
+        } else if (pressedKeys[2]){
             moveBoat(-1);
-        else
+        } else{
             moveBoat(0);
+        }
 
         // Update the sprite location to match the body
         this.getBoatSprite().setRotation((float)Math.toDegrees(this.getBoatBody().getAngle()));
         this.getBoatSprite().setPosition((this.getBoatBody().getPosition().x * GameData.METERS_TO_PIXELS) - this.getBoatSprite().getWidth() / 2,
                 (this.getBoatBody().getPosition().y * GameData.METERS_TO_PIXELS) - this.getBoatSprite().getHeight() / 2);
 
-
-        // Update the lane limits
-        updateLimits();
-
         //Update stamina
-        if (this.getStamina() > 30f) //Did this mean it was impossible to reach <30% stamina before?
+        if (this.getStamina() > 30f) { //Did this mean it was impossible to reach <30% stamina before?
             //stamina -= 1.5 * delta;
             if(pressedKeys[0] || pressedKeys[1] || pressedKeys[3]) {
                 //Holding W, A, or D.
@@ -56,6 +54,6 @@ public class Player extends Boat{
                 //Not pressing any buttons.
                 this.setStamina(this.getStamina() - 1.5f * delta);
             }
-
+        }
     }
 }

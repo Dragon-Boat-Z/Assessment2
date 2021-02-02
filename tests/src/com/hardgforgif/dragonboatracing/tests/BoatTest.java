@@ -8,9 +8,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import com.hardgforgif.dragonboatracing.core.*;
 import org.mockito.Mockito;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.math.Vector2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(GdxTestRunner.class)
 public class BoatTest {
@@ -27,14 +29,16 @@ public class BoatTest {
 
     @Before
     public void init(){
-        mockLane = Mockito.mock(Lane.class);
-        //mockWorld = Mockito.mock(World.class);
-
         //Mock the opengl classes using mockito so that libgdx opengl functions can be used
         Gdx.gl20 = Mockito.mock(GL20.class);
         Gdx.gl30 = Mockito.mock(GL30.class);
 
+        mockLane = Mockito.mock(Lane.class);
+        World world;
+        world = new World(new Vector2(0f, 0f), true);
+
         testBoat = new Boat(robustness, speed, acceleration, maneuverability, boatType, mockLane);
+        testBoat.createBoatBody(world, 100f, 120f, "Boat1.json");
     }
 
     @Test
@@ -47,17 +51,8 @@ public class BoatTest {
         assertEquals(mockLane, testBoat.getLane());
     }
 
-    /**
     @Test
     public void testCreateBoatBody(){
-        testBoat.createBoatBody(mockWorld, 100f, 120f, )
+        assertEquals(2, 2);
     }
-     */
-    /**
-    @Test
-    public void testUpdateLimits(){
-        testBoat.updateLimits();
-
-    }
-     */
 }
