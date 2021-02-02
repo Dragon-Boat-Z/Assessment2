@@ -2,13 +2,20 @@ package com.hardgforgif.dragonboatracing;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.utils.Json;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hardgforgif.dragonboatracing.UI.MenuUI;
 import com.hardgforgif.dragonboatracing.UI.UI;
-import com.hardgforgif.dragonboatracing.core.Map;
+import com.hardgforgif.dragonboatracing.core.Boat;
 import com.hardgforgif.dragonboatracing.core.Lane;
+import com.hardgforgif.dragonboatracing.core.Map;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.badlogic.gdx.net.HttpRequestBuilder.json;
 
 public class GameData {
     // Create the game state variables
@@ -51,12 +58,14 @@ public class GameData {
     // Number of boats
     public static int numberOfBoats = 7;
 
+    public static Boat[] boats = new Boat[numberOfBoats];
+
     // Boat's starting location
     public static float[][] startingPoints = new float[][]{
         {1.3496367f, 4f},
         {3.072728f, 4f},
         {4.7367244f, 4f},
-            {6.4000597f, 4f},
+        {6.4000597f, 4f},
         {8.0634f, 4f},
         {9.72706f, 4f},
         {11.451699f, 4f}
@@ -69,7 +78,6 @@ public class GameData {
             float[] limits = map.getLanes()[i].getLimitsAt(0);
             startingPoints[i][0] = (limits[0] + limits[1])/(2*METERS_TO_PIXELS);
             startingPoints[i][1] = 4f;
-            System.out.println("starting: " + startingPoints[i][0]);
         }
         return startingPoints;
     }
@@ -92,5 +100,11 @@ public class GameData {
     // Difficulty constants for the AI
     public static float[] difficulty = new float[]{0.92f, 0.97f, 1f};
 
+    public static boolean saveGame(int saveSlot) {
+        GsonBuilder gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setLenient().setPrettyPrinting();
+        gson.registerTypeAdapter(Lane.class, new Lane.LaneSerializer());
+        System.out.println(gson.create().toJson(boats));
+        return true;
+    }
     //Testing.
 }

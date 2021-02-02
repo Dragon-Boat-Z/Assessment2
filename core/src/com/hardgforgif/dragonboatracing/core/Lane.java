@@ -5,11 +5,19 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.hardgforgif.dragonboatracing.GameData;
 
+import java.lang.reflect.Type;
 import java.util.Random;
 
+import static com.badlogic.gdx.net.HttpRequestBuilder.json;
+
 public class Lane {
+    public int laneNo;
     private float[][] leftBoundary;
     private int leftIterator = 0;
     private float[][] rightBoundary;
@@ -19,7 +27,7 @@ public class Lane {
 
     private Obstacle[] obstacles;
 
-    public Lane(int mapHeight, MapLayer left, MapLayer right, int nrObstacles){
+    public Lane(int mapHeight, MapLayer left, MapLayer right, int nrObstacles, int laneNo_){
         leftBoundary = new float[mapHeight][2];
         rightBoundary = new float[mapHeight][2];
 
@@ -27,7 +35,7 @@ public class Lane {
         rightLayer = right;
 
         obstacles = new Obstacle[nrObstacles];
-
+        laneNo = laneNo_;
     }
 
     /**
@@ -130,5 +138,11 @@ public class Lane {
 
     public Obstacle[] getObstacles(){
         return this.obstacles;
+    }
+
+    public static class LaneSerializer implements JsonSerializer<Lane> {
+        public JsonElement serialize(Lane aLane, Type type, JsonSerializationContext jsonSerializationContext) {
+            return new JsonPrimitive(aLane.laneNo);
+        }
     }
 }

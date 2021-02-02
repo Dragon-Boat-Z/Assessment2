@@ -290,6 +290,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 						GameData.boatsStats[playerBoatType][2], GameData.boatsStats[playerBoatType][3],
 						playerBoatType, map[GameData.currentLeg].getLanes()[0]);
 				player.createBoatBody(world[GameData.currentLeg], GameData.startingPoints[0][0], GameData.startingPoints[0][1], "Boat1.json");
+				GameData.boats[0] = player;
 				// Create the AI boats
 				for(int i = 1; i < GameData.numberOfBoats; i++) {
                     int AIBoatType = GameData.boatTypes[i];
@@ -297,7 +298,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
                             GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
                             AIBoatType, map[GameData.currentLeg].getLanes()[i]);
                     opponents[i - 1].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i][0], GameData.startingPoints[i][1], "Boat1.json");
+                    GameData.boats[i] = opponents[i-1];
                 }
+
 			}
 
 			//Iterate through the PowerUps that need applying.

@@ -107,6 +107,7 @@ public class SaveUI extends UI {
             // Slot 1
             if(clickPos.y < SLOT_1_Y + SLOT_BUTTON_HEIGHT && clickPos.y > SLOT_1_Y) {
                 // Save in slot 1
+                GameData.saveGame(1);
             }
 
             // Slot 2

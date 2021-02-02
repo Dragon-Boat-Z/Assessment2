@@ -134,7 +134,7 @@ public class Map {
 
         MapLayer leftLayer = tiledMap.getLayers().get("CollisionLayerLeft");
         MapLayer rightLayer = tiledMap.getLayers().get("Lane1");
-        lanes[0] = new Lane(mapHeight, leftLayer, rightLayer, nrObstacles);
+        lanes[0] = new Lane(mapHeight, leftLayer, rightLayer, nrObstacles, 0);
         lanes[0].constructBoundaries(unitScale);
         lanes[0].spawnObstacles(world, mapHeight / GameData.PIXELS_TO_TILES);
 
@@ -146,7 +146,7 @@ public class Map {
             else {
                 rightLayer = tiledMap.getLayers().get("CollisionLayerRight");
             }
-            lanes[i] = new Lane(mapHeight, leftLayer, rightLayer, nrObstacles);
+            lanes[i] = new Lane(mapHeight, leftLayer, rightLayer, nrObstacles, i);
             lanes[i].constructBoundaries(unitScale);
             lanes[i].spawnObstacles(world, mapHeight / GameData.PIXELS_TO_TILES);
         }

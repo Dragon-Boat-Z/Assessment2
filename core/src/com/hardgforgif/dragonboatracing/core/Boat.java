@@ -9,32 +9,37 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.google.gson.annotations.Expose;
+import com.google.gson.InstanceCreator;
 import com.hardgforgif.dragonboatracing.GameData;
 import com.hardgforgif.dragonboatracing.BodyEditorLoader;
 
+import java.lang.reflect.Type;
+
 public class Boat {
     // Boat specs
-    private float robustness;
+    @Expose
+    private float robustness,maneuverability,speed,acceleration;
+    @Expose
     private float stamina = 120f;
-    private float maneuverability;
-    private float speed;
-    private float acceleration;
-
+    @Expose
     private float current_speed = 20f;
+    @Expose
     private float turningSpeed = 0.25f;
+    @Expose
     private float targetAngle = 0f;
+    @Expose
+    private Lane lane;
+    @Expose
+    private int boatType;
 
     private Sprite boatSprite;
     private Texture boatTexture;
     private Body boatBody;
-
     private TextureAtlas textureAtlas;
     private Animation animation;
-
-    private Lane lane;
     private float leftLimit;
     private float rightLimit;
-
 
     public Boat(float robustness, float speed, float acceleration, float maneuverability, int boatType, Lane lane) {
         this.robustness = robustness;
@@ -42,6 +47,7 @@ public class Boat {
         this.acceleration = acceleration;
         this.maneuverability = maneuverability;
         turningSpeed *= this.maneuverability / 100;
+        this.boatType = boatType;
 
         boatTexture = new Texture("Boat" + (boatType + 1) + ".png");
         textureAtlas = new TextureAtlas(Gdx.files.internal("Boats/Boat" + (boatType + 1) +  ".atlas"));
@@ -309,6 +315,8 @@ public class Boat {
         return this.lane;
     }
 
+    public int getBoatType() { return this.boatType; }
+
     public float getLeftLimit(){
         return this.leftLimit;
     }
@@ -344,4 +352,6 @@ public class Boat {
     public void setTargetAngle(float targetAngle) {
         this.targetAngle = targetAngle;
     }
+
+    public void setBoatType(int type) { this.boatType = type; }
 }
