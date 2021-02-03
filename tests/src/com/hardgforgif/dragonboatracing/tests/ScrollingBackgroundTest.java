@@ -39,7 +39,6 @@ public class ScrollingBackgroundTest{
         assertEquals(true, testScrollingBackground.getSpeedFixed());
     }
 
-    // y1 n y2
     @Test
     public void testScrollingBackgroundUpdateAndRender(){
         // speed < targetSpeed, speedFixed = true;
