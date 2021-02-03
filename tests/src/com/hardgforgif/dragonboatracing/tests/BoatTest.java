@@ -102,7 +102,7 @@ public class BoatTest {
     }
 
     @Test
-    public void testMoveBoatSpeed(){
+    public void testMoveBoatSpeedUp(){
         // float robustness = 120f;
         // float speed = 90f;
         // float acceleration = 100f;
@@ -150,5 +150,39 @@ public class BoatTest {
         testBoat.moveBoat(1);
         actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
         assertEquals(90f, actualSpeed);
+    }
+
+    @Test
+    public void testMoveBoatSpeedDown(){
+        //stamina below 50
+        testBoat.setCurrentSpeed(10);
+        testBoat.setStamina(40f);
+        testBoat.moveBoat(-1);
+        float actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
+        assertEquals(9.96f, actualSpeed);
+        //stamina below 75
+        testBoat.setCurrentSpeed(50);
+        testBoat.setStamina(60f);
+        testBoat.moveBoat(-1);
+        actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
+        assertEquals(49.92f, actualSpeed);
+
+        //stamina above 75
+        testBoat.setCurrentSpeed(80);
+        testBoat.setStamina(80);
+        testBoat.moveBoat(-1);
+        actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
+        assertEquals(79.87f, actualSpeed);
+    }
+
+    @Test
+    public void testRotateBoat(){
+        //right
+        testBoat.rotateBoat(90f);
+        assertEquals(0.008227981f, testBoat.getBoatBody().getAngle());
+
+        //left
+        testBoat.rotateBoat(-90f);
+        assertEquals(-0.008227981f, testBoat.getBoatBody().getAngle());
     }
 }
