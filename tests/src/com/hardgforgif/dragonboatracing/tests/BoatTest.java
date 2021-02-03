@@ -10,9 +10,12 @@ import com.hardgforgif.dragonboatracing.core.*;
 import org.mockito.Mockito;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.math.Vector2;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 @RunWith(GdxTestRunner.class)
 public class BoatTest {
@@ -61,7 +64,91 @@ public class BoatTest {
     }
 
     @Test
-    public void testDrawBoat(){
-        
+    public void testGetLimitsAt(){
+        Mockito.when(mockLane.getLeftIterator()).thenReturn(5);
+        float[][] leftBoundaries = {{0,0},
+                                {15,5},
+                                {30,10},
+                                {45,15},
+                                {60,20}};
+        Mockito.when(mockLane.getLeftBoundary()).thenReturn(leftBoundaries);
+
+        Mockito.when(mockLane.getRightIterator()).thenReturn(5);
+        float[][] rightBoundaries = {{0,0},
+                                     {15,5},
+                                     {30,10},
+                                     {45,15},
+                                     {60,20}};
+        Mockito.when(mockLane.getRightBoundary()).thenReturn(rightBoundaries);
+
+        float[] expected1 = {5f,5f};
+        assertTrue(Arrays.equals(expected1, testBoat.getLimitsAt(15f)));
+        float[] expected2 = {10f,10f};
+        assertTrue(Arrays.equals(expected2, testBoat.getLimitsAt(30)));
+    }
+
+    @Test
+    public void testHasFinished(){
+        //hasn't moved
+        assertFalse(testBoat.hasFinished());
+
+        //level with finish line
+        testBoat.getBoatSprite().setPosition(100, 8712);
+        assertFalse(testBoat.hasFinished());
+
+        //1 past finish line
+        testBoat.getBoatSprite().setPosition(100, 8713);
+        assertTrue(testBoat.hasFinished());
+    }
+
+    @Test
+    public void testMoveBoatSpeed(){
+        // float robustness = 120f;
+        // float speed = 90f;
+        // float acceleration = 100f;
+        // float maneuverability = 110f;
+        // int boatType = 3;
+
+        //stamina below 50
+        //current speed low enough
+        testBoat.setCurrentSpeed(10);
+        testBoat.setStamina(40f);
+        testBoat.moveBoat(1);
+        float actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
+        assertEquals(10.04f, actualSpeed);
+        //current speed at limit
+        testBoat.setCurrentSpeed(54);
+        testBoat.setStamina(40f);
+        testBoat.moveBoat(1);
+        actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
+        assertEquals(54f, actualSpeed);
+
+        //stamina below 75
+        //current speed low enough
+        testBoat.setCurrentSpeed(50);
+        testBoat.setStamina(60f);
+        testBoat.moveBoat(1);
+        actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
+        assertEquals(50.08f, actualSpeed);
+        //current speed at limit
+        testBoat.setCurrentSpeed(72);
+        testBoat.setStamina(60f);
+        testBoat.moveBoat(1);
+        actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
+        assertEquals(72f, actualSpeed);
+
+        //stamina above 75
+        //current speed low enough
+        testBoat.setCurrentSpeed(80);
+        testBoat.setStamina(80);
+        testBoat.moveBoat(1);
+        actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
+        assertEquals(80.13f, actualSpeed);
+        //current speed at limit
+        testBoat.setCurrentSpeed(90);
+        testBoat.setStamina(80);
+        testBoat.moveBoat(1);
+        actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
+        assertEquals(90f, actualSpeed);
     }
 }

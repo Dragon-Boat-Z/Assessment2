@@ -119,7 +119,7 @@ public class PlayerTest {
         //nothing
         testPlayer.updatePlayer(noMovement, 1f);
         spriteRotation = testPlayer.getBoatSprite().getRotation();
-        assertEquals(0, spriteRotation);
+        assertEquals(0f, spriteRotation);
 
         //left
         testPlayer.setStamina(120f);

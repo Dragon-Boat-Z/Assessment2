@@ -12,9 +12,19 @@ import org.mockito.Mockito;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(GdxTestRunner.class)
 public class GamePlayUITest {
+    @Before
+    public void init(){
+        //Mock the opengl classes using mockito so that libgdx opengl functions can be used
+        Gdx.gl20 = Mockito.mock(GL20.class);
+        Gdx.gl30 = Mockito.mock(GL30.class);
+    }
     
-    
+    @Test
+    public void test(){
+        assertTrue(true);
+    }
 }
