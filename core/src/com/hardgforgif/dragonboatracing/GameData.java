@@ -7,11 +7,10 @@ import com.badlogic.gdx.utils.Json;
 import com.google.gson.*;
 import com.hardgforgif.dragonboatracing.UI.MenuUI;
 import com.hardgforgif.dragonboatracing.UI.UI;
-import com.hardgforgif.dragonboatracing.core.Boat;
-import com.hardgforgif.dragonboatracing.core.Lane;
-import com.hardgforgif.dragonboatracing.core.Map;
+import com.hardgforgif.dragonboatracing.core.*;
 
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -30,6 +29,7 @@ public class GameData {
     public static boolean GameOverState = false;
     public static boolean pauseState = false;
     public static boolean saveState = false;
+    public static boolean loadState = false;
 
     // Create the game UI and the game music
     public static UI currentUI = new MenuUI();
@@ -126,6 +126,40 @@ public class GameData {
         writer.close();
 
         // Returns true if no IOException is thrown.
+        return true;
+    }
+
+    public static boolean loadGame(int saveSlot) throws IOException {
+        // Create file handler with set file path in Assessment2/save_data.
+        FileHandle fileHandle = Gdx.files.internal("save_data/save_state_" + saveSlot + ".json");
+        String absolutePath = fileHandle.file().getAbsolutePath();
+
+        FileReader reader = new FileReader(absolutePath);
+
+        JsonStreamParser streamParser = new JsonStreamParser(reader);
+
+        Gson gson = new Gson();
+        JsonObject test = gson.fromJson(streamParser.next(), JsonObject.class);
+
+        JsonArray boatArray = test.get("boats").getAsJsonArray();
+        JsonObject gamedata = test.get("game_data").getAsJsonObject();
+
+        currentTimer = gamedata.get("current_timer").getAsFloat();
+        for(int i = 0; i < numberOfBoats; i++) {
+            JsonObject o = boatArray.get(i).getAsJsonObject();
+            AI a;
+            Player p;
+            if(i == 0) {
+                p = Player.from_json(o, Game.getMap()[gamedata.get("leg_number").getAsInt()], Game.getWorld()[gamedata.get("leg_number").getAsInt()]);
+                boats[i] = p;
+            }
+            else {
+                a = AI.from_json(o, Game.getMap()[gamedata.get("leg_number").getAsInt()], Game.getWorld()[gamedata.get("leg_number").getAsInt()]);
+                boats[i] = a;
+            }
+            boatTypes[i] = boats[i].getBoatType();
+        }
+        reader.close();
         return true;
     }
 

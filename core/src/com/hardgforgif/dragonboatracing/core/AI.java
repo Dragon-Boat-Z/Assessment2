@@ -2,6 +2,8 @@ package com.hardgforgif.dragonboatracing.core;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
+import com.google.gson.JsonObject;
 import com.hardgforgif.dragonboatracing.GameData;
 
 public class AI extends Boat{
@@ -199,9 +201,6 @@ public class AI extends Boat{
             // 'hold S'
             moveBoat(-1);
 
-        // Update the limits
-        updateLimits();
-
         //if (stamina > 30f)
             //stamina -= 1.5 * delta;
         //Update stamina
@@ -220,5 +219,21 @@ public class AI extends Boat{
                 this.setStamina(this.getStamina() - 1.5f * delta);
             }
         
+    }
+
+    public static AI from_json(JsonObject obj, Map map, World world) {
+        // First initialise the boat with it's stats.
+        AI b = new AI(obj.get("robustness").getAsFloat(), obj.get("speed").getAsFloat(),
+                obj.get("acceleration").getAsFloat(), obj.get("maneuverability").getAsFloat(),
+                obj.get("boat_type").getAsInt(), map.getLanes()[obj.get("lane").getAsInt()]);
+
+        // Then update the in play variables of that boat from the save-state.
+        b.setStamina(obj.get("stamina").getAsFloat());
+        b.setCurrentSpeed(obj.get("current_speed").getAsFloat());
+        b.setTurningSpeed(obj.get("turning_speed").getAsFloat());
+        b.setTargetAngle(obj.get("target_angle").getAsFloat());
+        b.createBoatBody(world, obj.get("x_position").getAsFloat()*(1/GameData.METERS_TO_PIXELS),obj.get("y_position").getAsFloat()*(1/GameData.METERS_TO_PIXELS), "Boat1.json");
+
+        return b;
     }
 }

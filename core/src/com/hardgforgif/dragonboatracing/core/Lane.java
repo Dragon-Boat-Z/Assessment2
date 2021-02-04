@@ -17,7 +17,7 @@ import java.util.Random;
 import static com.badlogic.gdx.net.HttpRequestBuilder.json;
 
 public class Lane {
-    public int laneNo;
+    private int laneNo;
     private float[][] leftBoundary;
     private int leftIterator = 0;
     private float[][] rightBoundary;
@@ -97,6 +97,7 @@ public class Lane {
             if (randomIndex == 0 || randomIndex == 5)
                 scale = -0.8f;
             obstacles[i] = new Obstacle("Obstacles/Obstacle" + (randomIndex + 1) + ".png");
+            obstacles[i].setObstacleType(randomIndex+1);
             float segmentStart = i * segmentLength;
             float yPos = (float) (600f + (segmentStart + Math.random() * segmentLength));
 
@@ -150,5 +151,6 @@ public class Lane {
         return this.obstacles;
     }
 
+    public int getLaneNo() { return this.laneNo;}
 
 }
