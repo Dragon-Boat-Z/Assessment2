@@ -17,7 +17,7 @@ import java.util.Random;
 import static com.badlogic.gdx.net.HttpRequestBuilder.json;
 
 public class Lane {
-    public int laneNo;
+    private int laneNo;
     private float[][] leftBoundary;
     private int leftIterator = 0;
     private float[][] rightBoundary;
@@ -151,5 +151,6 @@ public class Lane {
         return this.obstacles;
     }
 
+    public int getLaneNo() { return this.laneNo;}
 
 }
