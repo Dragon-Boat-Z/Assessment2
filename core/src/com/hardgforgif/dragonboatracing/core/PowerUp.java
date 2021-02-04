@@ -10,5 +10,9 @@ public class PowerUp extends Obstacle {
         //Upon collision, the effet of the power up is applied to the boat that used it.
     }
 
+    public boolean isPowerUp() {
+        return true;
+    }
+
 }
 

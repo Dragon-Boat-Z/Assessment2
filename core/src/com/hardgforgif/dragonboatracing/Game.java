@@ -29,7 +29,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	private Vector2 clickPosition = new Vector2();
 	private boolean[] pressedKeys = new boolean[4]; // W, A, S, D buttons status
 
-	private ArrayList<Body> toBeRemovedBodies = new ArrayList<>();
+	private static ArrayList<Body> toBeRemovedBodies = new ArrayList<>();
 	private ArrayList<Body> toUpdateHealth = new ArrayList<>();
 	private ArrayList<Body[]> toApplyPowerUps = new ArrayList<>();
 
@@ -711,8 +711,12 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		return this.pressedKeys;
 	}
 
-	public ArrayList<Body> getToBeRemovedBodies(){
-		return this.toBeRemovedBodies;
+	public static ArrayList<Body> getToBeRemovedBodies(){
+		return toBeRemovedBodies;
+	}
+
+	public static void setToBeRemovedBodies(ArrayList<Body> tbRB) {
+		toBeRemovedBodies = tbRB;
 	}
 
 	public ArrayList<Body> getToUpdateHealth(){

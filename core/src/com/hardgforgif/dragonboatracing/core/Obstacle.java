@@ -16,19 +16,26 @@ public class Obstacle {
     private Texture obstacleTexture;
     private Body obstacleBody;
     private int obstacleType;
+    private float positionX;
+    private float positionY;
 
     public Obstacle(String textureName){
         obstacleTexture = new Texture(textureName);
+        positionX = 0;
+        positionY = 0;
     }
 
     /**
-     * Creates a new obstacle body
+     * Creates a new obstacle body/
      * @param world World to create the body in
      * @param posX x location of the body, in meters
      * @param posY y location of the body, in meters
      * @param bodyFile the name of the box2D editor json file for the body fixture
      */
     public void createObstacleBody(World world, float posX, float posY, String bodyFile, float scale){
+        this.positionX = posX;
+        this.positionY = posY;
+
         obstacleSprite = new Sprite(obstacleTexture);
         obstacleSprite.scale(scale);
 
@@ -69,6 +76,10 @@ public class Obstacle {
         batch.end();
     }
 
+    public boolean isPowerUp() {
+        return false;
+    }
+
     //getters
     public Sprite getObstacleSprite(){
         return this.obstacleSprite;
@@ -87,4 +98,11 @@ public class Obstacle {
     public void setObstacleType( int i ) { this.obstacleType = i; }
 
     public int getObstacleType(){ return this.obstacleType; }
+
+    public float getX() {
+        return this.positionX;
+    }
+    public float getY() {
+        return this.positionY;
+    }
 }
