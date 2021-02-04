@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import com.hardgforgif.dragonboatracing.core.*;
@@ -61,6 +62,7 @@ public class AITest {
         assertEquals(mockLane, testAI.getLane());
     }
 
+    @Ignore
     @Test
     public void testUpdateAI(){
         testAI.updateAI(2f);

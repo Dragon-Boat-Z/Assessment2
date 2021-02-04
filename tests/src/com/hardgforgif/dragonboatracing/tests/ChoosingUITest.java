@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import com.hardgforgif.dragonboatracing.UI.*;
@@ -32,6 +33,7 @@ public class ChoosingUITest {
         mockBatch = Mockito.mock(Batch.class);
     }
 
+    @Ignore
     @Test
     public void testDrawUI(){
         // Vector2 mousePos = new Vector2(151, -199);

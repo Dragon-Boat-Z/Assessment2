@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import com.hardgforgif.dragonboatracing.UI.*;
@@ -30,6 +31,7 @@ public class GameOverUITest {
         testGameOverUI = new GameOverUI();
     }
 
+    @Ignore
     @Test
     public void testGetInput(){
         Vector2 mousePosNotZero = new Vector2(1f,1f);
