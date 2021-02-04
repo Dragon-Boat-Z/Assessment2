@@ -74,16 +74,16 @@ public class BoatTest {
         Mockito.when(mockLane.getLeftBoundary()).thenReturn(leftBoundaries);
 
         Mockito.when(mockLane.getRightIterator()).thenReturn(5);
-        float[][] rightBoundaries = {{0,0},
-                                     {15,5},
-                                     {30,10},
-                                     {45,15},
-                                     {60,20}};
+        float[][] rightBoundaries = {{10,0},
+                                     {25,5},
+                                     {40,10},
+                                     {55,15},
+                                     {70,20}};
         Mockito.when(mockLane.getRightBoundary()).thenReturn(rightBoundaries);
 
-        float[] expected1 = {5f,5f};
+        float[] expected1 = {5f,0f};
         assertTrue(Arrays.equals(expected1, testBoat.getLimitsAt(15f)));
-        float[] expected2 = {10f,10f};
+        float[] expected2 = {10f,5f};
         assertTrue(Arrays.equals(expected2, testBoat.getLimitsAt(30)));
     }
 
@@ -103,12 +103,6 @@ public class BoatTest {
 
     @Test
     public void testMoveBoatSpeedUp(){
-        // float robustness = 120f;
-        // float speed = 90f;
-        // float acceleration = 100f;
-        // float maneuverability = 110f;
-        // int boatType = 3;
-
         //stamina below 50
         //current speed low enough
         testBoat.setCurrentSpeed(10);
@@ -173,6 +167,13 @@ public class BoatTest {
         testBoat.moveBoat(-1);
         actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
         assertEquals(79.87f, actualSpeed);
+
+        //current speed at 0
+        testBoat.setCurrentSpeed(0);
+        testBoat.setStamina(80);
+        testBoat.moveBoat(-1);
+        actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
+        assertEquals(0f, actualSpeed);
     }
 
     @Test
