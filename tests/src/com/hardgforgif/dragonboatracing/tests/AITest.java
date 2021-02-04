@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @RunWith(GdxTestRunner.class)
 public class AITest {
@@ -64,8 +65,8 @@ public class AITest {
     public void testUpdateAI(){
         testAI.updateAI(2f);
         assertEquals(new Vector2(10000f,12457.6f), testAI.getLaneChecker());
-        assertEquals(2, testAI.getObjectChecker());
-
+        assertEquals(new Vector2(10000f,12357.6f), testAI.getObjectChecker());
+        assertFalse(testAI.getIsDodging());
     }
 
     private void setupMockLane(){
