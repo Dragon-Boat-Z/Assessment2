@@ -95,23 +95,14 @@ public class LaneTest {
             assertTrue(Arrays.equals(testRightBoundary[i], testLane.getRightBoundary()[i]));
         }
     }
-    @Ignore
+
     @Test
     public void testGetLimitsAt(){
         testLane.constructBoundaries(2f);
 
-        //Testing when yPosition is greater than all boundaries
         float[] actualList = testLane.getLimitsAt(4.5f);
         float[] expectedList = {257.2726f, 1092.364f};
         assertTrue(Arrays.equals(expectedList, actualList));
-
-        //Testing when yPosition is greater than rightBoundary
-        actualList = testLane.getLimitsAt(2f);
-        expectedList[0] = 257.2726f;
-        expectedList[1] = 1092.364f;
-        assertEquals(expectedList, actualList);
-        //assertTrue(Arrays.equals(expectedList, actualList));
-
     }
 
     @Test
@@ -119,7 +110,7 @@ public class LaneTest {
     public void testSpawnObstacles(){
         testLane.spawnObstacles(world, mapHeight);
         for (int i = 0;i < obstacleCount; i++){
-            assertTrue(testLane.getObstacles()[i].getObstacleTexture().toString().matches("Obstacles/Obstacle[123456].png"));
+            assertTrue(testLane.getObstacles()[i].getObstaclTexture().toString().matches("Obstacles/Obstacle[123456].png"));
             }
 
     }

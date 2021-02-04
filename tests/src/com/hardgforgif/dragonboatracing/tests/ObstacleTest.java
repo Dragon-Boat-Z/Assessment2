@@ -38,7 +38,7 @@ public class ObstacleTest {
 
     @Test
     public void testObstacleConstructor(){
-        Texture texture = testObstacle.getObstacleTexture();
+        Texture texture = testObstacle.getObstaclTexture();
         assertEquals("Obstacles/Obstacle1.png", texture.toString());
     }
 
