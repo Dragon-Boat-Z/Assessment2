@@ -38,7 +38,7 @@ public class PauseUI extends UI {
         scrollingBackground = new ScrollingBackground();
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed()/3);
+        scrollingBackground.setTargetSpeed(ScrollingBackground.getDefaultSpeed()/3);
     }
 
     @Override

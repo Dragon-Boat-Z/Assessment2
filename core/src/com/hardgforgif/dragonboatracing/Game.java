@@ -263,15 +263,16 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 						GameData.boatsStats[playerBoatType][2], GameData.boatsStats[playerBoatType][3],
 						playerBoatType, map[GameData.currentLeg].getLanes()[0]);
 				player.createBoatBody(world[GameData.currentLeg], GameData.startingPoints[0][0], GameData.startingPoints[0][1], "Boat1.json");
+                player.setLimits(player.getLane().getLeftBoundary()[0][1],player.getLane().getRightBoundary()[0][1]);
 				// Create the AI boats
 				for(int i = 1; i < GameData.numberOfBoats; i++) {
                     int AIBoatType = GameData.boatTypes[i];
                     opponents[i - 1] = new AI(GameData.boatsStats[AIBoatType][0], GameData.boatsStats[AIBoatType][1],
                             GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
                             AIBoatType, map[GameData.currentLeg].getLanes()[i]);
-                    System.out.println("starting: " + GameData.startingPoints[i][0]);
                     opponents[i - 1].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i][0], GameData.startingPoints[i][1], "Boat1.json");
-                }
+                    opponents[i-1].setLimits(opponents[i-1].getLane().getLeftBoundary()[0][1],opponents[i-1].getLane().getRightBoundary()[0][1]);
+				}
 			}
 
 			// Iterate through the bodies that need to be removed from the world after a collision

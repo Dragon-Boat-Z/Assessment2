@@ -199,9 +199,6 @@ public class AI extends Boat{
             // 'hold S'
             moveBoat(-1);
 
-        // Update the limits
-        updateLimits();
-
         //if (stamina > 30f)
             //stamina -= 1.5 * delta;
         //Update stamina
@@ -220,5 +217,30 @@ public class AI extends Boat{
                 this.setStamina(this.getStamina() - 1.5f * delta);
             }
         
+    }
+
+    //getters
+    public Vector2 getLaneChecker(){
+        return this.laneChecker;
+    }
+
+    public Vector2 getObjectChecker(){
+        return this.objectChecker;
+    }
+
+    public boolean getIsDodging(){
+        return this.isDodging;
+    }
+
+    public boolean getIsTurning(){
+        return this.isTurning;
+    }
+
+    public boolean getIsBraking(){
+        return this.isBraking;
+    }
+
+    public float getDetectedObstacleYPos(){
+        return this.detectedObstacleYPos;
     }
 }
