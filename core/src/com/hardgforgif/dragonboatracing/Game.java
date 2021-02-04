@@ -16,13 +16,13 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
-	private Player player;
-	private AI[] opponents = new AI[6];
+	private static Player player;
+	private static AI[] opponents = new AI[6];
 	private static Map[] map;
 	private Batch batch;
 	private Batch UIbatch;
 	private OrthographicCamera camera;
-	private World[] world;
+	private static World[] world;
 
 
 	private Vector2 mousePosition = new Vector2();
@@ -207,6 +207,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 			// Change the player's acceleration so the boat stops moving
 			player.setAcceleration(-200f);
+			GameData.currentLeg++;
 		}
 
 		// Iterate through the AI to see if any of them finished the race
@@ -257,6 +258,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			// Transition to the showResult screen
 			GameData.showResultsState = true;
 			GameData.currentUI = new ResultsUI();
+			GameData.currentLeg++;
 		}
 
 		// Iterate through the AI and add a dnf result for any who haven't finished
@@ -271,7 +273,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		// Reset the screen
 		Gdx.gl.glClearColor(0.15f, 0.15f, 0.3f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
 		// If the game is in one of the static state
 		if (GameData.mainMenuState || GameData.choosingBoatState || GameData.GameOverState || GameData.pauseState || GameData.saveState){
 			// Draw the UI and wait for the input
@@ -280,28 +281,37 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 		}
 
+
+
 		// Otherwise, if we are in the game play state
 		else if(GameData.gamePlayState){
 			// If it's the first iteration in this state, the boats need to be created at their starting positions
 			if (player == null){
-				// Create the player boat
-				int playerBoatType = GameData.boatTypes[0];
-				player = new Player(GameData.boatsStats[playerBoatType][0], GameData.boatsStats[playerBoatType][1],
-						GameData.boatsStats[playerBoatType][2], GameData.boatsStats[playerBoatType][3],
-						playerBoatType, map[GameData.currentLeg].getLanes()[0]);
-				player.createBoatBody(world[GameData.currentLeg], GameData.startingPoints[0][0], GameData.startingPoints[0][1], "Boat1.json");
-				GameData.boats[0] = player;
-                player.setLimits(player.getLane().getLeftBoundary()[0][1],player.getLane().getRightBoundary()[0][1]);
+			    if(GameData.loadState) {
+                    setBoats(GameData.boats);
+                    GameData.loadState = false;
+                }
 
-				// Create the AI boats
-				for(int i = 1; i < GameData.numberOfBoats; i++) {
-                    int AIBoatType = GameData.boatTypes[i];
-                    opponents[i - 1] = new AI(GameData.boatsStats[AIBoatType][0], GameData.boatsStats[AIBoatType][1],
-                            GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
-                            AIBoatType, map[GameData.currentLeg].getLanes()[i]);
-                    opponents[i - 1].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i][0], GameData.startingPoints[i][1], "Boat1.json");
-                    GameData.boats[i] = opponents[i-1];
-                    opponents[i-1].setLimits(opponents[i-1].getLane().getLeftBoundary()[0][1],opponents[i-1].getLane().getRightBoundary()[0][1]);
+			    else {
+                    // Create the player boat
+                    int playerBoatType = GameData.boatTypes[0];
+                    player = new Player(GameData.boatsStats[playerBoatType][0], GameData.boatsStats[playerBoatType][1],
+                            GameData.boatsStats[playerBoatType][2], GameData.boatsStats[playerBoatType][3],
+                            playerBoatType, map[GameData.currentLeg].getLanes()[0]);
+                    player.createBoatBody(world[GameData.currentLeg], GameData.startingPoints[0][0], GameData.startingPoints[0][1], "Boat1.json");
+                    GameData.boats[0] = player;
+                    player.setLimits(player.getLane().getLeftBoundary()[0][1], player.getLane().getRightBoundary()[0][1]);
+
+                    // Create the AI boats
+                    for (int i = 1; i < GameData.numberOfBoats; i++) {
+                        int AIBoatType = GameData.boatTypes[i];
+                        opponents[i - 1] = new AI(GameData.boatsStats[AIBoatType][0], GameData.boatsStats[AIBoatType][1],
+                                GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
+                                AIBoatType, map[GameData.currentLeg].getLanes()[i]);
+                        opponents[i - 1].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i][0], GameData.startingPoints[i][1], "Boat1.json");
+                        GameData.boats[i] = opponents[i - 1];
+                        opponents[i - 1].setLimits(opponents[i - 1].getLane().getLeftBoundary()[0][1], opponents[i - 1].getLane().getRightBoundary()[0][1]);
+                    }
                 }
 
 			}
@@ -369,6 +379,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 						// Transition to the show result screen
 						GameData.showResultsState = true;
 						GameData.currentUI = new ResultsUI();
+						GameData.currentLeg++;
 					}
 				}
 
@@ -455,6 +466,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 				dnfRemainingBoats();
 				GameData.showResultsState = true;
 				GameData.currentUI = new ResultsUI();
+				GameData.currentLeg++;
 			}
 			// Otherwise keep checking for new results
 			else {
@@ -673,6 +685,19 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		return false;
 	}
 
+
+	public static void setBoats(Boat[] boats) {
+        // Create the player boat
+        player = (Player)GameData.boats[0];
+        player.setLimits(player.getLane().getLeftBoundary()[0][1],player.getLane().getRightBoundary()[0][1]);
+
+        // Create the AI boats
+        for(int i = 1; i < GameData.numberOfBoats; i++) {
+            opponents[i - 1] = (AI)GameData.boats[i];
+            opponents[i-1].setLimits(opponents[i-1].getLane().getLeftBoundary()[0][1],opponents[i-1].getLane().getRightBoundary()[0][1]);
+        }
+    }
+
 	//getters
 	public Player getPlayer(){
 		return this.player;
@@ -698,8 +723,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		return this.camera;
 	}
 
-	public World[] getWorld(){
-		return this.world;
+	public static World[] getWorld(){
+		return world;
 	}
 
 	public Vector2 getMousePosition(){
