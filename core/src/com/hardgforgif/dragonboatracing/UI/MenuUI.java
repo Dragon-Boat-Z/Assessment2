@@ -24,7 +24,7 @@ public class MenuUI extends UI {
 
     private static final int LOAD_BUTTON_WIDTH = 250;
     private static final int LOAD_BUTTON_HEIGHT = 120;
-    private static final int LOAD_BUTTON_Y = 210;
+    private static final int LOAD_BUTTON_Y = 203;
 
     Texture playButtonActive;
     Texture playButtonInactive;
@@ -91,7 +91,7 @@ public class MenuUI extends UI {
         ) {
             batch.draw(loadButtonActive, x, LOAD_BUTTON_Y, LOAD_BUTTON_WIDTH, LOAD_BUTTON_HEIGHT);
         } else {
-            batch.draw(exitButtonInactive, x, LOAD_BUTTON_Y, LOAD_BUTTON_WIDTH, LOAD_BUTTON_HEIGHT);
+            batch.draw(loadButtonInactive, x, LOAD_BUTTON_Y, LOAD_BUTTON_WIDTH, LOAD_BUTTON_HEIGHT);
         }
 
         batch.end();
@@ -136,6 +136,10 @@ public class MenuUI extends UI {
                 clickPos.y > LOAD_BUTTON_Y
         ) {
             // Load a save
+            GameData.saveState = true;
+            GameData.loadState = true;
+            GameData.mainMenuState = false;
+            GameData.currentUI = new SaveUI();
         }
     }
 
