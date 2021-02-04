@@ -3,7 +3,13 @@ package com.hardgforgif.dragonboatracing.tests;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import com.hardgforgif.dragonboatracing.core.*;
@@ -18,44 +24,104 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LaneTest {
 
     Lane testLane;
-    MapLayer mockLeftLayer;
-    MapLayer mockRightLayer;
 
-    int mapHeight = 1200;
+    int mapHeight = 10;
     int obstacleCount = 35;
-
+    TiledMap tiledMap;
+    MapLayer leftLayer;
+    MapLayer rightLayer;
+    World world;
     @Before
     public void init(){
         //Mock the opengl classes using mockito so that libgdx opengl functions can be used
         Gdx.gl20 = Mockito.mock(GL20.class);
         Gdx.gl30 = Mockito.mock(GL30.class);
+        tiledMap = new TmxMapLoader().load("Map1/Map2.tmx");
+        leftLayer = tiledMap.getLayers().get("CollisionLayerLeft");
+        rightLayer = tiledMap.getLayers().get("Lane1");
+        testLane = new Lane(mapHeight, leftLayer, rightLayer, obstacleCount);
 
-        mockLeftLayer = Mockito.mock(MapLayer.class);
-        mockRightLayer = Mockito.mock(MapLayer.class);
-
-        testLane = new Lane(mapHeight, mockLeftLayer, mockRightLayer, obstacleCount);
+        world = new World(new Vector2(0f, 0f), true);
     }
 
     @Test
     public void testLaneConstructor(){
         //compare left boundary array
-        float[][] testLeftBoundary = new float[1200][2];
+        float[][] testLeftBoundary = new float[mapHeight][2];
+
         for(int i = 0; i < mapHeight; i++){
-            for(int j = 0; j < testLeftBoundary[i].length; j++){
-                assertEquals(testLeftBoundary[i][j], testLane.getLeftBoundary()[i][j]);
-            }
+            assertTrue(Arrays.equals(testLeftBoundary[i], testLane.getLeftBoundary()[i]));
         }
 
         //compare right boundary array
-        float[][] testRightBoundary = new float[1200][2];
+        float[][] testRightBoundary = new float[mapHeight][2];
         for(int i = 0; i < mapHeight; i++){
-            for(int j = 0; j < testRightBoundary[i].length; j++){
-                assertEquals(testRightBoundary[i][j], testLane.getRightBoundary()[i][j]);
-            }
+            assertTrue(Arrays.equals(testRightBoundary[i], testLane.getRightBoundary()[i]));
         }
-
-        assertEquals(mockLeftLayer, testLane.getLeftLayer());
-        assertEquals(mockRightLayer, testLane.getRightLayer());
+        assertEquals(leftLayer, testLane.getLeftLayer());
+        assertEquals(rightLayer, testLane.getRightLayer());
         assertEquals(obstacleCount, testLane.getObstacles().length);
     }
+
+    @Test
+    public void testConstructBoundaries(){
+        testLane.constructBoundaries(2f);
+        float[][] testLeftBoundary = {{2.7890625f, 257.2726f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f}};
+        for(int i = 0; i < mapHeight; i++) {
+            assertTrue(Arrays.equals(testLeftBoundary[i], testLane.getLeftBoundary()[i]));
+        }
+
+        testLane.constructBoundaries(2f);
+        float[][] testRightBoundary = {{4.3671875f, 1092.364f},
+                                        {4.3671875f, 1092.364f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f},
+                                        {0.0f, 0.0f}};
+        for(int i = 0; i < mapHeight; i++) {
+            assertTrue(Arrays.equals(testRightBoundary[i], testLane.getRightBoundary()[i]));
+        }
+    }
+    @Ignore
+    @Test
+    public void testGetLimitsAt(){
+        testLane.constructBoundaries(2f);
+
+        //Testing when yPosition is greater than all boundaries
+        float[] actualList = testLane.getLimitsAt(4.5f);
+        float[] expectedList = {257.2726f, 1092.364f};
+        assertTrue(Arrays.equals(expectedList, actualList));
+
+        //Testing when yPosition is greater than rightBoundary
+        actualList = testLane.getLimitsAt(2f);
+        expectedList[0] = 257.2726f;
+        expectedList[1] = 1092.364f;
+        assertEquals(expectedList, actualList);
+        //assertTrue(Arrays.equals(expectedList, actualList));
+
+    }
+
+    @Test
+    //Can't test objects
+    public void testSpawnObstacles(){
+        testLane.spawnObstacles(world, mapHeight);
+        for (int i = 0;i < obstacleCount; i++){
+            assertTrue(testLane.getObstacles()[i].getObstacleTexture().toString().matches("Obstacles/Obstacle[123456].png"));
+            }
+
+    }
+
 }

@@ -38,7 +38,7 @@ public class ObstacleTest {
 
     @Test
     public void testObstacleConstructor(){
-        Texture texture = testObstacle.getObstaclTexture();
+        Texture texture = testObstacle.getObstacleTexture();
         assertEquals("Obstacles/Obstacle1.png", texture.toString());
     }
 
@@ -49,5 +49,12 @@ public class ObstacleTest {
         assertEquals(new Vector2(100f, 120f), testObstacle.getObstacleBody().getPosition());
         assertEquals(9866f, testObstacle.getObstacleSprite().getX());
         assertEquals(11892, testObstacle.getObstacleSprite().getY());
+    }
+
+    @Test
+    public void createObstacleBody(){
+
+        //assertTrue();
+
     }
 }
