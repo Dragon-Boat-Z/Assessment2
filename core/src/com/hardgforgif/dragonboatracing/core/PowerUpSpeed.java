@@ -4,6 +4,7 @@ public class PowerUpSpeed extends PowerUp {
 
     public PowerUpSpeed() {
         super("PowerUps/SpeedBoost.png");
+        setObstacleType(10);
     }
 
     @Override

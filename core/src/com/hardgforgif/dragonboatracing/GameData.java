@@ -103,6 +103,9 @@ public class GameData {
     // Difficulty constants for the AI
     public static float[] difficulty = new float[]{0.92f, 0.97f, 1f};
 
+    //Difficulty selected start.
+    public static int difficultySelected = 0;
+
     public static boolean saveGame(int saveSlot, Map map) throws IOException {
         // Create gson builder for converting from Java objects to Json format.
         GsonBuilder gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setLenient().setPrettyPrinting();

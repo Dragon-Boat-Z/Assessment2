@@ -4,6 +4,7 @@ public class PowerUpStamina extends PowerUp {
 
     public PowerUpStamina() {
         super("PowerUps/StaminaBoost.png");
+        setObstacleType(11);
     }
 
     @Override

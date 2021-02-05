@@ -134,7 +134,7 @@ public class SaveUI extends UI {
                         if (GameData.saveGame(1, Game.getMap()[GameData.currentLeg]))
                             System.out.println("Saved in slot 1.");
                     } catch (IOException e) {
-                        System.out.println("IOException caught.");
+                        System.out.println("IOException caught." + e);
                     }
                 }
             }
@@ -150,7 +150,7 @@ public class SaveUI extends UI {
                         if (GameData.saveGame(2, Game.getMap()[GameData.currentLeg]))
                             System.out.println("Saved in slot 2.");
                     } catch (IOException e) {
-                        System.out.println("IOException caught.");
+                        System.out.println("IOException caught." + e);
                     }
                 }
             }
@@ -167,7 +167,7 @@ public class SaveUI extends UI {
                         if (GameData.saveGame(3, Game.getMap()[GameData.currentLeg]))
                             System.out.println("Saved in slot 3.");
                     } catch (IOException e) {
-                        System.out.println("IOException caught.");
+                        System.out.println("IOException caught." + e);
                     }
                 }
             }

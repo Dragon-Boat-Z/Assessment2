@@ -102,14 +102,16 @@ public class Lane {
             //obstacles[i] = new Obstacle("Obstacles/Obstacle" + (randomIndex + 1) + ".png");
             //obstacles[i].setObstacleType(randomIndex+1);
 
-            float powerupDropChance = 0.1f;
+            float powerupDropChance = 0.5f;
             String filePath = "";
             float scale = 0f;
             if(new Random().nextFloat() <= powerupDropChance) {
                 //Add a PowerUp to obstacles[].
                 int powerupRandomiser = new Random().nextInt(5);
                 filePath = "PowerUps/PowerUp";
+                scale = -0.25f;
                 switch(powerupRandomiser) {
+                //switch(2) {
                     case 0:
                         //Bomb PowerUp.
                         obstacles[i] = new PowerUpBomb();
@@ -138,6 +140,9 @@ public class Lane {
                 filePath = "Obstacles/Obstacle" + (randomIndex + 1);
                 obstacles[i] = new Obstacle(filePath + ".png");
                 obstacles[i].setObstacleType(randomIndex);
+                if(randomIndex <= 1) {
+                    scale = -0.33f;
+                }
             }
 
             float segmentStart = i * segmentLength;

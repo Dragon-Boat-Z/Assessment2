@@ -73,7 +73,7 @@ public class Boat {
      */
     public void createBoatBody(World world, float posX, float posY, String bodyFile){
         boatSprite = new Sprite(boatTexture);
-        boatSprite.scale(-0.8f);
+        boatSprite.scale(-0.675f);
 
         // Define the body
         BodyDef bodyDef = new BodyDef();

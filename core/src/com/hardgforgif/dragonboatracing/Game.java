@@ -63,7 +63,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			map[i].createMapCollisions("CollisionLayerRight", world[i]);
 
 			// Create the lanes, and the obstacles in the physics game world
-			map[i].createLanes(world[i]);
+			map[i].createLanes(world[i], 30 + (i * 5) + (GameData.difficultySelected * 5));
 
 			// Create the start line
 			map[i].createStartLine("finishLine.png");
@@ -487,14 +487,14 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 				opponents[i] = null;
 			GameData.results.clear();
 			GameData.currentTimer = 0f;
-			player.setPowerUpTimer(0f);
-			player.setSpeed(GameData.boatsStats[player.getBoatType()][1]);
-			player.setInvulnerability(false);
-			for(int i = 0; i < opponents.length; i++) {
-				opponents[i].setPowerUpTimer(0f);
-				opponents[i].setSpeed(GameData.boatsStats[opponents[i].getBoatType()][1]);
-				opponents[i].setInvulnerability(false);
-			}
+			//player.setPowerUpTimer(0f);
+			//player.setSpeed(GameData.boatsStats[player.getBoatType()][1]);
+			//player.setInvulnerability(false);
+			//for(int i = 0; i < opponents.length; i++) {
+				//opponents[i].setPowerUpTimer(0f);
+				//opponents[i].setSpeed(GameData.boatsStats[opponents[i].getBoatType()][1]);
+				//opponents[i].setInvulnerability(false);
+			//}
 			GameData.penalties = new float[GameData.numberOfBoats];
 
 			// If we're coming from the result screen, then we need to advance to the next leg
@@ -528,7 +528,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 					map[i].createMapCollisions("CollisionLayerRight", world[i]);
 
 					// Create the lanes, and the obstacles in the physics game world
-					map[i].createLanes(world[i]);
+					map[i].createLanes(world[i], 30 + (i * 5) + (GameData.difficultySelected * 5));
 
 					// Create the finish line
 					map[i].createFinishLine("finishLine.png");

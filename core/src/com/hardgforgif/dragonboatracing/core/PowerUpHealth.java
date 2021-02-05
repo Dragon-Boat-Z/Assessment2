@@ -6,6 +6,7 @@ public class PowerUpHealth extends PowerUp {
 
     public PowerUpHealth() {
         super("PowerUps/HealthBoost.png");
+        setObstacleType(8);
     }
 
     @Override

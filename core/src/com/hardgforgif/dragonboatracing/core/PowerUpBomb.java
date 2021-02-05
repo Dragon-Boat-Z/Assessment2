@@ -9,6 +9,7 @@ public class PowerUpBomb extends PowerUp {
 
     public PowerUpBomb() {
         super("PowerUps/ObstacleClearer.png");
+        setObstacleType(7);
     }
 
     @Override

@@ -126,7 +126,7 @@ public class Map {
      * Instantiates the lane array and spawns obstacles on each of the lanes
      * @param world World to spawn the obstacles in
      */
-    public void createLanes(World world) {
+    public void createLanes(World world, int nrObstacles) {
         //MapLayer leftLayer = tiledMap.getLayers().get("CollisionLayerLeft");
         //MapLayer rightLayer = tiledMap.getLayers().get("Lane1");
 
@@ -134,7 +134,7 @@ public class Map {
         //lanes[0].constructBoundaries(unitScale);
         //lanes[0].spawnObstacles(world, mapHeight / GameData.PIXELS_TO_TILES);
 
-        int nrObstacles = 30;
+        //int nrObstacles = 30;
 
         MapLayer leftLayer = tiledMap.getLayers().get("CollisionLayerLeft");
         MapLayer rightLayer = tiledMap.getLayers().get("Lane1");
