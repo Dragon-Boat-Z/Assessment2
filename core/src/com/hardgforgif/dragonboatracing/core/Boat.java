@@ -180,14 +180,14 @@ public class Boat {
         if(stamina < 50f) {
             //Stamina is <50%. Acceleration and top speed capped significantly.
             setCurrentSpeed(this.getCurrentSpeed() + move_state * 0.15f * ((acceleration * 0.6f)/90)  * (stamina/100)); 
-            if (this.getCurrentSpeed() > this.getSpeed() * 0.6f)
-                setCurrentSpeed(this.getSpeed() * 0.6f);
+            if (this.getCurrentSpeed() > this.getSpeed() * 0.8f)
+                setCurrentSpeed(this.getSpeed() * 0.8f);
         }
         else if(stamina < 75f) {
             //Stamina is >50% but <75%. Acceleration and top speed capped slightly.
             setCurrentSpeed(this.getCurrentSpeed() + move_state * 0.15f * ((acceleration * 0.8f)/90)  * (stamina/100)); 
-            if (this.getCurrentSpeed() > this.getSpeed() * 0.8f)
-                setCurrentSpeed(this.getSpeed() * 0.8f);
+            if (this.getCurrentSpeed() > this.getSpeed() * 0.9f)
+                setCurrentSpeed(this.getSpeed() * 0.9f);
         }
         else {
             //Stamina is >75%. Acceleration and top speed are not capped.

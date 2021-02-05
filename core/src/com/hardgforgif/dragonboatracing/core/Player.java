@@ -44,15 +44,15 @@ public class Player extends Boat{
             //stamina -= 1.5 * delta;
             if(pressedKeys[0] || pressedKeys[1] || pressedKeys[3]) {
                 //Holding W, A, or D.
-                this.setStamina(this.getStamina() - 2 * delta);
+                this.setStamina(this.getStamina() - 4 * delta);
             }
             else if(pressedKeys[2]) {
                 //Holding S.
-                this.setStamina(this.getStamina() - 1 * delta);
+                this.setStamina(this.getStamina() + 3 * delta);
             }
             else {
                 //Not pressing any buttons.
-                this.setStamina(this.getStamina() - 1.5f * delta);
+                this.setStamina(this.getStamina() + 2 * delta);
             }
 
     }

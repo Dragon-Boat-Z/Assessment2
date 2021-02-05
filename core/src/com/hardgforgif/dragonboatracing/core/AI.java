@@ -222,15 +222,15 @@ public class AI extends Boat{
             //stamina -= 1.5 * delta;
             if(isDodging || isAccelerating) {
                 //AI is turning. Should also include accelerating!
-                this.setStamina(this.getStamina() - 2 * delta);
+                this.setStamina(this.getStamina() - 4 * delta);
             }
             else if(isBraking) {
                 //AI is braking.
-                this.setStamina(this.getStamina() - 1 * delta);
+                this.setStamina(this.getStamina() + 3 * delta);
             }
             else {
                 //Not accelerating or braking.
-                this.setStamina(this.getStamina() - 1.5f * delta);
+                this.setStamina(this.getStamina() + 2 * delta);
             }
         
     }
