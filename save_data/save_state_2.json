@@ -1,0 +1,1082 @@
+{
+"boats": [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null
+],
+"game_data":{
+  "leg_number": 0,
+  "current_timer": 0.0
+},
+
+"map": {
+  "lane_0": [
+    {
+      "x_position": 152.73524,
+      "y_position": 813.14764,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 141.40271,
+      "y_position": 1450.9874,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 144.64238,
+      "y_position": 1925.7451,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 98.31465,
+      "y_position": 2478.3333,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 186.78285,
+      "y_position": 3136.6223,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": -66.11513,
+      "y_position": 3578.6357,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 105.32266,
+      "y_position": 4475.8306,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 99.697975,
+      "y_position": 5329.5244,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 155.77736,
+      "y_position": 6047.6226,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 162.68303,
+      "y_position": 6530.906,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 124.773285,
+      "y_position": 6742.0874,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 188.95018,
+      "y_position": 7915.455,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 200.11336,
+      "y_position": 8024.3145,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 169.32,
+      "y_position": 8760.246,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 197.62213,
+      "y_position": 9311.458,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": -81.80026,
+      "y_position": 10074.588,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 133.71101,
+      "y_position": 10536.661,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 158.4331,
+      "y_position": 11333.736,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 185.95378,
+      "y_position": 11771.424,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": -79.69644,
+      "y_position": 12710.651,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": -20.934753,
+      "y_position": 13143.266,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 147.35753,
+      "y_position": 13784.062,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": -88.6557,
+      "y_position": 14454.868,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 106.01438,
+      "y_position": 15295.128,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 162.20049,
+      "y_position": 15381.453,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 94.22415,
+      "y_position": 16370.33,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 117.43756,
+      "y_position": 16851.371,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 187.97417,
+      "y_position": 17411.1,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 128.6439,
+      "y_position": 17996.482,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 194.63367,
+      "y_position": 18662.424,
+      "obstacle_type": 3
+    }
+  ],
+  "lane_1": [
+    {
+      "x_position": 141.557,
+      "y_position": 912.3541,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 299.7938,
+      "y_position": 1473.6083,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 266.8074,
+      "y_position": 1840.6116,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 359.2767,
+      "y_position": 2814.582,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 199.36432,
+      "y_position": 2954.2441,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 292.34137,
+      "y_position": 4073.969,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 333.42117,
+      "y_position": 4381.683,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 310.0712,
+      "y_position": 5460.2446,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 342.07593,
+      "y_position": 5735.6924,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 176.28552,
+      "y_position": 6407.8145,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 348.10037,
+      "y_position": 6944.155,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 320.5072,
+      "y_position": 7529.6987,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 283.48386,
+      "y_position": 8030.4194,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 321.0067,
+      "y_position": 9118.279,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 154.80472,
+      "y_position": 9228.171,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 317.47253,
+      "y_position": 9807.391,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 284.64615,
+      "y_position": 10437.904,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 291.51282,
+      "y_position": 11345.619,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 320.32272,
+      "y_position": 11909.862,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 264.33694,
+      "y_position": 12778.466,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 275.81964,
+      "y_position": 13182.105,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 317.19604,
+      "y_position": 13820.871,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 296.87344,
+      "y_position": 14454.3955,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 287.88074,
+      "y_position": 15141.34,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 148.63303,
+      "y_position": 15760.631,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 202.7793,
+      "y_position": 15977.151,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 322.74103,
+      "y_position": 16610.049,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 185.7933,
+      "y_position": 17633.52,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 186.06122,
+      "y_position": 17865.12,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 148.18866,
+      "y_position": 18378.482,
+      "obstacle_type": 6
+    }
+  ],
+  "lane_2": [
+    {
+      "x_position": 350.45312,
+      "y_position": 580.5273,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 370.62772,
+      "y_position": 1155.4523,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 503.461,
+      "y_position": 1997.196,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 446.7873,
+      "y_position": 2726.8662,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 313.71796,
+      "y_position": 3546.2288,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 406.69928,
+      "y_position": 3769.215,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 345.13245,
+      "y_position": 4497.738,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 317.60757,
+      "y_position": 4843.1016,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 282.41904,
+      "y_position": 5414.6245,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 483.90955,
+      "y_position": 6678.4434,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 345.06018,
+      "y_position": 6672.283,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 269.41507,
+      "y_position": 7523.116,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 284.69568,
+      "y_position": 7860.2954,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 365.2842,
+      "y_position": 9047.894,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 256.00085,
+      "y_position": 9619.686,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 511.54468,
+      "y_position": 10376.657,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 493.20718,
+      "y_position": 10937.201,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 442.3156,
+      "y_position": 11293.848,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 340.07947,
+      "y_position": 11653.096,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 479.54114,
+      "y_position": 12330.714,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 514.5963,
+      "y_position": 13428.779,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 433.88455,
+      "y_position": 13686.15,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 264.9497,
+      "y_position": 14186.892,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 332.83798,
+      "y_position": 15134.07,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 484.66245,
+      "y_position": 15893.297,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 438.45966,
+      "y_position": 16328.291,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 282.08115,
+      "y_position": 17002.13,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 351.01868,
+      "y_position": 17095.605,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 520.05444,
+      "y_position": 18276.82,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 516.8507,
+      "y_position": 19002.709,
+      "obstacle_type": 3
+    }
+  ],
+  "lane_3": [
+    {
+      "x_position": 617.10944,
+      "y_position": 666.5615,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 653.21515,
+      "y_position": 1208.0269,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 622.96356,
+      "y_position": 1897.741,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 504.87573,
+      "y_position": 2859.7556,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 467.43365,
+      "y_position": 3377.4473,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 650.4262,
+      "y_position": 4199.5386,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 678.7601,
+      "y_position": 4812.633,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 512.22675,
+      "y_position": 5006.9805,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 680.01447,
+      "y_position": 5685.6484,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 665.74927,
+      "y_position": 6123.9517,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 674.7899,
+      "y_position": 7172.334,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 578.38715,
+      "y_position": 7816.2563,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 561.5956,
+      "y_position": 7928.732,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 470.81543,
+      "y_position": 8592.329,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 652.7888,
+      "y_position": 9245.888,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 685.4634,
+      "y_position": 9865.843,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 598.6516,
+      "y_position": 10778.818,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 690.96436,
+      "y_position": 11414.072,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 604.06915,
+      "y_position": 12175.502,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 699.09326,
+      "y_position": 12496.099,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 599.54315,
+      "y_position": 13127.47,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 639.8431,
+      "y_position": 14026.933,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 440.57422,
+      "y_position": 14016.863,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 679.1226,
+      "y_position": 15089.705,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 649.1998,
+      "y_position": 15553.819,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 488.24005,
+      "y_position": 16168.288,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 506.18433,
+      "y_position": 16475.871,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 657.04846,
+      "y_position": 17463.355,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 660.8556,
+      "y_position": 18091.219,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 595.479,
+      "y_position": 18957.713,
+      "obstacle_type": 4
+    }
+  ],
+  "lane_4": [
+    {
+      "x_position": 818.2037,
+      "y_position": 943.7254,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 810.19543,
+      "y_position": 1406.1674,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 808.86804,
+      "y_position": 1930.1511,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 847.1736,
+      "y_position": 2894.6375,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 765.2873,
+      "y_position": 3145.0386,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 855.7233,
+      "y_position": 3684.1333,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 675.8931,
+      "y_position": 4461.2637,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 793.2196,
+      "y_position": 5479.905,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 848.732,
+      "y_position": 5604.294,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 809.6757,
+      "y_position": 6521.009,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 862.40125,
+      "y_position": 7303.237,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 836.2852,
+      "y_position": 7343.779,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 776.90857,
+      "y_position": 8469.538,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 817.0868,
+      "y_position": 8764.442,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 822.7335,
+      "y_position": 9330.202,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 850.5379,
+      "y_position": 9831.593,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 834.4604,
+      "y_position": 10679.01,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 766.77826,
+      "y_position": 11339.739,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 789.5468,
+      "y_position": 12123.786,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 586.64764,
+      "y_position": 12439.738,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 703.36145,
+      "y_position": 13356.409,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 830.0857,
+      "y_position": 13857.663,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 844.1886,
+      "y_position": 14211.903,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 836.60175,
+      "y_position": 14828.274,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 663.0483,
+      "y_position": 15544.403,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 835.0455,
+      "y_position": 16177.075,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 787.71356,
+      "y_position": 16983.568,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 807.5356,
+      "y_position": 17485.697,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 777.5366,
+      "y_position": 18000.37,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 771.12964,
+      "y_position": 18876.814,
+      "obstacle_type": 5
+    }
+  ],
+  "lane_5": [
+    {
+      "x_position": 947.58997,
+      "y_position": 897.47296,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 1004.9667,
+      "y_position": 1795.7268,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 1024.4711,
+      "y_position": 2400.767,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 903.35266,
+      "y_position": 2525.6067,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 831.29126,
+      "y_position": 3449.0757,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 864.7811,
+      "y_position": 3789.8494,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 974.02716,
+      "y_position": 4593.3735,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 847.8882,
+      "y_position": 5256.3247,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 1021.69434,
+      "y_position": 6011.338,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 964.08014,
+      "y_position": 6345.28,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 986.5337,
+      "y_position": 6856.5195,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 997.2525,
+      "y_position": 7406.07,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 998.69904,
+      "y_position": 8168.601,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 819.201,
+      "y_position": 8519.677,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 998.5083,
+      "y_position": 9574.198,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 974.0081,
+      "y_position": 10259.202,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 934.281,
+      "y_position": 10671.098,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 992.9151,
+      "y_position": 11181.883,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 890.7457,
+      "y_position": 11895.779,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 994.9478,
+      "y_position": 12617.608,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 1017.3834,
+      "y_position": 13048.999,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 957.3634,
+      "y_position": 13872.314,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 1032.0979,
+      "y_position": 14579.594,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 895.3539,
+      "y_position": 14923.499,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 874.6503,
+      "y_position": 15631.302,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 909.9878,
+      "y_position": 15927.373,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 799.0751,
+      "y_position": 16872.227,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 987.4054,
+      "y_position": 17228.852,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 1000.5227,
+      "y_position": 18227.256,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 1014.4783,
+      "y_position": 18809.518,
+      "obstacle_type": 2
+    }
+  ],
+  "lane_6": [
+    {
+      "x_position": 979.6133,
+      "y_position": 999.46594,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 1011.094,
+      "y_position": 1221.0829,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 965.8347,
+      "y_position": 1778.3185,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 1075.7366,
+      "y_position": 2784.5444,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 935.35034,
+      "y_position": 3465.8794,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 1133.3755,
+      "y_position": 4226.5723,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 1164.2261,
+      "y_position": 4839.761,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 1043.9023,
+      "y_position": 5375.736,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 1026.0573,
+      "y_position": 5539.2363,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 1168.6542,
+      "y_position": 6510.705,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 914.9746,
+      "y_position": 6631.301,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 1151.9966,
+      "y_position": 7856.419,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 1187.3375,
+      "y_position": 8332.558,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 1176.7662,
+      "y_position": 8686.768,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 1113.594,
+      "y_position": 9221.776,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 1098.7964,
+      "y_position": 10124.181,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 1203.7471,
+      "y_position": 10679.015,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 1124.8047,
+      "y_position": 11555.771,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 1106.2743,
+      "y_position": 11713.458,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 958.58826,
+      "y_position": 12640.611,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 1189.9161,
+      "y_position": 12930.653,
+      "obstacle_type": 3
+    },
+    {
+      "x_position": 1134.3553,
+      "y_position": 13751.318,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 996.933,
+      "y_position": 14411.6,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 1140.6462,
+      "y_position": 15260.488,
+      "obstacle_type": 5
+    },
+    {
+      "x_position": 1145.5768,
+      "y_position": 15632.768,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 1009.7001,
+      "y_position": 16400.805,
+      "obstacle_type": 1
+    },
+    {
+      "x_position": 1209.5446,
+      "y_position": 16585.42,
+      "obstacle_type": 4
+    },
+    {
+      "x_position": 1175.6586,
+      "y_position": 17320.3,
+      "obstacle_type": 2
+    },
+    {
+      "x_position": 977.4446,
+      "y_position": 18153.9,
+      "obstacle_type": 6
+    },
+    {
+      "x_position": 1168.5417,
+      "y_position": 18869.459,
+      "obstacle_type": 5
+    }
+  ]
+}
+}

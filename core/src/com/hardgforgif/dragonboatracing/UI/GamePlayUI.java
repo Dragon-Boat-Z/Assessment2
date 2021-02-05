@@ -80,7 +80,7 @@ public class GamePlayUI extends UI{
         speedLabel.draw(batch, "Speed", 10, 230);
 
         // Draw the position label, the timer and the leg label
-        positionLabel.draw(batch, GameData.standings[0] + "/4", 1225, 700);
+        positionLabel.draw(batch, GameData.standings[0] + "/7", 1225, 700);
         timerLabel.draw(batch, String.valueOf(Math.round(GameData.currentTimer * 10.0) / 10.0), 10, 700);
         legLabel.draw(batch, "Leg: " + (GameData.currentLeg + 1), 10, 650);
 
