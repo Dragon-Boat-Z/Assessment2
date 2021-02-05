@@ -357,7 +357,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 						}
 
 				// Remove the body from the world to avoid other collisions with it
-				world[GameData.currentLeg].destroyBody(body);
+				if(body != null) {
+					world[GameData.currentLeg].destroyBody(body);
+				}
 			}
 
 			// Iterate through the bodies marked to be damaged after a collision
