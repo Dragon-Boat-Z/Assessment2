@@ -143,6 +143,14 @@ public class SaveUI extends UI {
             if(clickPos.y < SLOT_2_Y + SLOT_BUTTON_HEIGHT && clickPos.y > SLOT_2_Y){
                 if(GameData.loadState) {
                     // Load from slot 2
+                    try {
+                        GameData.loadGame(2);
+                        GameData.saveState = false;
+                        GameData.gamePlayState = true;
+                        GameData.currentUI = new GamePlayUI();
+                    } catch (IOException e) {
+                        System.out.println("IOException caught.");
+                    }
                 }
                 else if(GameData.saveState) {
                     // Save in slot 2
@@ -159,6 +167,14 @@ public class SaveUI extends UI {
             if (clickPos.y < SLOT_3_Y + SLOT_BUTTON_HEIGHT && clickPos.y > SLOT_3_Y) {
                 if(GameData.loadState) {
                     // Load from slot 3
+                    try {
+                        GameData.loadGame(3);
+                        GameData.saveState = false;
+                        GameData.gamePlayState = true;
+                        GameData.currentUI = new GamePlayUI();
+                    } catch (IOException e) {
+                        System.out.println("IOException caught.");
+                    }
 
                 }
                 else if(GameData.saveState) {
