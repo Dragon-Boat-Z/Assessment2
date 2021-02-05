@@ -137,6 +137,7 @@ public class Lane {
                 int randomIndex = new Random().nextInt(7);
                 filePath = "Obstacles/Obstacle" + (randomIndex + 1);
                 obstacles[i] = new Obstacle(filePath + ".png");
+                obstacles[i].setObstacleType(randomIndex);
             }
 
             float segmentStart = i * segmentLength;
@@ -158,14 +159,14 @@ public class Lane {
             JsonObject obj = obstArray.get(i).getAsJsonObject();
             int obstType = obj.get("obstacle_type").getAsInt();
             float scale = obstType == 1 || obstType == 6 ? -0.8f : 0;
-            obstacles[i] = new Obstacle("Obstacles/Obstacle" + obstType + ".png");
+            obstacles[i] = new Obstacle("Obstacles/Obstacle" + (obstType+1) + ".png");
             obstacles[i].setObstacleType(obstType);
             float yPos = obj.get("y_position").getAsFloat();
             float xPos = obj.get("x_position").getAsFloat();
 
 
             obstacles[i].createObstacleBody(world, xPos / GameData.METERS_TO_PIXELS, yPos / GameData.METERS_TO_PIXELS,
-                    "Obstacles/Obstacle" + (obstType) + ".json", scale);
+                    "Obstacles/Obstacle" + (obstType+1) + ".json", scale);
         }
     }
 
