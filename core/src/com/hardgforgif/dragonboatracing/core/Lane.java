@@ -5,11 +5,19 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.hardgforgif.dragonboatracing.GameData;
 
+import java.lang.reflect.Type;
 import java.util.Random;
 
+import static com.badlogic.gdx.net.HttpRequestBuilder.json;
+
 public class Lane {
+    private int laneNo;
     private float[][] leftBoundary;
     private int leftIterator = 0;
     private float[][] rightBoundary;
@@ -19,7 +27,7 @@ public class Lane {
 
     private Obstacle[] obstacles;
 
-    public Lane(int mapHeight, MapLayer left, MapLayer right, int nrObstacles){
+    public Lane(int mapHeight, MapLayer left, MapLayer right, int nrObstacles, int laneNo_){
         leftBoundary = new float[mapHeight][2];
         rightBoundary = new float[mapHeight][2];
 
@@ -27,7 +35,7 @@ public class Lane {
         rightLayer = right;
 
         obstacles = new Obstacle[nrObstacles];
-
+        laneNo = laneNo_;
     }
 
     /**
@@ -83,12 +91,47 @@ public class Lane {
     public void spawnObstacles(World world, float mapHeight){
         int nrObstacles = obstacles.length;
         float segmentLength = mapHeight / nrObstacles;
+
         for (int i = 0; i < nrObstacles; i++){
-            int randomIndex = new Random().nextInt(6);
+            //int randomIndex = new Random().nextInt(6);
+            //float scale = 0f;
+            //if (randomIndex == 0 || randomIndex == 5)
+                //scale = -0.8f;
+            //obstacles[i] = new Obstacle("Obstacles/Obstacle" + (randomIndex + 1) + ".png");
+            //obstacles[i].setObstacleType(randomIndex+1);
+
+            float powerupDropChance = 0.1f;
+            String filePath = "";
             float scale = 0f;
-            if (randomIndex == 0 || randomIndex == 5)
-                scale = -0.8f;
-            obstacles[i] = new Obstacle("Obstacles/Obstacle" + (randomIndex + 1) + ".png");
+            if(new Random().nextFloat() <= powerupDropChance) {
+                //Add a PowerUp to obstacles[].
+                int powerupRandomiser = new Random().nextInt(5);
+                filePath = "PowerUps/PowerUp";
+                switch(powerupRandomiser) {
+                    case 0:
+                        //Bomb PowerUp.
+                        obstacles[i] = new PowerUpBomb();
+                    case 1:
+                        //Health PowerUp.
+                        obstacles[i] = new PowerUpHealth();
+                    case 2:
+                        //Invulnerability PowerUp.
+                        obstacles[i] = new PowerUpInvulnerability();
+                    case 3:
+                        //Speed PowerUp.
+                        obstacles[i] = new PowerUpSpeed();
+                    case 4:
+                        //Stamina PowerUp.
+                        obstacles[i] = new PowerUpStamina();
+                }
+            }
+            else {
+                //Add an Obstacle to obstacles[].
+                int randomIndex = new Random().nextInt(7);
+                filePath = "Obstacles/Obstacle" + (randomIndex + 1);
+                obstacles[i] = new Obstacle(filePath + ".png");
+            }
+
             float segmentStart = i * segmentLength;
             float yPos = (float) (600f + (segmentStart + Math.random() * segmentLength));
 
@@ -97,9 +140,18 @@ public class Lane {
             float rightLimit = limits[1];
             float xPos = (float) (leftLimit + Math.random() * (rightLimit - leftLimit));
 
-
             obstacles[i].createObstacleBody(world, xPos / GameData.METERS_TO_PIXELS, yPos / GameData.METERS_TO_PIXELS,
-                    "Obstacles/Obstacle" + (randomIndex + 1) + ".json", scale);
+                    filePath + ".json", scale);
+        }
+    }
+
+    /**
+     * JSON Serializer for Lane, will just return laneNo (0-6)
+     * @return laneNo in JSON form.
+     */
+    public static class LaneSerializer implements JsonSerializer<Lane> {
+        public JsonElement serialize(Lane aLane, Type type, JsonSerializationContext jsonSerializationContext) {
+            return new JsonPrimitive(aLane.laneNo);
         }
     }
 
@@ -128,7 +180,10 @@ public class Lane {
         return this.rightLayer;
     }
 
-    public Obstacle[] getObstacles() {
+    public Obstacle[] getObstacles(){
         return this.obstacles;
     }
+
+    public int getLaneNo() { return this.laneNo;}
+
 }

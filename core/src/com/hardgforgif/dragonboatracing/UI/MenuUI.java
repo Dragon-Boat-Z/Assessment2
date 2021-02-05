@@ -12,21 +12,27 @@ public class MenuUI extends UI {
     //Sets the dimensions for all the UI components
     private static final int LOGO_WIDTH = 400;
     private static final int LOGO_HEIGHT = 200;
-    private static final int LOGO_Y = 450;
+    private static final int LOGO_Y = 480;
 
     private static final int PLAY_BUTTON_WIDTH = 300;
     private static final int PLAY_BUTTON_HEIGHT = 120;
-    private static final int PLAY_BUTTON_Y = 280;
+    private static final int PLAY_BUTTON_Y = 340;
 
     private static final int EXIT_BUTTON_WIDTH = 250;
     private static final int EXIT_BUTTON_HEIGHT = 120;
-    private static final int EXIT_BUTTON_Y = 100;
+    private static final int EXIT_BUTTON_Y = 65;
+
+    private static final int LOAD_BUTTON_WIDTH = 250;
+    private static final int LOAD_BUTTON_HEIGHT = 120;
+    private static final int LOAD_BUTTON_Y = 203;
 
     Texture playButtonActive;
     Texture playButtonInactive;
     Texture exitButtonActive;
     Texture exitButtonInactive;
     Texture logo;
+    Texture loadButtonActive;
+    Texture loadButtonInactive;
 
     ScrollingBackground scrollingBackground;
 
@@ -35,12 +41,14 @@ public class MenuUI extends UI {
         scrollingBackground = new ScrollingBackground();
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setTargetSpeed(ScrollingBackground.getDefaultSpeed());
+        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed());
 
         playButtonActive = new Texture("PlaySelected.png");
         playButtonInactive = new Texture("PlayUnselected.png");
         exitButtonActive = new Texture("ExitSelected.png");
         exitButtonInactive = new Texture("ExitUnselected.png");
+        loadButtonActive = new Texture("LoadSelected.png");
+        loadButtonInactive = new Texture("LoadUnselected.png");
         logo = new Texture("Title.png");
     }
 
@@ -74,6 +82,18 @@ public class MenuUI extends UI {
         } else {
             batch.draw(exitButtonInactive, x, EXIT_BUTTON_Y, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
         }
+
+        x = screenWidth / 2 - LOAD_BUTTON_WIDTH / 2;
+        if (
+                mousePos.x < x + LOAD_BUTTON_WIDTH && mousePos.x > x &&
+                        mousePos.y < LOAD_BUTTON_Y + LOAD_BUTTON_HEIGHT &&
+                        mousePos.y > LOAD_BUTTON_Y
+        ) {
+            batch.draw(loadButtonActive, x, LOAD_BUTTON_Y, LOAD_BUTTON_WIDTH, LOAD_BUTTON_HEIGHT);
+        } else {
+            batch.draw(loadButtonInactive, x, LOAD_BUTTON_Y, LOAD_BUTTON_WIDTH, LOAD_BUTTON_HEIGHT);
+        }
+
         batch.end();
 
         playMusic();
@@ -107,6 +127,19 @@ public class MenuUI extends UI {
                 clickPos.y > EXIT_BUTTON_Y
         ) {
             Gdx.app.exit();
+        }
+
+        // If the load button is clicked
+        x = screenWidth / 2 - LOAD_BUTTON_WIDTH / 2;
+        if (clickPos.x < x + LOAD_BUTTON_WIDTH && clickPos.x > x &&
+                clickPos.y < LOAD_BUTTON_Y + LOAD_BUTTON_HEIGHT &&
+                clickPos.y > LOAD_BUTTON_Y
+        ) {
+            // Load a save
+            GameData.saveState = true;
+            GameData.loadState = true;
+            GameData.mainMenuState = false;
+            GameData.currentUI = new SaveUI();
         }
     }
 

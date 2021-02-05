@@ -9,45 +9,59 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.google.gson.*;
+import com.google.gson.annotations.Expose;
 import com.hardgforgif.dragonboatracing.GameData;
 import com.hardgforgif.dragonboatracing.BodyEditorLoader;
 
+import java.lang.reflect.Type;
+
 public class Boat {
     // Boat specs
-    private float robustness;
+    @Expose
+    private float robustness,maneuverability,speed,acceleration;
+    @Expose
     private float stamina = 120f;
-    private float maneuverability;
-    private float speed;
-    private float acceleration;
-
+    @Expose
     private float current_speed = 20f;
+    @Expose
     private float turningSpeed = 0.25f;
+    @Expose
     private float targetAngle = 0f;
+    @Expose
+    private Lane lane;
+    @Expose
+    private int boatType;
+
+    private int laneNo;
+    private float powerupTimer;
+    private boolean invulnerable;
 
     private Sprite boatSprite;
     private Texture boatTexture;
     private Body boatBody;
-
     private TextureAtlas textureAtlas;
     private Animation animation;
-
-    private Lane lane;
     private float leftLimit;
     private float rightLimit;
-
 
     public Boat(float robustness, float speed, float acceleration, float maneuverability, int boatType, Lane lane) {
         this.robustness = robustness;
         this.speed = speed;
         this.acceleration = acceleration;
         this.maneuverability = maneuverability;
-        turningSpeed *= this.maneuverability / 100;
+        this.turningSpeed *= this.maneuverability / 100;
+        this.boatType = boatType;
 
         boatTexture = new Texture("Boat" + (boatType + 1) + ".png");
         textureAtlas = new TextureAtlas(Gdx.files.internal("Boats/Boat" + (boatType + 1) +  ".atlas"));
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
         this.lane = lane;
+        this.laneNo = lane.getLaneNo();
+
+        this.powerupTimer = 0;
+        this.invulnerable = false;
     }
 
     /**
@@ -165,24 +179,24 @@ public class Boat {
         */
         if(stamina < 50f) {
             //Stamina is <50%. Acceleration and top speed capped significantly.
-            current_speed += move_state * 0.15f * ((acceleration * 0.6f)/90)  * (stamina/100);
-            if (current_speed > speed * 0.6f)
-                current_speed = speed * 0.6f;
+            setCurrentSpeed(this.getCurrentSpeed() + move_state * 0.15f * ((acceleration * 0.6f)/90)  * (stamina/100)); 
+            if (this.getCurrentSpeed() > this.getSpeed() * 0.6f)
+                setCurrentSpeed(this.getSpeed() * 0.6f);
         }
         else if(stamina < 75f) {
             //Stamina is >50% but <75%. Acceleration and top speed capped slightly.
-            current_speed += move_state * 0.15f * ((acceleration * 0.8f)/90)  * (stamina/100);
-            if (current_speed > speed * 0.8f)
-                current_speed = speed * 0.8f;
+            setCurrentSpeed(this.getCurrentSpeed() + move_state * 0.15f * ((acceleration * 0.8f)/90)  * (stamina/100)); 
+            if (this.getCurrentSpeed() > this.getSpeed() * 0.8f)
+                setCurrentSpeed(this.getSpeed() * 0.8f);
         }
         else {
             //Stamina is >75%. Acceleration and top speed are not capped.
-            current_speed += move_state * 0.15f * (acceleration/90)  * (stamina/100);
-            if (current_speed > speed)
-                current_speed = speed;
+            setCurrentSpeed(this.getCurrentSpeed() + move_state * 0.15f * (acceleration/90)  * (stamina/100)); 
+            if (this.getCurrentSpeed() > this.getSpeed())
+                setCurrentSpeed(this.getSpeed());
         }
-        if (current_speed < 0)
-            current_speed = 0;
+        if (this.getCurrentSpeed() < 0)
+            setCurrentSpeed(0);
 
 
         // Get the coordinates of the center of the boat
@@ -252,6 +266,42 @@ public class Boat {
         boatBody.setTransform(boatBody.getPosition(), newAngle * MathUtils.degRad);
     }
 
+    public static class BoatSerializer implements JsonSerializer<Boat> {
+        public JsonElement serialize(Boat aBoat, Type type, JsonSerializationContext jsonSerializationContext) {
+            JsonObject obj = new JsonObject();
+            obj.add("lane", new JsonPrimitive(aBoat.getLane().getLaneNo()));
+            obj.add("robustness", new JsonPrimitive(aBoat.getRobustness()));
+            obj.add("maneuverability", new JsonPrimitive(aBoat.getManeuverability()));
+            obj.add("speed", new JsonPrimitive(aBoat.getSpeed()));
+            obj.add("acceleration", new JsonPrimitive(aBoat.getAcceleration()));
+            obj.add("stamina", new JsonPrimitive(aBoat.getStamina()));
+            obj.add("current_speed", new JsonPrimitive(aBoat.getCurrentSpeed()));
+            obj.add("turning_speed", new JsonPrimitive(aBoat.getTurningSpeed()));
+            obj.add("target_angle", new JsonPrimitive(aBoat.getTargetAngle()));
+            obj.add("boat_type", new JsonPrimitive(aBoat.getBoatType()));
+            obj.add("x_position", new JsonPrimitive(aBoat.getBoatSprite().getX()));
+            obj.add("y_position", new JsonPrimitive(aBoat.getBoatSprite().getY()));
+
+            return obj;
+        }
+    }
+
+    public static Boat from_json(JsonObject obj, Map map, World world) {
+
+        // First initialise the boat with it's stats.
+        Boat b = new Boat(obj.get("robustness").getAsFloat(), obj.get("speed").getAsFloat(),
+                 obj.get("acceleration").getAsFloat(), obj.get("maneuverability").getAsFloat(),
+                 obj.get("boat_type").getAsInt(), map.getLanes()[obj.get("lane").getAsInt()]);
+
+        // Then update the in play variables of that boat from the save-state.
+        b.setStamina(obj.get("stamina").getAsFloat());
+        b.setCurrentSpeed(obj.get("current_speed").getAsFloat());
+        b.setTurningSpeed(obj.get("turning_speed").getAsFloat());
+        b.setTargetAngle(obj.get("target_angle").getAsFloat());
+        b.createBoatBody(world, obj.get("x_position").getAsFloat(),obj.get("y_position").getAsFloat(), "Boat1.json");
+        return b;
+    }
+
     //getters
     public float getRobustness(){
         return this.robustness;
@@ -309,12 +359,22 @@ public class Boat {
         return this.lane;
     }
 
+    public int getBoatType() { return this.boatType; }
+
     public float getLeftLimit(){
         return this.leftLimit;
     }
 
     public float getRightLimit(){
         return this.rightLimit;
+    }
+    
+    public float getPowerUpTimer() {
+        return this.powerupTimer;
+    }
+
+    public boolean isInvulnerable() {
+        return this.invulnerable;
     }
 
     public void setRobustness(float f) { this.robustness = f; }
@@ -345,8 +405,29 @@ public class Boat {
         this.targetAngle = targetAngle;
     }
 
+    public void setBoatType(int type) { 
+        this.boatType = type; 
+    }
+
+    public void setPowerUpTimer(float time) {
+        this.powerupTimer = time;
+    }
+
+    public void setInvulnerability(boolean toggle) {
+        this.invulnerable = toggle;
+    }
+
     public void setLimits(float left, float right) {
         this.leftLimit = left;
         this.rightLimit = right;
+    }
+
+    public void setLaneNo(int num) {
+        this.laneNo = num;
+    }
+
+    public void setPosition(float x, float y) {
+        this.boatSprite.setX(x);
+        this.boatSprite.setY(y);
     }
 }

@@ -72,25 +72,16 @@ public class ScrollingBackground {
         imageScale = width / image.getWidth();
     }
 
-    //setters
-    public void setTargetSpeed(int targetSpeed) {
+    /**
+     * Set the scrolling speed in pixels/sec
+     * @param targetSpeed
+     */
+    public void setSpeed(int targetSpeed) {
         this.targetSpeed = targetSpeed;
     }
 
-    public void setSpeed(int speed){
-        this.speed = speed;
-    }
-    
     public void setSpeedFixed(boolean speedFixed) {
         this.speedFixed = speedFixed;
-    }
-
-    public void setY1(float y1){
-        this.y1 = y1;
-    }
-    
-    public void setY2(float y2){
-        this.y2 = y2;
     }
 
     //getters

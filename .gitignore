@@ -4,6 +4,7 @@
 *.war
 *.ear
 hs_err_pid*
+/save_data/*
 
 ## Robovm
 /ios/robovm-build/
@@ -130,4 +131,3 @@ settings.json
 
 ##testing
 /tests/build/*
-/tests/bin/*

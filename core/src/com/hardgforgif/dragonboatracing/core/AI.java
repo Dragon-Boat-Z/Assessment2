@@ -2,6 +2,8 @@ package com.hardgforgif.dragonboatracing.core;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
+import com.google.gson.JsonObject;
 import com.hardgforgif.dragonboatracing.GameData;
 
 public class AI extends Boat{
@@ -101,22 +103,26 @@ public class AI extends Boat{
      */
     private boolean obstaclesInRange(){
         for (Obstacle obstacle : this.getLane().getObstacles()){
-            // Get the obstacles attributes
-            float width = obstacle.getObstacleSprite().getWidth() * obstacle.getObstacleSprite().getScaleX();
-            float height = obstacle.getObstacleSprite().getHeight() * obstacle.getObstacleSprite().getScaleY();
-            float posX = obstacle.getObstacleSprite().getX() + obstacle.getObstacleSprite().getWidth() / 2 - width / 2;
-            float posY = obstacle.getObstacleSprite().getY() + obstacle.getObstacleSprite().getHeight() / 2 - height / 2;
+            //Don't bother dodging if Obstacle is a PowerUp.
+            if(!obstacle.isPowerUp()){
+                // Get the obstacles attributes
+                float width = obstacle.getObstacleSprite().getWidth() * obstacle.getObstacleSprite().getScaleX();
+                float height = obstacle.getObstacleSprite().getHeight() * obstacle.getObstacleSprite().getScaleY();
+                float posX = obstacle.getObstacleSprite().getX() + obstacle.getObstacleSprite().getWidth() / 2 - width / 2;
+                float posY = obstacle.getObstacleSprite().getY() + obstacle.getObstacleSprite().getHeight() / 2 - height / 2;
 
-            // Get the boat  attributes
-            float boatLeftX = this.objectChecker.x - this.getBoatSprite().getWidth() / 2 * this.getBoatSprite().getScaleX();
-            float boatRightX = this.objectChecker.x + this.getBoatSprite().getWidth() / 2 * this.getBoatSprite().getScaleX();
+                // Get the boat  attributes
+                float boatLeftX = this.objectChecker.x - this.getBoatSprite().getWidth() / 2 * this.getBoatSprite().getScaleX();
+                float boatRightX = this.objectChecker.x + this.getBoatSprite().getWidth() / 2 * this.getBoatSprite().getScaleX();
 
-            // Check for obstacles
-            if (boatRightX >= posX && boatLeftX <= posX + width &&
-                    this.objectChecker.y >= posY && this.getBoatSprite().getY() + this.getBoatSprite().getHeight() / 2 <= posY){
-                detectedObstacleYPos = posY;
-                return true;
+                // Check for obstacles
+                if (boatRightX >= posX && boatLeftX <= posX + width &&
+                        this.objectChecker.y >= posY && this.getBoatSprite().getY() + this.getBoatSprite().getHeight() / 2 <= posY){
+                    detectedObstacleYPos = posY;
+                    return true;
+                }
             }
+            
         }
         return false;
     }
@@ -219,28 +225,19 @@ public class AI extends Boat{
         
     }
 
-    //getters
-    public Vector2 getLaneChecker(){
-        return this.laneChecker;
-    }
+    public static AI from_json(JsonObject obj, Map map, World world) {
+        // First initialise the boat with it's stats.
+        AI b = new AI(obj.get("robustness").getAsFloat(), obj.get("speed").getAsFloat(),
+                obj.get("acceleration").getAsFloat(), obj.get("maneuverability").getAsFloat(),
+                obj.get("boat_type").getAsInt(), map.getLanes()[obj.get("lane").getAsInt()]);
 
-    public Vector2 getObjectChecker(){
-        return this.objectChecker;
-    }
+        // Then update the in play variables of that boat from the save-state.
+        b.setStamina(obj.get("stamina").getAsFloat());
+        b.setCurrentSpeed(obj.get("current_speed").getAsFloat());
+        b.setTurningSpeed(obj.get("turning_speed").getAsFloat());
+        b.setTargetAngle(obj.get("target_angle").getAsFloat());
+        b.createBoatBody(world, obj.get("x_position").getAsFloat()*(1/GameData.METERS_TO_PIXELS),obj.get("y_position").getAsFloat()*(1/GameData.METERS_TO_PIXELS), "Boat1.json");
 
-    public boolean getIsDodging(){
-        return this.isDodging;
-    }
-
-    public boolean getIsTurning(){
-        return this.isTurning;
-    }
-
-    public boolean getIsBraking(){
-        return this.isBraking;
-    }
-
-    public float getDetectedObstacleYPos(){
-        return this.detectedObstacleYPos;
+        return b;
     }
 }

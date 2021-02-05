@@ -16,21 +16,22 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
-	private Player player;
-	private AI[] opponents = new AI[6];
-	private Map[] map;
+	private static Player player;
+	private static AI[] opponents = new AI[6];
+	private static Map[] map;
 	private Batch batch;
 	private Batch UIbatch;
 	private OrthographicCamera camera;
-	private World[] world;
+	private static World[] world;
 
 
 	private Vector2 mousePosition = new Vector2();
 	private Vector2 clickPosition = new Vector2();
 	private boolean[] pressedKeys = new boolean[4]; // W, A, S, D buttons status
 
-	private ArrayList<Body> toBeRemovedBodies = new ArrayList<>();
+	private static ArrayList<Body> toBeRemovedBodies = new ArrayList<>();
 	private ArrayList<Body> toUpdateHealth = new ArrayList<>();
+	private ArrayList<Body[]> toApplyPowerUps = new ArrayList<>();
 
 
 	@Override
@@ -86,21 +87,47 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	 * @param world This is the physics world in which the collisions happen
 	 */
 	private void createContactListener(World world){
+
 		world.setContactListener(new ContactListener() {
 			@Override
 			public void beginContact(Contact contact) {
+
 				Fixture fixtureA = contact.getFixtureA();
 				Fixture fixtureB = contact.getFixtureB();
+
+				//if (fixtureA.getBody().getUserData() instanceof Boat) {
+					//toUpdateHealth.add(fixtureA.getBody());
+				//} else if (fixtureB.getBody().getUserData() instanceof Boat) {
+					//toUpdateHealth.add(fixtureB.getBody());
+				//}
+				if(fixtureA.getBody().getUserData() instanceof Boat) {
+					if(fixtureB.getBody().getUserData() instanceof PowerUp) {
+						//Use the power up.
+						//Add [Boat, PowerUp] to a list of boats that need PowerUps applying to them.
+						toApplyPowerUps.add(new Body[]{fixtureA.getBody(), fixtureB.getBody()});
+						//toBeRemovedBodies.add(fixtureB.getBody());
+					}
+					else {
+						//Fixture B is not a PowerUp, so hitting it will hurt.
+						toUpdateHealth.add(fixtureA.getBody());
+					}
+				}
+				else if(fixtureB.getBody().getUserData() instanceof Boat) {
+					if(fixtureA.getBody().getUserData() instanceof PowerUp) {
+						//Use the power up.
+						//Add [Boat, PowerUp] to a list of boats that need PowerUps applying to them.
+						toApplyPowerUps.add(new Body[]{fixtureB.getBody(), fixtureA.getBody()});
+						//toBeRemovedBodies.add(fixtureA.getBody());
+					}
+					else {
+						//Fixture A is not a PowerUp, so hitting it will hurt.
+						toUpdateHealth.add(fixtureB.getBody());
+					}
+				}
 				if (fixtureA.getBody().getUserData() instanceof Obstacle) {
 					toBeRemovedBodies.add(fixtureA.getBody());
 				} else if (fixtureB.getBody().getUserData() instanceof Obstacle) {
 					toBeRemovedBodies.add(fixtureB.getBody());
-				}
-
-				if (fixtureA.getBody().getUserData() instanceof Boat) {
-					toUpdateHealth.add(fixtureA.getBody());
-				} else if (fixtureB.getBody().getUserData() instanceof Boat) {
-					toUpdateHealth.add(fixtureB.getBody());
 				}
 			}
 
@@ -148,7 +175,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		}
 
 		// Iterate through all the AIs to update their standings too
-		for (int i = 0; i < GameData.numberOfBoats - 1; i++)
+		for (int i = 0; i < opponents.length; i++)
 			// If the AI hasn't finished the race...
 			if(!opponents[i].hasFinished()){
 				// Reset his position
@@ -159,7 +186,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 					GameData.standings[i + 1]++;
 
 				// For every other AI that is ahead, increment by 1
-				for (int j = 0; j < GameData.numberOfBoats - 1; j++)
+				for (int j = 0; j < opponents.length; j++)
 					if(opponents[j].getBoatSprite().getY() > opponents[i].getBoatSprite().getY())
 						GameData.standings[i + 1]++;
 			}
@@ -180,10 +207,11 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 			// Change the player's acceleration so the boat stops moving
 			player.setAcceleration(-200f);
+			GameData.currentLeg++;
 		}
 
 		// Iterate through the AI to see if any of them finished the race
-		for (int i = 0; i < GameData.numberOfBoats - 1; i++){
+		for (int i = 0; i < opponents.length; i++){
 			// If the AI has finished and we haven't added his result already...
 			if(opponents[i].hasFinished() && opponents[i].getAcceleration() > 0 && GameData.results.size() < GameData.numberOfBoats){
 				// Add the result to the list with the his lane numer as key
@@ -209,7 +237,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		}
 
 		// Update the penalties for the opponents, if they are outside the lane
-		for (int i = 0; i < GameData.numberOfBoats - 1; i++){
+		for (int i = 0; i < opponents.length; i++){
 			boatCenter = opponents[i].getBoatSprite().getX() + opponents[i].getBoatSprite().getWidth() / 2;
 			if (!opponents[i].hasFinished() && opponents[i].getRobustness() > 0 &&(boatCenter < opponents[i].getLeftLimit() || boatCenter > opponents[i].getRightLimit())){
 				GameData.penalties[i + 1] += Gdx.graphics.getDeltaTime();
@@ -230,10 +258,11 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			// Transition to the showResult screen
 			GameData.showResultsState = true;
 			GameData.currentUI = new ResultsUI();
+			GameData.currentLeg++;
 		}
 
 		// Iterate through the AI and add a dnf result for any who haven't finished
-		for (int i = 0; i < GameData.numberOfBoats - 1; i++){
+		for (int i = 0; i < opponents.length; i++){
 		  if (!opponents[i].hasFinished() && opponents[i].getRobustness() > 0 && GameData.results.size() < GameData.numberOfBoats)
 				GameData.results.add(new Float[]{Float.valueOf(i + 1), Float.MAX_VALUE});
 		}
@@ -244,7 +273,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		// Reset the screen
 		Gdx.gl.glClearColor(0.15f, 0.15f, 0.3f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
 		// If the game is in one of the static state
 		if (GameData.mainMenuState || GameData.choosingBoatState || GameData.GameOverState || GameData.pauseState || GameData.saveState){
 			// Draw the UI and wait for the input
@@ -253,25 +281,68 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 		}
 
+
+
 		// Otherwise, if we are in the game play state
 		else if(GameData.gamePlayState){
 			// If it's the first iteration in this state, the boats need to be created at their starting positions
 			if (player == null){
-				// Create the player boat
-				int playerBoatType = GameData.boatTypes[0];
-				player = new Player(GameData.boatsStats[playerBoatType][0], GameData.boatsStats[playerBoatType][1],
-						GameData.boatsStats[playerBoatType][2], GameData.boatsStats[playerBoatType][3],
-						playerBoatType, map[GameData.currentLeg].getLanes()[0]);
-				player.createBoatBody(world[GameData.currentLeg], GameData.startingPoints[0][0], GameData.startingPoints[0][1], "Boat1.json");
-                player.setLimits(player.getLane().getLeftBoundary()[0][1],player.getLane().getRightBoundary()[0][1]);
-				// Create the AI boats
-				for(int i = 1; i < GameData.numberOfBoats; i++) {
-                    int AIBoatType = GameData.boatTypes[i];
-                    opponents[i - 1] = new AI(GameData.boatsStats[AIBoatType][0], GameData.boatsStats[AIBoatType][1],
-                            GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
-                            AIBoatType, map[GameData.currentLeg].getLanes()[i]);
-                    opponents[i - 1].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i][0], GameData.startingPoints[i][1], "Boat1.json");
-                    opponents[i-1].setLimits(opponents[i-1].getLane().getLeftBoundary()[0][1],opponents[i-1].getLane().getRightBoundary()[0][1]);
+			    if(GameData.loadState) {
+                    setBoats(GameData.boats);
+                    GameData.loadState = false;
+                }
+
+			    else {
+                    // Create the player boat
+                    int playerBoatType = GameData.boatTypes[0];
+                    player = new Player(GameData.boatsStats[playerBoatType][0], GameData.boatsStats[playerBoatType][1],
+                            GameData.boatsStats[playerBoatType][2], GameData.boatsStats[playerBoatType][3],
+                            playerBoatType, map[GameData.currentLeg].getLanes()[0]);
+                    player.createBoatBody(world[GameData.currentLeg], GameData.startingPoints[0][0], GameData.startingPoints[0][1], "Boat1.json");
+                    GameData.boats[0] = player;
+                    player.setLimits(player.getLane().getLeftBoundary()[0][1], player.getLane().getRightBoundary()[0][1]);
+
+                    // Create the AI boats
+                    for (int i = 1; i < GameData.numberOfBoats; i++) {
+                        int AIBoatType = GameData.boatTypes[i];
+                        opponents[i - 1] = new AI(GameData.boatsStats[AIBoatType][0], GameData.boatsStats[AIBoatType][1],
+                                GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
+                                AIBoatType, map[GameData.currentLeg].getLanes()[i]);
+                        opponents[i - 1].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i][0], GameData.startingPoints[i][1], "Boat1.json");
+                        GameData.boats[i] = opponents[i - 1];
+                        opponents[i - 1].setLimits(opponents[i - 1].getLane().getLeftBoundary()[0][1], opponents[i - 1].getLane().getRightBoundary()[0][1]);
+                    }
+                }
+
+			}
+
+			//Iterate through the PowerUps that need applying.
+			for (Body[] bodyPair : toApplyPowerUps) {
+				if(player.getBoatBody() == bodyPair[0] && !player.hasFinished()) {
+					//The boat in question is the Player.
+					for (Lane lane : map[GameData.currentLeg].getLanes()) {
+						for (Obstacle obstacle : lane.getObstacles()) {
+							if (obstacle.getObstacleBody() == bodyPair[1]) {
+								obstacle.setObstacleBody(null);
+								((PowerUp) obstacle).applyPowerUp(player);
+							}
+						}
+					}
+				}
+				else {
+					//The boat is one of the AI.
+					for(int i = 0; i < opponents.length; i++) {
+						if (opponents[i].getBoatBody() == bodyPair[0] && !opponents[i].hasFinished()) {
+							for (Lane lane : map[GameData.currentLeg].getLanes()) {
+								for (Obstacle obstacle : lane.getObstacles()) {
+									if (obstacle.getObstacleBody() == bodyPair[1]) {
+										obstacle.setObstacleBody(null);
+										((PowerUp) obstacle).applyPowerUp(opponents[i]);
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 
@@ -292,7 +363,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			// Iterate through the bodies marked to be damaged after a collision
 			for (Body body : toUpdateHealth){
 				// if it's the player body
-				if (player.getBoatBody() == body && !player.hasFinished()){
+				if (player.getBoatBody() == body && !player.hasFinished() && !player.isInvulnerable()){
 					// Reduce the health and the speed
                     player.setRobustness(player.getRobustness()-10f);
                     player.setCurrentSpeed(player.getCurrentSpeed()-10f);
@@ -308,13 +379,14 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 						// Transition to the show result screen
 						GameData.showResultsState = true;
 						GameData.currentUI = new ResultsUI();
+						GameData.currentLeg++;
 					}
 				}
 
 				// Otherwise, one of the AI has to be updated similarly
 				else {
-					for (int i = 0; i < GameData.numberOfBoats - 1; i++){
-						if (opponents[i].getBoatBody() == body && !opponents[i].hasFinished()) {
+					for (int i = 0; i < opponents.length; i++){
+						if (opponents[i].getBoatBody() == body && !opponents[i].hasFinished() && !opponents[i].isInvulnerable()) {
 
 							opponents[i].setRobustness(opponents[i].getRobustness()-10f);
 							opponents[i].setCurrentSpeed(opponents[i].getCurrentSpeed()-10f);
@@ -324,19 +396,37 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 								GameData.results.add(new Float[]{Float.valueOf(i + 1), Float.MAX_VALUE});
 							}
 						}
-
 					}
 				}
-
 			}
 
 			toBeRemovedBodies.clear();
 			toUpdateHealth.clear();
+			toApplyPowerUps.clear();
 
 			// Advance the game world physics
 			world[GameData.currentLeg].step(1f/60f, 6, 2);
-			// Update the timer
+
+			// Update the timers
 			GameData.currentTimer += Gdx.graphics.getDeltaTime();
+			if(player.getPowerUpTimer() > 0) {
+				player.setPowerUpTimer(player.getPowerUpTimer() - Gdx.graphics.getDeltaTime());
+				if(player.getPowerUpTimer() < 0) {
+					player.setPowerUpTimer(0f);
+					player.setSpeed(GameData.boatsStats[player.getBoatType()][1]);
+					player.setInvulnerability(false);
+				}
+			}
+			for(int i = 0; i < opponents.length; i++) {
+				if(opponents[i].getPowerUpTimer() > 0) {
+					opponents[i].setPowerUpTimer(player.getPowerUpTimer() - Gdx.graphics.getDeltaTime());
+					if(opponents[i].getPowerUpTimer() < 0) {
+						opponents[i].setPowerUpTimer(0f);
+						opponents[i].setSpeed(GameData.boatsStats[opponents[i].getBoatType()][1]);
+						opponents[i].setInvulnerability(false);
+					}
+				}
+			}
 
 			// Update the player's and the AI's movement
 			player.updatePlayer(pressedKeys, Gdx.graphics.getDeltaTime());
@@ -376,6 +466,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 				dnfRemainingBoats();
 				GameData.showResultsState = true;
 				GameData.currentUI = new ResultsUI();
+				GameData.currentLeg++;
 			}
 			// Otherwise keep checking for new results
 			else {
@@ -396,10 +487,18 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		// Otherwise we need need to reset elements of the game to prepare for the next race
 		else if(GameData.resetGameState){
 			player = null;
-			for (int i = 0; i < GameData.numberOfBoats - 1; i++)
+			for (int i = 0; i < opponents.length; i++)
 				opponents[i] = null;
 			GameData.results.clear();
 			GameData.currentTimer = 0f;
+			player.setPowerUpTimer(0f);
+			player.setSpeed(GameData.boatsStats[player.getBoatType()][1]);
+			player.setInvulnerability(false);
+			for(int i = 0; i < opponents.length; i++) {
+				opponents[i].setPowerUpTimer(0f);
+				opponents[i].setSpeed(GameData.boatsStats[opponents[i].getBoatType()][1]);
+				opponents[i].setInvulnerability(false);
+			}
 			GameData.penalties = new float[GameData.numberOfBoats];
 
 			// If we're coming from the result screen, then we need to advance to the next leg
@@ -586,6 +685,19 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		return false;
 	}
 
+
+	public static void setBoats(Boat[] boats) {
+        // Create the player boat
+        player = (Player)GameData.boats[0];
+        player.setLimits(player.getLane().getLeftBoundary()[0][1],player.getLane().getRightBoundary()[0][1]);
+
+        // Create the AI boats
+        for(int i = 1; i < GameData.numberOfBoats; i++) {
+            opponents[i - 1] = (AI)GameData.boats[i];
+            opponents[i-1].setLimits(opponents[i-1].getLane().getLeftBoundary()[0][1],opponents[i-1].getLane().getRightBoundary()[0][1]);
+        }
+    }
+
 	//getters
 	public Player getPlayer(){
 		return this.player;
@@ -595,8 +707,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		return this.opponents;
 	}
 
-	public Map[] getMap(){
-		return this.map;
+	public static Map[] getMap(){
+		return map;
 	}
 
 	public Batch getBatch(){
@@ -611,8 +723,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		return this.camera;
 	}
 
-	public World[] getWorld(){
-		return this.world;
+	public static World[] getWorld(){
+		return world;
 	}
 
 	public Vector2 getMousePosition(){
@@ -627,8 +739,12 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		return this.pressedKeys;
 	}
 
-	public ArrayList<Body> getToBeRemovedBodies(){
-		return this.toBeRemovedBodies;
+	public static ArrayList<Body> getToBeRemovedBodies(){
+		return toBeRemovedBodies;
+	}
+
+	public static void setToBeRemovedBodies(ArrayList<Body> tbRB) {
+		toBeRemovedBodies = tbRB;
 	}
 
 	public ArrayList<Body> getToUpdateHealth(){
