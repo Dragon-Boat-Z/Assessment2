@@ -167,7 +167,7 @@ public class Map {
 
         // Find out where it's going to start at, and how wide it will be, based on the limits of the edge lanes
         float startpoint = lanes[0].getLimitsAt(9000f)[0];
-        float width = lanes[3].getLimitsAt(9000f)[1] - startpoint;
+        float width = lanes[GameData.numberOfBoats - 1].getLimitsAt(9000f)[1] - startpoint;
 
         // Set it's new found position and width
         finishLineSprite.setPosition(startpoint, 9000f);
@@ -181,7 +181,7 @@ public class Map {
 
         // Find out where it's going to start at, and how wide it will be, based on the limits of the edge lanes
         float startpoint = lanes[0].getLimitsAt(350f)[0];
-        float width = lanes[3].getLimitsAt(350f)[1] - startpoint;
+        float width = lanes[GameData.numberOfBoats - 1].getLimitsAt(350f)[1] - startpoint;
 
         // Set it's new found position and width
         startLineSprite.setPosition(startpoint, 350f);

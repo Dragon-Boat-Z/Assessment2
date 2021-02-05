@@ -153,7 +153,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	 * @param player The target player
 	 */
 	private void updateCamera(Player player) {
-		camera.position.set(camera.position.x, player.getBoatSprite().getY() + 600, 0);
+		camera.position.set(camera.position.x, player.getBoatSprite().getY() + 400, 0);
 		camera.update();
 	}
 
@@ -278,8 +278,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			GameData.currentUI.getInput(Gdx.graphics.getWidth(), clickPosition);
 
 		}
-
-
 
 		// Otherwise, if we are in the game play state
 		else if(GameData.gamePlayState){

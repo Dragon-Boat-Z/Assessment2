@@ -154,7 +154,7 @@ public class Lane {
     }
 
     public void spawnObstacles(World world, float mapHeight, JsonArray obstArray){
-        int nrObstacles = obstacles.length;
+        int nrObstacles = obstArray.size();
         for (int i = 0; i < nrObstacles; i++){
             JsonObject obj = obstArray.get(i).getAsJsonObject();
             int obstType = obj.get("obstacle_type").getAsInt();
