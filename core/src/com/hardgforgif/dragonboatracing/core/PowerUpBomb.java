@@ -2,7 +2,7 @@ package com.hardgforgif.dragonboatracing.core;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Game;
+import com.hardgforgif.dragonboatracing.Game;
 import com.badlogic.gdx.physics.box2d.Body;
 
 public class PowerUpBomb extends PowerUp {
@@ -50,7 +50,8 @@ public class PowerUpBomb extends PowerUp {
                 break;
             }
         }
-        Game.setToBeRemovedBodies(toClear.addAll(Game.getToBeRemovedBodies()));
+        toClear.addAll(Game.getToBeRemovedBodies());
+        Game.setToBeRemovedBodies(toClear);
     }
 
 }

@@ -103,22 +103,26 @@ public class AI extends Boat{
      */
     private boolean obstaclesInRange(){
         for (Obstacle obstacle : this.getLane().getObstacles()){
-            // Get the obstacles attributes
-            float width = obstacle.getObstacleSprite().getWidth() * obstacle.getObstacleSprite().getScaleX();
-            float height = obstacle.getObstacleSprite().getHeight() * obstacle.getObstacleSprite().getScaleY();
-            float posX = obstacle.getObstacleSprite().getX() + obstacle.getObstacleSprite().getWidth() / 2 - width / 2;
-            float posY = obstacle.getObstacleSprite().getY() + obstacle.getObstacleSprite().getHeight() / 2 - height / 2;
+            //Don't bother dodging if Obstacle is a PowerUp.
+            if(!obstacle.isPowerUp()){
+                // Get the obstacles attributes
+                float width = obstacle.getObstacleSprite().getWidth() * obstacle.getObstacleSprite().getScaleX();
+                float height = obstacle.getObstacleSprite().getHeight() * obstacle.getObstacleSprite().getScaleY();
+                float posX = obstacle.getObstacleSprite().getX() + obstacle.getObstacleSprite().getWidth() / 2 - width / 2;
+                float posY = obstacle.getObstacleSprite().getY() + obstacle.getObstacleSprite().getHeight() / 2 - height / 2;
 
-            // Get the boat  attributes
-            float boatLeftX = this.objectChecker.x - this.getBoatSprite().getWidth() / 2 * this.getBoatSprite().getScaleX();
-            float boatRightX = this.objectChecker.x + this.getBoatSprite().getWidth() / 2 * this.getBoatSprite().getScaleX();
+                // Get the boat  attributes
+                float boatLeftX = this.objectChecker.x - this.getBoatSprite().getWidth() / 2 * this.getBoatSprite().getScaleX();
+                float boatRightX = this.objectChecker.x + this.getBoatSprite().getWidth() / 2 * this.getBoatSprite().getScaleX();
 
-            // Check for obstacles
-            if (boatRightX >= posX && boatLeftX <= posX + width &&
-                    this.objectChecker.y >= posY && this.getBoatSprite().getY() + this.getBoatSprite().getHeight() / 2 <= posY){
-                detectedObstacleYPos = posY;
-                return true;
+                // Check for obstacles
+                if (boatRightX >= posX && boatLeftX <= posX + width &&
+                        this.objectChecker.y >= posY && this.getBoatSprite().getY() + this.getBoatSprite().getHeight() / 2 <= posY){
+                    detectedObstacleYPos = posY;
+                    return true;
+                }
             }
+            
         }
         return false;
     }
