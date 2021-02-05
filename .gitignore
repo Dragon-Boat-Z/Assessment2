@@ -1,4 +1,5 @@
 ## Java
+/save_data/*.json
 
 *.class
 *.war

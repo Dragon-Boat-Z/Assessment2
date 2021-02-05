@@ -160,18 +160,51 @@ public class Lane {
 
     public void spawnObstacles(World world, float mapHeight, JsonArray obstArray){
         int nrObstacles = obstArray.size();
+        float scale, xPos, yPos;
+        String filepath = "Obstacles/Obstacle";
         for (int i = 0; i < nrObstacles; i++){
             JsonObject obj = obstArray.get(i).getAsJsonObject();
             int obstType = obj.get("obstacle_type").getAsInt();
-            float scale = obstType == 1 || obstType == 6 ? -0.8f : 0;
-            obstacles[i] = new Obstacle("Obstacles/Obstacle" + (obstType+1) + ".png");
-            obstacles[i].setObstacleType(obstType);
-            float yPos = obj.get("y_position").getAsFloat();
-            float xPos = obj.get("x_position").getAsFloat();
-
-
-            obstacles[i].createObstacleBody(world, xPos / GameData.METERS_TO_PIXELS, yPos / GameData.METERS_TO_PIXELS,
-                    "Obstacles/Obstacle" + (obstType+1) + ".json", scale);
+            if(obstType <= 6) {
+                filepath = "Obstacles/Obstacle";
+                scale = obstType <= 1 ? -0.33f : 0f;
+                obstacles[i] = new Obstacle(filepath + (obstType + 1) + ".png");
+                obstacles[i].setObstacleType(obstType);
+                yPos = obj.get("y_position").getAsFloat();
+                xPos = obj.get("x_position").getAsFloat();
+                obstacles[i].createObstacleBody(world, xPos / GameData.METERS_TO_PIXELS, yPos / GameData.METERS_TO_PIXELS, filepath
+                        + (obstType+1) + ".json", scale);
+            }
+            else {
+                scale = -0.25f;
+                filepath = "PowerUps/PowerUp";
+                switch(obstType) {
+                    case 7:
+                        //Bomb PowerUp.
+                        obstacles[i] = new PowerUpBomb();
+                        break;
+                    case 8:
+                        //Health PowerUp.
+                        obstacles[i] = new PowerUpHealth();
+                        break;
+                    case 9:
+                        //Invulnerability PowerUp.
+                        obstacles[i] = new PowerUpInvulnerability();
+                        break;
+                    case 10:
+                        //Speed PowerUp.
+                        obstacles[i] = new PowerUpSpeed();
+                        break;
+                    case 11:
+                        //Stamina PowerUp.
+                        obstacles[i] = new PowerUpStamina();
+                        break;
+                }
+                obstacles[i].setObstacleType(i);
+                yPos = obj.get("y_position").getAsFloat();
+                xPos = obj.get("x_position").getAsFloat();
+                obstacles[i].createObstacleBody(world, xPos / GameData.METERS_TO_PIXELS, yPos / GameData.METERS_TO_PIXELS, filepath + ".json", scale);
+            }
         }
     }
 
