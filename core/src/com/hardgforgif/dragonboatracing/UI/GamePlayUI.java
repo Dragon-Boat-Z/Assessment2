@@ -56,10 +56,10 @@ public class GamePlayUI extends UI{
         riBar = new Sprite(robustnessINV);
         sBar = new Sprite(stamina);
         spBar = new Sprite(speed);
-        sBar.setPosition(10 ,120);
-        rBar.setPosition(10,60);
-        riBar.setPosition(10, 60);
-        spBar.setPosition(10,180);
+        sBar.setPosition(10 ,650-60);
+        rBar.setPosition(10,650);
+        riBar.setPosition(10, 650);
+        spBar.setPosition(10,650-120);
 
     }
 
@@ -88,14 +88,14 @@ public class GamePlayUI extends UI{
         }
         sBar.draw(batch);
         spBar.draw(batch);
-        robustnessLabel.draw(batch, "Robustness", 10, 110);
-        staminaLabel.draw(batch, "Stamina", 10,170);
-        speedLabel.draw(batch, "Speed", 10, 230);
+        robustnessLabel.draw(batch, "Robustness", 10, 700);
+        staminaLabel.draw(batch, "Stamina", 10,700-60);
+        speedLabel.draw(batch, "Speed", 10, 700-120);
 
         // Draw the position label, the timer and the leg label
         positionLabel.draw(batch, GameData.standings[0] + "/7", 1225, 700);
-        timerLabel.draw(batch, String.valueOf(Math.round(GameData.currentTimer * 10.0) / 10.0), 10, 700);
-        legLabel.draw(batch, "Leg: " + (GameData.currentLeg + 1), 10, 650);
+        timerLabel.draw(batch, String.valueOf(Math.round(GameData.currentTimer * 10.0) / 10.0), 620, 700);
+        legLabel.draw(batch, "Leg: " + (GameData.currentLeg + 1), 10, 40);
 
         // Draw the lane waning if needed
         if(GameData.playerWarning) {
