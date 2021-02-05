@@ -133,31 +133,35 @@ public class GameData {
         // Create file handler with set file path in Assessment2/save_data.
         FileHandle fileHandle = Gdx.files.internal("save_data/save_state_" + saveSlot + ".json");
         String absolutePath = fileHandle.file().getAbsolutePath();
-
         FileReader reader = new FileReader(absolutePath);
-
         JsonStreamParser streamParser = new JsonStreamParser(reader);
 
+        // Create gson object and read save state
         Gson gson = new Gson();
-        JsonObject test = gson.fromJson(streamParser.next(), JsonObject.class);
+        JsonObject load_state = gson.fromJson(streamParser.next(), JsonObject.class);
 
-        JsonArray boatArray = test.get("boats").getAsJsonArray();
-        JsonObject gamedata = test.get("game_data").getAsJsonObject();
+        // Separate state into boats, gamedata and objects
+        JsonArray boatArray = load_state.get("boats").getAsJsonArray();
+        JsonObject gamedata = load_state.get("game_data").getAsJsonObject();
+        JsonObject objectArray = load_state.get("map").getAsJsonObject();
 
         currentTimer = gamedata.get("current_timer").getAsFloat();
+        int current_leg = gamedata.get("leg_number").getAsInt();
+
+        // For each boat, initialise the boat and all obstacles in that boat's lane
         for(int i = 0; i < numberOfBoats; i++) {
             JsonObject o = boatArray.get(i).getAsJsonObject();
-            AI a;
-            Player p;
             if(i == 0) {
-                p = Player.from_json(o, Game.getMap()[gamedata.get("leg_number").getAsInt()], Game.getWorld()[gamedata.get("leg_number").getAsInt()]);
+                Player p = Player.from_json(o, Game.getMap()[current_leg], Game.getWorld()[current_leg]);
                 boats[i] = p;
             }
             else {
-                a = AI.from_json(o, Game.getMap()[gamedata.get("leg_number").getAsInt()], Game.getWorld()[gamedata.get("leg_number").getAsInt()]);
+                AI a = AI.from_json(o, Game.getMap()[current_leg], Game.getWorld()[current_leg]);
                 boats[i] = a;
             }
             boatTypes[i] = boats[i].getBoatType();
+            JsonArray obsts = objectArray.get("lane_" + i).getAsJsonArray();
+            Game.getMap()[current_leg].getLanes()[i].spawnObstacles(Game.getWorld()[current_leg], Game.getMap()[current_leg].getMapHeight() / GameData.PIXELS_TO_TILES, obsts);
         }
         reader.close();
         return true;

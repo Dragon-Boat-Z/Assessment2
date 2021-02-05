@@ -195,12 +195,13 @@ public class Map {
                 int obstLength = aMap.getLanes()[i].getObstacles().length;
                 JsonArray obstacles = new JsonArray(obstLength);
                 for(Obstacle o : aMap.getLanes()[i].getObstacles()) {
-                    JsonObject obstacle = new JsonObject();
-                    obstacle.add("x_position",new JsonPrimitive(o.getObstacleSprite().getX()));
-                    obstacle.add("y_position",new JsonPrimitive(o.getObstacleSprite().getY()));
-                    obstacle.add("obstacle_type",new JsonPrimitive(o.getObstacleType()));
-
-                    obstacles.add(obstacle);
+                    if(o.getObstacleBody() != null) {
+                        JsonObject obstacle = new JsonObject();
+                        obstacle.add("x_position", new JsonPrimitive(o.getObstacleSprite().getX()));
+                        obstacle.add("y_position", new JsonPrimitive(o.getObstacleSprite().getY()));
+                        obstacle.add("obstacle_type", new JsonPrimitive(o.getObstacleType()));
+                        obstacles.add(obstacle);
+                    }
                 }
                 obj.add("lane_" + i, obstacles);
             }
@@ -225,7 +226,7 @@ public class Map {
         return this.mapWidth;
     }
 
-    public int getMapHeight(){
+    public float getMapHeight(){
         return this.mapHeight;
     }
 

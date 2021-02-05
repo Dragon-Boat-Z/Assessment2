@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.google.gson.JsonObject;
 import com.hardgforgif.dragonboatracing.GameData;
 import com.hardgforgif.dragonboatracing.BodyEditorLoader;
 
@@ -23,6 +24,12 @@ public class Obstacle {
         obstacleTexture = new Texture(textureName);
         positionX = 0;
         positionY = 0;
+    }
+
+    public Obstacle(String textureName, float x, float y){
+        obstacleTexture = new Texture(textureName);
+        positionX = x;
+        positionY = y;
     }
 
     /**

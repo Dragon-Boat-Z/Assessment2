@@ -207,7 +207,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 			// Change the player's acceleration so the boat stops moving
 			player.setAcceleration(-200f);
-			GameData.currentLeg++;
 		}
 
 		// Iterate through the AI to see if any of them finished the race
@@ -258,7 +257,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			// Transition to the showResult screen
 			GameData.showResultsState = true;
 			GameData.currentUI = new ResultsUI();
-			GameData.currentLeg++;
 		}
 
 		// Iterate through the AI and add a dnf result for any who haven't finished
@@ -381,7 +379,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 						// Transition to the show result screen
 						GameData.showResultsState = true;
 						GameData.currentUI = new ResultsUI();
-						GameData.currentLeg++;
 					}
 				}
 
@@ -468,7 +465,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 				dnfRemainingBoats();
 				GameData.showResultsState = true;
 				GameData.currentUI = new ResultsUI();
-				GameData.currentLeg++;
 			}
 			// Otherwise keep checking for new results
 			else {
@@ -698,6 +694,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             opponents[i - 1] = (AI)GameData.boats[i];
             opponents[i-1].setLimits(opponents[i-1].getLane().getLeftBoundary()[0][1],opponents[i-1].getLane().getRightBoundary()[0][1]);
         }
+    }
+
+    public static void setObstacles(Obstacle[][] obsts) {
+
     }
 
 	//getters
