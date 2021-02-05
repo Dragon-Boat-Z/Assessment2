@@ -5,6 +5,8 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
@@ -111,18 +113,23 @@ public class Lane {
                     case 0:
                         //Bomb PowerUp.
                         obstacles[i] = new PowerUpBomb();
+                        break;
                     case 1:
                         //Health PowerUp.
                         obstacles[i] = new PowerUpHealth();
+                        break;
                     case 2:
                         //Invulnerability PowerUp.
                         obstacles[i] = new PowerUpInvulnerability();
+                        break;
                     case 3:
                         //Speed PowerUp.
                         obstacles[i] = new PowerUpSpeed();
+                        break;
                     case 4:
                         //Stamina PowerUp.
                         obstacles[i] = new PowerUpStamina();
+                        break;
                 }
             }
             else {
@@ -142,6 +149,23 @@ public class Lane {
 
             obstacles[i].createObstacleBody(world, xPos / GameData.METERS_TO_PIXELS, yPos / GameData.METERS_TO_PIXELS,
                     filePath + ".json", scale);
+        }
+    }
+
+    public void spawnObstacles(World world, float mapHeight, JsonArray obstArray){
+        int nrObstacles = obstacles.length;
+        for (int i = 0; i < nrObstacles; i++){
+            JsonObject obj = obstArray.get(i).getAsJsonObject();
+            int obstType = obj.get("obstacle_type").getAsInt();
+            float scale = obstType == 1 || obstType == 6 ? -0.8f : 0;
+            obstacles[i] = new Obstacle("Obstacles/Obstacle" + obstType + ".png");
+            obstacles[i].setObstacleType(obstType);
+            float yPos = obj.get("y_position").getAsFloat();
+            float xPos = obj.get("x_position").getAsFloat();
+
+
+            obstacles[i].createObstacleBody(world, xPos / GameData.METERS_TO_PIXELS, yPos / GameData.METERS_TO_PIXELS,
+                    "Obstacles/Obstacle" + (obstType) + ".json", scale);
         }
     }
 
@@ -183,6 +207,8 @@ public class Lane {
     public Obstacle[] getObstacles(){
         return this.obstacles;
     }
+
+    public void setObstacles(Obstacle[] obstacles_) { this.obstacles = obstacles_; }
 
     public int getLaneNo() { return this.laneNo;}
 
