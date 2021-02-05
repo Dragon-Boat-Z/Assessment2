@@ -13,6 +13,7 @@ public class AI extends Boat{
     private boolean isDodging = false;
     private boolean isTurning = false;
     private boolean isBraking = false;
+    private boolean isAccelerating = false;
     private float detectedObstacleYPos;
 
     public AI(float robustness, float speed, float acceleration, float maneuverability, int boatType, Lane lane) {
@@ -150,7 +151,7 @@ public class AI extends Boat{
             isDodging = true;
 
             //If the AI is braking:
-            isBraking = true;
+            //isBraking = true;
 
             //Apply the roation
             rotateBoat(this.getTargetAngle());
@@ -195,22 +196,31 @@ public class AI extends Boat{
         }
 
         // Apply the movement
-        if (this.getStamina() > 50f)
+        if (this.getStamina() > 50f) {
             // 'hold W'
+            isAccelerating = true;
+            isBraking = false;
             moveBoat(1);
-        else if (this.getStamina() > 30f)
+        }
+        else if (this.getStamina() > 30f) {
             // 'do nothing'
+            isAccelerating = false;
+            isBraking = false;
             moveBoat(0);
-        else
+        }
+        else {
             // 'hold S'
+            isBraking = true;
+            isAccelerating = false;
             moveBoat(-1);
+        }
 
         //if (stamina > 30f)
             //stamina -= 1.5 * delta;
         //Update stamina
         if (this.getStamina() > 30f) //Did this mean it was impossible to reach <30% stamina before?
             //stamina -= 1.5 * delta;
-            if(isDodging) {
+            if(isDodging || isAccelerating) {
                 //AI is turning. Should also include accelerating!
                 this.setStamina(this.getStamina() - 2 * delta);
             }
