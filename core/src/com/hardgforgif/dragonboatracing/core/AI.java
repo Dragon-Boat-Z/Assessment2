@@ -249,5 +249,29 @@ public class AI extends Boat{
         b.createBoatBody(world, obj.get("x_position").getAsFloat()*(1/GameData.METERS_TO_PIXELS),obj.get("y_position").getAsFloat()*(1/GameData.METERS_TO_PIXELS), "Boat1.json");
 
         return b;
+  
+    //getters
+    public Vector2 getLaneChecker(){
+        return this.laneChecker;
+    }
+
+    public Vector2 getObjectChecker(){
+        return this.objectChecker;
+    }
+
+    public boolean getIsDodging(){
+        return this.isDodging;
+    }
+
+    public boolean getIsTurning(){
+        return this.isTurning;
+    }
+
+    public boolean getIsBraking(){
+        return this.isBraking;
+    }
+
+    public float getDetectedObstacleYPos(){
+        return this.detectedObstacleYPos;
     }
 }

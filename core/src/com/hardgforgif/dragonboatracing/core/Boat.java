@@ -416,7 +416,6 @@ public class Boat {
     public void setInvulnerability(boolean toggle) {
         this.invulnerable = toggle;
     }
-
     public void setLimits(float left, float right) {
         this.leftLimit = left;
         this.rightLimit = right;
