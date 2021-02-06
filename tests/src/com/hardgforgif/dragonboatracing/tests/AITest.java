@@ -62,12 +62,11 @@ public class AITest {
         assertEquals(mockLane, testAI.getLane());
     }
 
-    @Ignore
     @Test
     public void testUpdateAI(){
         testAI.updateAI(2f);
-        assertEquals(new Vector2(10000f,12457.6f), testAI.getLaneChecker());
-        assertEquals(new Vector2(10000f,12357.6f), testAI.getObjectChecker());
+        assertEquals(new Vector2(10000f,12493.6f), testAI.getLaneChecker());
+        assertEquals(new Vector2(10000f,12393.6f), testAI.getObjectChecker());
         assertFalse(testAI.getIsDodging());
     }
 

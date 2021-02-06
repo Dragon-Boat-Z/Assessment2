@@ -45,7 +45,6 @@ public class BoatTest {
         testBoat.createBoatBody(world, 100f, 120f, "Boat1.json");
     }
 
-    @Ignore
     @Test
     public void testBoatConstructor(){
         assertEquals(robustness, testBoat.getRobustness());
@@ -56,17 +55,15 @@ public class BoatTest {
         assertEquals(mockLane, testBoat.getLane());
     }
 
-    @Ignore
     @Test
     public void testCreateBoatBody(){
-        assertEquals(0.19999999f, testBoat.getBoatSprite().getScaleX());
-        assertEquals(0.19999999f, testBoat.getBoatSprite().getScaleY());
+        assertEquals(0.325f, testBoat.getBoatSprite().getScaleX());
+        assertEquals(0.325f, testBoat.getBoatSprite().getScaleY());
         assertEquals(BodyDef.BodyType.DynamicBody, testBoat.getBoatBody().getType());
         assertEquals(new Vector2(100f, 120f), testBoat.getBoatBody().getPosition());
         assertEquals(testBoat, testBoat.getBoatBody().getUserData());
     }
 
-    @Ignore
     @Test
     public void testGetLimitsAt(){
         Mockito.when(mockLane.getLeftIterator()).thenReturn(5);
@@ -91,7 +88,6 @@ public class BoatTest {
         assertTrue(Arrays.equals(expected2, testBoat.getLimitsAt(30)));
     }
 
-    @Ignore
     @Test
     public void testHasFinished(){
         //hasn't moved
@@ -106,9 +102,14 @@ public class BoatTest {
         assertTrue(testBoat.hasFinished());
     }
 
-    @Ignore
     @Test
     public void testMoveBoatSpeedUp(){
+        // float robustness = 120f;
+        // float speed = 90f;
+        // float acceleration = 100f;
+        // float maneuverability = 110f;
+        // int boatType = 3;
+
         //stamina below 50
         //current speed low enough
         testBoat.setCurrentSpeed(10);
@@ -117,11 +118,11 @@ public class BoatTest {
         float actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
         assertEquals(10.04f, actualSpeed);
         //current speed at limit
-        testBoat.setCurrentSpeed(54);
+        testBoat.setCurrentSpeed(72);
         testBoat.setStamina(40f);
         testBoat.moveBoat(1);
         actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
-        assertEquals(54f, actualSpeed);
+        assertEquals(72f, actualSpeed);
 
         //stamina below 75
         //current speed low enough
@@ -131,11 +132,11 @@ public class BoatTest {
         actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
         assertEquals(50.08f, actualSpeed);
         //current speed at limit
-        testBoat.setCurrentSpeed(72);
+        testBoat.setCurrentSpeed(81);
         testBoat.setStamina(60f);
         testBoat.moveBoat(1);
         actualSpeed = (float) Math.round(testBoat.getCurrentSpeed() * 100) / 100;
-        assertEquals(72f, actualSpeed);
+        assertEquals(81f, actualSpeed);
 
         //stamina above 75
         //current speed low enough
@@ -152,7 +153,6 @@ public class BoatTest {
         assertEquals(90f, actualSpeed);
     }
 
-    @Ignore
     @Test
     public void testMoveBoatSpeedDown(){
         //stamina below 50
@@ -183,7 +183,6 @@ public class BoatTest {
         assertEquals(0f, actualSpeed);
     }
 
-    @Ignore
     @Test
     public void testRotateBoat(){
         //right

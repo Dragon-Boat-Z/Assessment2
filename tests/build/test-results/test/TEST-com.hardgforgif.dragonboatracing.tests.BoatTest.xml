@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.hardgforgif.dragonboatracing.tests.BoatTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-02-02T20:00:50" hostname="Monty" time="0.049">
+<testsuite name="com.hardgforgif.dragonboatracing.tests.BoatTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-02-06T13:59:22" hostname="Monty" time="0.101">
   <properties/>
-  <testcase name="testCreateBoatBody" classname="com.hardgforgif.dragonboatracing.tests.BoatTest" time="0.027"/>
-  <testcase name="testConstructor" classname="com.hardgforgif.dragonboatracing.tests.BoatTest" time="0.005"/>
-  <system-out><![CDATA[100.0, 120.0
-100.0, 120.0
-]]></system-out>
+  <testcase name="testGetLimitsAt" classname="com.hardgforgif.dragonboatracing.tests.BoatTest" time="0.008"/>
+  <testcase name="testMoveBoatSpeedUp" classname="com.hardgforgif.dragonboatracing.tests.BoatTest" time="0.007"/>
+  <testcase name="testRotateBoat" classname="com.hardgforgif.dragonboatracing.tests.BoatTest" time="0.005"/>
+  <testcase name="testBoatConstructor" classname="com.hardgforgif.dragonboatracing.tests.BoatTest" time="0.007"/>
+  <testcase name="testMoveBoatSpeedDown" classname="com.hardgforgif.dragonboatracing.tests.BoatTest" time="0.005"/>
+  <testcase name="testCreateBoatBody" classname="com.hardgforgif.dragonboatracing.tests.BoatTest" time="0.006"/>
+  <testcase name="testHasFinished" classname="com.hardgforgif.dragonboatracing.tests.BoatTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
