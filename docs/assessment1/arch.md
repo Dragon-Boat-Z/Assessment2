@@ -22,12 +22,12 @@ parent: Assessment 1
 ---
 ## Abstract architecture diagram
 
-![abstract architecture diagram](/assets/static/arch/ab.png "Abstract architecture diagram")
+![abstract architecture diagram](/assets/assessment1/static/arch/ab.png "Abstract architecture diagram")
 
 ## Concrete architecture diagram
 
-![concrete architecture diagram](/assets/static/arch/con1.png "Concrete architecture diagram")
-![concrete architecture diagram](/assets/static/arch/con2.png "Concrete architecture diagram")
+![concrete architecture diagram](/assets/assessment1/static/arch/con1.png "Concrete architecture diagram")
+![concrete architecture diagram](/assets/assessment1/static/arch/con2.png "Concrete architecture diagram")
 
 
 ## Abstract
