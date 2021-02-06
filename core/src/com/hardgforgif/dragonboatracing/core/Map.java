@@ -14,7 +14,11 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Json;
+import com.google.gson.*;
 import com.hardgforgif.dragonboatracing.GameData;
+
+import java.lang.reflect.Type;
 
 public class Map {
     // Map components
@@ -122,7 +126,7 @@ public class Map {
      * Instantiates the lane array and spawns obstacles on each of the lanes
      * @param world World to spawn the obstacles in
      */
-    public void createLanes(World world) {
+    public void createLanes(World world, int nrObstacles) {
         //MapLayer leftLayer = tiledMap.getLayers().get("CollisionLayerLeft");
         //MapLayer rightLayer = tiledMap.getLayers().get("Lane1");
 
@@ -130,11 +134,11 @@ public class Map {
         //lanes[0].constructBoundaries(unitScale);
         //lanes[0].spawnObstacles(world, mapHeight / GameData.PIXELS_TO_TILES);
 
-        int nrObstacles = 30;
+        //int nrObstacles = 30;
 
         MapLayer leftLayer = tiledMap.getLayers().get("CollisionLayerLeft");
         MapLayer rightLayer = tiledMap.getLayers().get("Lane1");
-        lanes[0] = new Lane(mapHeight, leftLayer, rightLayer, nrObstacles);
+        lanes[0] = new Lane(mapHeight, leftLayer, rightLayer, nrObstacles, 0);
         lanes[0].constructBoundaries(unitScale);
         lanes[0].spawnObstacles(world, mapHeight / GameData.PIXELS_TO_TILES);
 
@@ -146,7 +150,7 @@ public class Map {
             else {
                 rightLayer = tiledMap.getLayers().get("CollisionLayerRight");
             }
-            lanes[i] = new Lane(mapHeight, leftLayer, rightLayer, nrObstacles);
+            lanes[i] = new Lane(mapHeight, leftLayer, rightLayer, nrObstacles, i);
             lanes[i].constructBoundaries(unitScale);
             lanes[i].spawnObstacles(world, mapHeight / GameData.PIXELS_TO_TILES);
         }
@@ -163,7 +167,7 @@ public class Map {
 
         // Find out where it's going to start at, and how wide it will be, based on the limits of the edge lanes
         float startpoint = lanes[0].getLimitsAt(9000f)[0];
-        float width = lanes[3].getLimitsAt(9000f)[1] - startpoint;
+        float width = lanes[GameData.numberOfBoats - 1].getLimitsAt(9000f)[1] - startpoint;
 
         // Set it's new found position and width
         finishLineSprite.setPosition(startpoint, 9000f);
@@ -177,13 +181,34 @@ public class Map {
 
         // Find out where it's going to start at, and how wide it will be, based on the limits of the edge lanes
         float startpoint = lanes[0].getLimitsAt(350f)[0];
-        float width = lanes[3].getLimitsAt(350f)[1] - startpoint;
+        float width = lanes[GameData.numberOfBoats - 1].getLimitsAt(350f)[1] - startpoint;
 
         // Set it's new found position and width
         startLineSprite.setPosition(startpoint, 350f);
         startLineSprite.setSize(width, 100);
     }
-    
+
+    public static class MapSerializer implements JsonSerializer<Map> {
+        public JsonElement serialize(Map aMap, Type type, JsonSerializationContext jsonSerializationContext) {
+            JsonObject obj = new JsonObject();
+            for(int i = 0; i < aMap.getLanes().length; i++) {
+                int obstLength = aMap.getLanes()[i].getObstacles().length;
+                JsonArray obstacles = new JsonArray(obstLength);
+                for(Obstacle o : aMap.getLanes()[i].getObstacles()) {
+                    if(o.getObstacleBody() != null) {
+                        JsonObject obstacle = new JsonObject();
+                        obstacle.add("x_position", new JsonPrimitive(o.getObstacleSprite().getX()));
+                        obstacle.add("y_position", new JsonPrimitive(o.getObstacleSprite().getY()));
+                        obstacle.add("obstacle_type", new JsonPrimitive(o.getObstacleType()));
+                        obstacles.add(obstacle);
+                    }
+                }
+                obj.add("lane_" + i, obstacles);
+            }
+            return obj;
+        }
+    }
+
     //getters
     public TiledMap getTiledMap(){
         return this.tiledMap;
@@ -201,7 +226,7 @@ public class Map {
         return this.mapWidth;
     }
 
-    public int getMapHeight(){
+    public float getMapHeight(){
         return this.mapHeight;
     }
 

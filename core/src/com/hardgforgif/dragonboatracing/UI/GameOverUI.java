@@ -28,7 +28,7 @@ public class GameOverUI extends UI{
     public GameOverUI(){
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setTargetSpeed(ScrollingBackground.getDefaultSpeed());
+        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed());
 
         gameOverTexture = new Texture(Gdx.files.internal("gameOver.png"));
         victoryTexture = new Texture(Gdx.files.internal("victory.png"));

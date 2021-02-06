@@ -4,8 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.hardgforgif.dragonboatracing.Game;
 import com.hardgforgif.dragonboatracing.GameData;
 import com.hardgforgif.dragonboatracing.core.Player;
+
+import java.io.IOException;
 
 public class SaveUI extends UI {
 
@@ -39,7 +42,7 @@ public class SaveUI extends UI {
         scrollingBackground = new ScrollingBackground();
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setTargetSpeed(ScrollingBackground.getDefaultSpeed()/3);
+        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed()/3);
     }
     @Override
     public void drawUI(Batch batch, Vector2 mousePos, float screenWidth, float delta) {
@@ -98,25 +101,91 @@ public class SaveUI extends UI {
                         clickPos.y  > BACK_BUTTON_Y
         ) {
             // Go back to pause state
-            GameData.saveState = false;
-            GameData.pauseState = true;
-            GameData.currentUI = new PauseUI();
+            if(!GameData.loadState) {
+                GameData.saveState = false;
+                GameData.pauseState = true;
+                GameData.currentUI = new PauseUI();
+            }
+            else {
+                GameData.saveState = false;
+                GameData.loadState = false;
+                GameData.mainMenuState = true;
+                GameData.currentUI = new MenuUI();
+            }
         }
 
         if (clickPos.x < x + SLOT_BUTTON_WIDTH && clickPos.x > x) {
             // Slot 1
             if(clickPos.y < SLOT_1_Y + SLOT_BUTTON_HEIGHT && clickPos.y > SLOT_1_Y) {
-                // Save in slot 1
+                if(GameData.loadState) {
+                    // Load from slot 1
+                    try {
+                        GameData.loadGame(1);
+                        GameData.saveState = false;
+                        GameData.gamePlayState = true;
+                        GameData.currentUI = new GamePlayUI();
+                    } catch (IOException e) {
+                        System.out.println("IOException caught.");
+                    }
+                }
+                 else if(GameData.saveState) {
+                    // Save in slot 1
+                    try {
+                        if (GameData.saveGame(1, Game.getMap()[GameData.currentLeg]))
+                            System.out.println("Saved in slot 1.");
+                    } catch (IOException e) {
+                        System.out.println("IOException caught." + e);
+                    }
+                }
             }
 
             // Slot 2
             if(clickPos.y < SLOT_2_Y + SLOT_BUTTON_HEIGHT && clickPos.y > SLOT_2_Y){
-                // Save in slot 2
+                if(GameData.loadState) {
+                    // Load from slot 2
+                    try {
+                        GameData.loadGame(2);
+                        GameData.saveState = false;
+                        GameData.gamePlayState = true;
+                        GameData.currentUI = new GamePlayUI();
+                    } catch (IOException e) {
+                        System.out.println("IOException caught.");
+                    }
+                }
+                else if(GameData.saveState) {
+                    // Save in slot 2
+                    try {
+                        if (GameData.saveGame(2, Game.getMap()[GameData.currentLeg]))
+                            System.out.println("Saved in slot 2.");
+                    } catch (IOException e) {
+                        System.out.println("IOException caught." + e);
+                    }
+                }
             }
 
             // Slot 3
             if (clickPos.y < SLOT_3_Y + SLOT_BUTTON_HEIGHT && clickPos.y > SLOT_3_Y) {
-                // Save in slot 3
+                if(GameData.loadState) {
+                    // Load from slot 3
+                    try {
+                        GameData.loadGame(3);
+                        GameData.saveState = false;
+                        GameData.gamePlayState = true;
+                        GameData.currentUI = new GamePlayUI();
+                    } catch (IOException e) {
+                        System.out.println("IOException caught.");
+                    }
+
+                }
+                else if(GameData.saveState) {
+                    // Save in slot 3
+                    try {
+                        if (GameData.saveGame(3, Game.getMap()[GameData.currentLeg]))
+                            System.out.println("Saved in slot 3.");
+                    } catch (IOException e) {
+                        System.out.println("IOException caught." + e);
+                    }
+                }
             }
         }
     }
