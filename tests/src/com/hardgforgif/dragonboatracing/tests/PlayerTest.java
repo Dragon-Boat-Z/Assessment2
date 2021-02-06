@@ -137,47 +137,46 @@ public class PlayerTest {
         assertEquals(0.4714285731315613, spriteRotation);
     }
 
-    @Ignore
     @Test
     public void testPlayerUpdatePlayerStamina(){
-        testPlayer.setStamina(120f); //reset stamina
+        //testPlayer.setStamina(120f); //reset stamina
         float initialStamina;
         float newStamina;
         //up
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(moveUp, 2f);
         newStamina = testPlayer.getStamina();
-        assertEquals(initialStamina - 4, newStamina);
+        assertEquals(initialStamina - 8, newStamina);
 
         //up - different delta
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(moveUp, 5f);
         newStamina = testPlayer.getStamina();
-        assertEquals(initialStamina - 10, newStamina);
+        assertEquals(initialStamina - 20, newStamina);
 
         //left
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(turnLeft, 3f);
         newStamina = testPlayer.getStamina();
-        assertEquals(initialStamina - 6, newStamina);
+        assertEquals(initialStamina - 12, newStamina);
 
         //right
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(turnRight, 4f);
         newStamina = testPlayer.getStamina();
-        assertEquals(initialStamina - 8, newStamina);
+        assertEquals(initialStamina - 16, newStamina);
 
         //down
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(moveDown, 6f);
         newStamina = testPlayer.getStamina();
-        assertEquals(initialStamina - 6, newStamina);
+        assertEquals(initialStamina + 18, newStamina);
 
         //nothing
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(noMovement, 8f);
         newStamina = testPlayer.getStamina();
-        assertEquals(initialStamina - 12, newStamina);
+        assertEquals(initialStamina + 16, newStamina);
 
         //stamina below 30
         testPlayer.setStamina(25f);
