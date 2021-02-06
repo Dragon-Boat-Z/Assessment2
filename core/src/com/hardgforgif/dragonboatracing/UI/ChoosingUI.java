@@ -248,7 +248,7 @@ public class ChoosingUI extends UI{
                     selectedDifficulty = true;
                 }
                 // Hard Difficulty
-                if (mousePos.y < DIFFICULT_NORMAL_Y + DIFFICULTY_WIDTH && mousePos.y > DIFFICULT_NORMAL_Y) {
+                if (mousePos.y < DIFFICULT_HARD_Y + DIFFICULTY_WIDTH && mousePos.y > DIFFICULT_HARD_Y) {
                     GameData.difficultySelected = 2;
                     selectedDifficulty = true;
                 }
