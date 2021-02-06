@@ -15,26 +15,27 @@ public class PowerUpBomb extends PowerUp {
     @Override
     public void applyPowerUp(Boat user) {
         //Clear the nearest numToClear Obstacles in this lane.
-        int numToClear = 5;
+        int numToClear = 2;
         //Sorting obstacles in lane by proximity.
         Lane thisLane = user.getLane();
         Obstacle[] laneObstacles = thisLane.getObstacles();
         ArrayList<Obstacle> sortedObstacles = new ArrayList<Obstacle>();
         for(int i = 0; i < laneObstacles.length; i++) {
-            if(sortedObstacles.isEmpty()) {
-                sortedObstacles.add(laneObstacles[i]);
-            }
-            else {
-                for(int j = 0; j < sortedObstacles.size(); j++) {
-                    if(laneObstacles[i].getY() < sortedObstacles.get(j).getY()) {
-                        if(laneObstacles[i].isPowerUp()) {
-                            sortedObstacles.add(j, laneObstacles[i]);
-                        }
-                        break;
-                    }
-                }
-                if(laneObstacles[i].isPowerUp()) {
+            if(laneObstacles[i] != null && !laneObstacles[i].isPowerUp()) {
+                if (sortedObstacles.isEmpty()) {
                     sortedObstacles.add(laneObstacles[i]);
+                } else {
+                    for (int j = 0; j < sortedObstacles.size(); j++) {
+                        if (laneObstacles[i].getY() < sortedObstacles.get(j).getY()) {
+                            if (laneObstacles[i].isPowerUp()) {
+                                sortedObstacles.add(j, laneObstacles[i]);
+                            }
+                            break;
+                        }
+                    }
+                    //if (laneObstacles[i].isPowerUp()) {
+                        //sortedObstacles.add(laneObstacles[i]);
+                    //}
                 }
             }
         }
@@ -53,6 +54,8 @@ public class PowerUpBomb extends PowerUp {
         }
         toClear.addAll(Game.getToBeRemovedBodies());
         Game.setToBeRemovedBodies(toClear);
+        //
+        System.out.println(toClear);
     }
 
 }
