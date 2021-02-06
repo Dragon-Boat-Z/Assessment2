@@ -6,7 +6,7 @@ parent: Assessment 1
 
 # Architecture
 
-[Deliverable (.pdf)](/assets/assessment1/deliverables/Arch1.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Deliverable (.pdf)](/docs/assets/assessment1/deliverables/Arch1.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 {: .no_toc }
 
@@ -22,12 +22,12 @@ parent: Assessment 1
 ---
 ## Abstract architecture diagram
 
-![abstract architecture diagram](/assets/assessment1/static/arch/ab.png "Abstract architecture diagram")
+![abstract architecture diagram](/docs//assets/assessment1/static/arch/ab.png "Abstract architecture diagram")
 
 ## Concrete architecture diagram
 
-![concrete architecture diagram](/assets/assessment1/static/arch/con1.png "Concrete architecture diagram")
-![concrete architecture diagram](/assets/assessment1/static/arch/con2.png "Concrete architecture diagram")
+![concrete architecture diagram](/docs/assets/assessment1/static/arch/con1.png "Concrete architecture diagram")
+![concrete architecture diagram](/docs/assets/assessment1/static/arch/con2.png "Concrete architecture diagram")
 
 
 ## Abstract

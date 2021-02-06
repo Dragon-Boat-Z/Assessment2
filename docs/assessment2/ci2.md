@@ -6,7 +6,7 @@ parent: Assessment 2
 
 # Continuous Integration
 
-[Deliverable (.pdf)](/assets/assessment2/deliverables/CI2.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Deliverable (.pdf)](/docs/assets/assessment2/deliverables/CI2.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 {: .no_toc }
 

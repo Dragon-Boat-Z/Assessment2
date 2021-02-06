@@ -6,7 +6,7 @@ parent: Assessment 1
 
 # Implementation
 
-[Deliverable (.pdf)](/assets/assessment1/deliverables/Impl1.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Deliverable (.pdf)](/docs/assets/assessment1/deliverables/Impl1.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 {: .no_toc }
 
