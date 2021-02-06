@@ -112,7 +112,7 @@ public class LaneTest {
     public void testSpawnObstacles(){
         testLane.spawnObstacles(world, mapHeight);
         for (int i = 0;i < obstacleCount; i++){
-            assertTrue(testLane.getObstacles()[i].getObstacleTexture().toString().matches("Obstacles/Obstacle[123456].png"));
+            assertTrue(testLane.getObstacles()[i].getObstacleTexture().toString().matches("Obstacles/Obstacle[123456789].png|PowerUps/.*.png"));
             }
 
     }

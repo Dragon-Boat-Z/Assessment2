@@ -104,12 +104,6 @@ public class BoatTest {
 
     @Test
     public void testMoveBoatSpeedUp(){
-        // float robustness = 120f;
-        // float speed = 90f;
-        // float acceleration = 100f;
-        // float maneuverability = 110f;
-        // int boatType = 3;
-
         //stamina below 50
         //current speed low enough
         testBoat.setCurrentSpeed(10);

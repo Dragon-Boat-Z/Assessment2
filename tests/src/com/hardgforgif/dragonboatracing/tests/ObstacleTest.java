@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import com.hardgforgif.dragonboatracing.core.*;
@@ -47,8 +48,8 @@ public class ObstacleTest {
         assertEquals(0.19999999f, testObstacle.getObstacleSprite().getScaleX());
         assertEquals(0.19999999f, testObstacle.getObstacleSprite().getScaleY());
         assertEquals(new Vector2(100f, 120f), testObstacle.getObstacleBody().getPosition());
-        assertEquals(9866f, testObstacle.getObstacleSprite().getX());
-        assertEquals(11892, testObstacle.getObstacleSprite().getY());
+        assertEquals(9980f, testObstacle.getObstacleSprite().getX());
+        assertEquals(11948.5f, testObstacle.getObstacleSprite().getY());
     }
 
     @Test
