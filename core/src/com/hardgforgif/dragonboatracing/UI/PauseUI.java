@@ -131,7 +131,9 @@ public class PauseUI extends UI {
                         clickPos.y  > EXIT_BUTTON_Y
         ) {
             // Close the game
-            Gdx.app.exit();
+            GameData.pauseState = false;
+            GameData.mainMenuState = true;
+            GameData.currentUI = new MenuUI();
         }
 
         // If save button is clicked
