@@ -11,6 +11,7 @@ public class DesktopLauncher {
 		config.width = 1280;
 		config.height = 720;
 		config.fullscreen = false;
+		config.title = "Dragon Boat Game";
 		new LwjglApplication(new Game(), config);
 	}
 }

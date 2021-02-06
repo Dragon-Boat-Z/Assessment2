@@ -21,9 +21,11 @@ public class GamePlayUI extends UI{
     private Texture stamina;
     private Texture robustness;
     private Texture speed;
+    private Texture robustnessINV;
     private Sprite spBar;
     private Sprite rBar;
     private Sprite sBar;
+    private Sprite riBar;
 
     public GamePlayUI() {
         positionLabel = new BitmapFont();
@@ -48,13 +50,16 @@ public class GamePlayUI extends UI{
 
         stamina = new Texture(Gdx.files.internal("Stamina_bar.png"));
         robustness  = new Texture(Gdx.files.internal("Robustness_bar.png"));
+        robustnessINV = new Texture(Gdx.files.internal("Robustness_INV_bar.png"));
         speed = new Texture(Gdx.files.internal("Speed_bar.png"));
         rBar = new Sprite(robustness);
+        riBar = new Sprite(robustnessINV);
         sBar = new Sprite(stamina);
         spBar = new Sprite(speed);
-        sBar.setPosition(10 ,120);
-        rBar.setPosition(10,60);
-        spBar.setPosition(10,180);
+        sBar.setPosition(10 ,650-60);
+        rBar.setPosition(10,650);
+        riBar.setPosition(10, 650);
+        spBar.setPosition(10,650-120);
 
     }
 
@@ -68,21 +73,29 @@ public class GamePlayUI extends UI{
         // Set the robustness and stamina bars size based on the player boat
         sBar.setSize(playerBoat.getStamina(), 30);
         rBar.setSize(playerBoat.getRobustness(),30);
+        riBar.setSize(playerBoat.getRobustness(), 30);
         spBar.setSize(playerBoat.getCurrentSpeed(),30);
 
         batch.begin();
         // Draw the robustness and stamina bars
+        if(playerBoat.isInvulnerable()) {
+            //Invulnerable robustness bar.
+            riBar.draw(batch);
+        }
+        else {
+            //Normal robustness bar.
+            rBar.draw(batch);
+        }
         sBar.draw(batch);
-        rBar.draw(batch);
         spBar.draw(batch);
-        robustnessLabel.draw(batch, "Robustness", 10, 110);
-        staminaLabel.draw(batch, "Stamina", 10,170);
-        speedLabel.draw(batch, "Speed", 10, 230);
+        robustnessLabel.draw(batch, "Robustness", 10, 700);
+        staminaLabel.draw(batch, "Stamina", 10,700-60);
+        speedLabel.draw(batch, "Speed", 10, 700-120);
 
         // Draw the position label, the timer and the leg label
-        positionLabel.draw(batch, GameData.standings[0] + "/4", 1225, 700);
-        timerLabel.draw(batch, String.valueOf(Math.round(GameData.currentTimer * 10.0) / 10.0), 10, 700);
-        legLabel.draw(batch, "Leg: " + (GameData.currentLeg + 1), 10, 650);
+        positionLabel.draw(batch, GameData.standings[0] + "/7", 1225, 700);
+        timerLabel.draw(batch, String.valueOf(Math.round(GameData.currentTimer * 10.0) / 10.0), 620, 700);
+        legLabel.draw(batch, "Leg: " + (GameData.currentLeg + 1), 10, 40);
 
         // Draw the lane waning if needed
         if(GameData.playerWarning) {
