@@ -60,6 +60,7 @@ public class GameData {
     // Store information about each lane's boat
     // Number of boats
     public static int numberOfBoats = 7;
+    public static int numberOfFinalists = 4;
 
     public static Boat[] boats = new Boat[numberOfBoats];
 

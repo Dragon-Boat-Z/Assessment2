@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
 	private static Player player;
-	private static AI[] opponents = new AI[6];
+	private static AI[] opponents;
 	private static Map[] map;
 	private Batch batch;
 	private Batch UIbatch;
@@ -53,6 +53,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 			// Initialize the map
 			map[i] = new Map("Map1/Map2.tmx", w);
+
+			// Initialise opponents.
+			opponents = new AI[GameData.numberOfBoats - 1];
 
 			// Calculate the ratio between pixels, meters and tiles
 			GameData.TILES_TO_METERS = map[i].getTilesToMetersRatio();
@@ -199,7 +202,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		// If the player has finished and we haven't added his result already...
 		if(player.hasFinished() && player.getAcceleration() > 0 && GameData.results.size() < GameData.numberOfBoats){
 			// Add the result to the list with key 0, the player's lane
-			GameData.results.add(new Float[]{0f, GameData.currentTimer});
+			GameData.results.add(new Float[]{0f, GameData.currentTimer, Float.valueOf(player.getBoatType())});
 
 			// Transition to the results UI
 			GameData.showResultsState = true;
@@ -214,7 +217,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			// If the AI has finished and we haven't added his result already...
 			if(opponents[i].hasFinished() && opponents[i].getAcceleration() > 0 && GameData.results.size() < GameData.numberOfBoats){
 				// Add the result to the list with the his lane numer as key
-				GameData.results.add(new Float[]{Float.valueOf(i + 1), GameData.currentTimer});
+				GameData.results.add(new Float[]{Float.valueOf(i + 1), GameData.currentTimer, Float.valueOf(opponents[i].getBoatType())});
 
 				// Change the AI's acceleration so the boat stops moving
 				opponents[i].setAcceleration(-200f);
@@ -250,7 +253,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	 */
 	private void dnfRemainingBoats() {
 		// If the player hasn't finished
-		if (!player.hasFinished() && player.getRobustness() > 0 && GameData.results.size() < GameData.numberOfBoats){
+		if (!player.hasFinished() && player.getRobustness() > 0 && GameData.results.size() < (opponents.length + 1)){
 			// Add a dnf result
 			GameData.results.add(new Float[]{0f, Float.MAX_VALUE});
 
@@ -261,8 +264,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 		// Iterate through the AI and add a dnf result for any who haven't finished
 		for (int i = 0; i < opponents.length; i++){
-		  if (!opponents[i].hasFinished() && opponents[i].getRobustness() > 0 && GameData.results.size() < GameData.numberOfBoats)
-				GameData.results.add(new Float[]{Float.valueOf(i + 1), Float.MAX_VALUE});
+		  if (!opponents[i].hasFinished() && opponents[i].getRobustness() > 0 && GameData.results.size() < (opponents.length + 1))
+				GameData.results.add(new Float[]{Float.valueOf(i + 1), Float.MAX_VALUE, Float.valueOf(opponents[i].getBoatType())});
 		}
 	}
 
@@ -289,6 +292,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
                 }
 
 			    else {
+
                     // Create the player boat
                     int playerBoatType = GameData.boatTypes[0];
                     player = new Player(GameData.boatsStats[playerBoatType][0], GameData.boatsStats[playerBoatType][1],
@@ -298,16 +302,46 @@ public class Game extends ApplicationAdapter implements InputProcessor {
                     GameData.boats[0] = player;
                     player.setLimits(player.getLane().getLeftBoundary()[0][1], player.getLane().getRightBoundary()[0][1]);
 
-                    // Create the AI boats
-                    for (int i = 1; i < GameData.numberOfBoats; i++) {
-                        int AIBoatType = GameData.boatTypes[i];
-                        opponents[i - 1] = new AI(GameData.boatsStats[AIBoatType][0], GameData.boatsStats[AIBoatType][1],
-                                GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
-                                AIBoatType, map[GameData.currentLeg].getLanes()[i]);
-                        opponents[i - 1].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i][0], GameData.startingPoints[i][1], "Boat1.json");
-                        GameData.boats[i] = opponents[i - 1];
-                        opponents[i - 1].setLimits(opponents[i - 1].getLane().getLeftBoundary()[0][1], opponents[i - 1].getLane().getRightBoundary()[0][1]);
-                    }
+					// Create the AI boats
+					// If last leg, have less boats. Otherwise, have normal number of boats.
+					if(GameData.currentLeg == GameData.numberOfLegs - 1) {
+						opponents = new AI[GameData.numberOfFinalists - 1];
+						int incrementer = 0;
+						ArrayList<Integer> finalistTypes = new ArrayList<>();
+						while(finalistTypes.size() < opponents.length) {
+							//Add the first numberOfFinalists-1 boats from the latest results to the final.
+							//Goes through results looking for AI, has to skip a Player as it could be in any position.
+							if(GameData.results.get(incrementer)[0] != 0) {
+								finalistTypes.add(Math.round(GameData.results.get(incrementer)[2]));
+							}
+							incrementer += 1;
+						}
+						for (int i = 0; i < opponents.length; i++) {
+							int AIBoatType = finalistTypes.get(i);
+							opponents[i] = new AI(GameData.boatsStats[AIBoatType][0], GameData.boatsStats[AIBoatType][1],
+									GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
+									AIBoatType, map[GameData.currentLeg].getLanes()[i + 1]);
+							opponents[i].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i + 1][0], GameData.startingPoints[i + 1][1], "Boat1.json");
+							GameData.boats[i + 1] = opponents[i];
+							opponents[i].setLimits(opponents[i].getLane().getLeftBoundary()[0][1], opponents[i].getLane().getRightBoundary()[0][1]);
+						}
+					}
+
+					else {
+						opponents = new AI[GameData.numberOfBoats - 1];
+						for (int i = 0; i < opponents.length; i++) {
+							int AIBoatType = GameData.boatTypes[i + 1];
+							opponents[i] = new AI(GameData.boatsStats[AIBoatType][0], GameData.boatsStats[AIBoatType][1],
+									GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
+									AIBoatType, map[GameData.currentLeg].getLanes()[i + 1]);
+							opponents[i].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i + 1][0], GameData.startingPoints[i + 1][1], "Boat1.json");
+							GameData.boats[i + 1] = opponents[i];
+							opponents[i].setLimits(opponents[i].getLane().getLeftBoundary()[0][1], opponents[i].getLane().getRightBoundary()[0][1]);
+						}
+					}
+					GameData.results.clear();
+
+
                 }
 
 			}
@@ -372,7 +406,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 						world[GameData.currentLeg].destroyBody(player.getBoatBody());
 
 						// Add a DNF result
-						GameData.results.add(new Float[]{0f, Float.MAX_VALUE});
+						GameData.results.add(new Float[]{0f, Float.MAX_VALUE, Float.valueOf(player.getBoatType())});
 
 						// Transition to the show result screen
 						GameData.showResultsState = true;
@@ -390,7 +424,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 							if(opponents[i].getRobustness() < 0 && GameData.results.size() < GameData.numberOfBoats){
 								world[GameData.currentLeg].destroyBody(opponents[i].getBoatBody());
-								GameData.results.add(new Float[]{Float.valueOf(i + 1), Float.MAX_VALUE});
+								GameData.results.add(new Float[]{Float.valueOf(i + 1), Float.MAX_VALUE, Float.valueOf(opponents[i].getBoatType())});
 							}
 						}
 					}
@@ -458,7 +492,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 			// If it's been 15 seconds since the winner completed the race, dnf all boats who haven't finished yet
 			// Then transition to the result state
-			if(GameData.results.size() > 0 && GameData.results.size() < GameData.numberOfBoats &&
+			if(GameData.results.size() > 0 && GameData.results.size() < (opponents.length + 1) &&
 					GameData.currentTimer > GameData.results.get(0)[1] + 15f){
 				dnfRemainingBoats();
 				GameData.showResultsState = true;
@@ -485,7 +519,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			player = null;
 			for (int i = 0; i < opponents.length; i++)
 				opponents[i] = null;
-			GameData.results.clear();
+			//GameData.results.clear();
 			GameData.currentTimer = 0f;
 			//player.setPowerUpTimer(0f);
 			//player.setSpeed(GameData.boatsStats[player.getBoatType()][1]);
