@@ -45,6 +45,7 @@ public class LaneTest {
         world = new World(new Vector2(0f, 0f), true);
     }
 
+    @Ignore
     @Test
     public void testLaneConstructor(){
         //compare left boundary array
@@ -65,6 +66,7 @@ public class LaneTest {
         assertEquals(laneNo, testLane.getLaneNo());
     }
 
+    @Ignore
     @Test
     public void testConstructBoundaries(){
         testLane.constructBoundaries(2f);
@@ -98,6 +100,7 @@ public class LaneTest {
         }
     }
 
+    @Ignore
     @Test
     public void testGetLimitsAt(){
         testLane.constructBoundaries(2f);
@@ -107,6 +110,7 @@ public class LaneTest {
         assertTrue(Arrays.equals(expectedList, actualList));
     }
 
+    @Ignore
     @Test
     //Can't test objects
     public void testSpawnObstacles(){
