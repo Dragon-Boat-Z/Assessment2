@@ -131,4 +131,4 @@ settings.json
 
 ##testing
 /tests/build/*
-tests/bin/*
+/tests/bin/*
