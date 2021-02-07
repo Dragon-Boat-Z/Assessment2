@@ -250,4 +250,16 @@ public class AI extends Boat{
 
         return b;
     }
+
+    public Vector2 getLaneChecker(){
+        return this.laneChecker;
+    }
+
+    public Vector2 getObjectChecker(){
+        return this.objectChecker;
+    }
+
+    public boolean getIsDodging(){
+        return this.isDodging;
+    }
 }

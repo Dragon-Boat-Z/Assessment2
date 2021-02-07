@@ -128,4 +128,12 @@ public class ScrollingBackground {
     public static int getTargetAcquiredAcceleration() {
         return TARGET_ACQUIRED_ACCELERATION;
     }
+
+    public void setY1(float y1){
+        this.y1 = y1;
+    }
+
+    public void setY2(float y2){
+        this.y2 = y2;
+    }
 }
