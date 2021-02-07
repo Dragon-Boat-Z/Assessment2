@@ -54,7 +54,6 @@ public class Player extends Boat{
                 //Not pressing any buttons.
                 this.setStamina(this.getStamina() + 2 * delta);
             }
-
     }
 
     public static Player from_json(JsonObject obj, Map map, World world) {
