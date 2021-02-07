@@ -633,7 +633,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             else
             {
                 // Check if the state we are in is pause-able from.
-                if(GameData.gamePlayState || GameData.choosingBoatState || GameData.showResultsState || GameData.saveState) {
+                if(GameData.gamePlayState || GameData.choosingBoatState || GameData.saveState) {
                     GameData.pauseState = true;
                     // If pausing from the save state, we want to preserve the current previous state.
                     GameData.previousState = GameData.saveState ? GameData.previousState : GameData.currentUI.getClass().getSimpleName();
