@@ -11,12 +11,14 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.hardgforgif.dragonboatracing.UI.*;
 import com.hardgforgif.dragonboatracing.core.*;
 
+
+
 import javax.xml.transform.Result;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
-	private static Player player;
+    private static Player player;
 	private static AI[] opponents;
 	private static Map[] map;
 	private Batch batch;
