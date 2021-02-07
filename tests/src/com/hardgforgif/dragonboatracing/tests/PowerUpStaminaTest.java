@@ -14,10 +14,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-
 @RunWith(GdxTestRunner.class)
 public class PowerUpStaminaTest {
-    
+
     Lane mockLane;
     Boat testBoat;
     PowerUpStamina testPowerUp;
@@ -36,7 +35,7 @@ public class PowerUpStaminaTest {
     }
 
     @Test
-    public void testApplyPowerUpStamina(){
+    public void testApplyPowerUpStamina() {
         testBoat.setStamina(40);
         testPowerUp.applyPowerUp(testBoat);
         assertEquals(60, testBoat.getStamina());

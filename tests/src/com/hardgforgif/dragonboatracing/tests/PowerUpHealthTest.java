@@ -14,10 +14,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-
 @RunWith(GdxTestRunner.class)
 public class PowerUpHealthTest {
-    
+
     Lane mockLane;
     Boat testBoat;
     PowerUpHealth testPowerUp;
@@ -36,7 +35,7 @@ public class PowerUpHealthTest {
     }
 
     @Test
-    public void testApplyPowerUpHealth(){
+    public void testApplyPowerUpHealth() {
         // test for when boat has lost health
         // set testBoat robustness to half
         testBoat.setRobustness(60);

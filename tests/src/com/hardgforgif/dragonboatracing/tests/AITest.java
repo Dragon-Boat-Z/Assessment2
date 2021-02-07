@@ -1,26 +1,26 @@
 package com.hardgforgif.dragonboatracing.tests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
+import com.hardgforgif.dragonboatracing.core.AI;
+import com.hardgforgif.dragonboatracing.core.Lane;
+import com.hardgforgif.dragonboatracing.core.Obstacle;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import com.hardgforgif.dragonboatracing.core.*;
-import com.badlogic.gdx.physics.box2d.*;
-
 import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @RunWith(GdxTestRunner.class)
 public class AITest {
-    
+
     Lane mockLane;
     Obstacle mockObstacle;
     Sprite mockObstacleSprite;
@@ -33,8 +33,9 @@ public class AITest {
     int boatType = 3;
 
     @Before
-    public void init(){
-        //Mock the opengl classes using mockito so that libgdx opengl functions can be used
+    public void init() {
+        // Mock the opengl classes using mockito so that libgdx opengl functions can be
+        // used
         Gdx.gl20 = Mockito.mock(GL20.class);
         Gdx.gl30 = Mockito.mock(GL30.class);
 
@@ -53,7 +54,7 @@ public class AITest {
     }
 
     @Test
-    public void testAIConstructor(){
+    public void testAIConstructor() {
         assertEquals(110.4f, Math.round(testAI.getRobustness() * 1000f) / 1000f);
         assertEquals(82.8f, Math.round(testAI.getSpeed() * 1000f) / 1000f);
         assertEquals(92f, Math.round(testAI.getAcceleration() * 1000f) / 1000f);
@@ -63,40 +64,32 @@ public class AITest {
     }
 
     @Test
-    public void testUpdateAI(){
+    public void testUpdateAI() {
         testAI.updateAI(2f);
-        assertEquals(new Vector2(10000f,12493.6f), testAI.getLaneChecker());
-        assertEquals(new Vector2(10000f,12393.6f), testAI.getObjectChecker());
+        assertEquals(new Vector2(10000f, 12493.6f), testAI.getLaneChecker());
+        assertEquals(new Vector2(10000f, 12393.6f), testAI.getObjectChecker());
         assertFalse(testAI.getIsDodging());
     }
 
-    private void setupMockLane(){
+    private void setupMockLane() {
         Mockito.when(mockLane.getLeftIterator()).thenReturn(5);
-        float[][] leftBoundaries = {{0,0},
-                                    {15,5},
-                                    {30,10},
-                                    {45,15},
-                                    {60,20}};
+        float[][] leftBoundaries = { { 0, 0 }, { 15, 5 }, { 30, 10 }, { 45, 15 }, { 60, 20 } };
         Mockito.when(mockLane.getLeftBoundary()).thenReturn(leftBoundaries);
 
         Mockito.when(mockLane.getRightIterator()).thenReturn(5);
-        float[][] rightBoundaries = {{10,0},
-                                     {25,5},
-                                     {40,10},
-                                     {55,15},
-                                     {70,20}};
+        float[][] rightBoundaries = { { 10, 0 }, { 25, 5 }, { 40, 10 }, { 55, 15 }, { 70, 20 } };
         Mockito.when(mockLane.getRightBoundary()).thenReturn(rightBoundaries);
 
         setupMockObstacle();
-        Obstacle[] obstacles = {mockObstacle};
+        Obstacle[] obstacles = { mockObstacle };
         Mockito.when(mockLane.getObstacles()).thenReturn(obstacles);
     }
 
-    private void setupMockObstacle(){
+    private void setupMockObstacle() {
         Mockito.doReturn(mockObstacleSprite).when(mockObstacle).getObstacleSprite();
     }
 
-    public void setupMockObstacleSprite(){
+    public void setupMockObstacleSprite() {
         Mockito.when(mockObstacleSprite.getWidth()).thenReturn(20f);
         Mockito.when(mockObstacleSprite.getHeight()).thenReturn(20f);
         Mockito.when(mockObstacleSprite.getX()).thenReturn(45f);
