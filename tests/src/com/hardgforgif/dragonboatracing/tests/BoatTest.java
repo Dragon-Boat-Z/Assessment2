@@ -16,7 +16,6 @@ import com.hardgforgif.dragonboatracing.core.Boat;
 import com.hardgforgif.dragonboatracing.core.Lane;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -49,7 +48,6 @@ public class BoatTest {
         testBoat.createBoatBody(world, 100f, 120f, "Boat1.json");
     }
 
-    @Ignore
     @Test
     public void testBoatConstructor() {
         assertEquals(robustness, testBoat.getRobustness());
@@ -60,7 +58,6 @@ public class BoatTest {
         assertEquals(mockLane, testBoat.getLane());
     }
 
-    @Ignore
     @Test
     public void testCreateBoatBody() {
         assertEquals(0.325f, testBoat.getBoatSprite().getScaleX());
@@ -70,7 +67,6 @@ public class BoatTest {
         assertEquals(testBoat, testBoat.getBoatBody().getUserData());
     }
 
-    @Ignore
     @Test
     public void testGetLimitsAt() {
         Mockito.when(mockLane.getLeftIterator()).thenReturn(5);
@@ -87,7 +83,6 @@ public class BoatTest {
         assertTrue(Arrays.equals(expected2, testBoat.getLimitsAt(30)));
     }
 
-    @Ignore
     @Test
     public void testHasFinished() {
         // hasn't moved
@@ -102,7 +97,6 @@ public class BoatTest {
         assertTrue(testBoat.hasFinished());
     }
 
-    @Ignore
     @Test
     public void testMoveBoatSpeedUp() {
         // stamina below 50
@@ -148,7 +142,6 @@ public class BoatTest {
         assertEquals(90f, actualSpeed);
     }
 
-    @Ignore
     @Test
     public void testMoveBoatSpeedDown() {
         // stamina below 50
@@ -179,7 +172,6 @@ public class BoatTest {
         assertEquals(0f, actualSpeed);
     }
 
-    @Ignore
     @Test
     public void testRotateBoat() {
         // right

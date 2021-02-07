@@ -11,7 +11,6 @@ import com.hardgforgif.dragonboatracing.core.Lane;
 import com.hardgforgif.dragonboatracing.core.Player;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -140,7 +139,6 @@ public class PlayerTest {
         assertEquals(0.4714285731315613, spriteRotation);
     }
 
-    @Ignore
     @Test
     public void testPlayerUpdatePlayerStamina() {
         // testPlayer.setStamina(120f); //reset stamina

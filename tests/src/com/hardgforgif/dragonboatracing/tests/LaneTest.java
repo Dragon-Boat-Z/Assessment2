@@ -16,7 +16,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.hardgforgif.dragonboatracing.core.Lane;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -48,7 +47,6 @@ public class LaneTest {
         world = new World(new Vector2(0f, 0f), true);
     }
 
-    @Ignore
     @Test
     public void testLaneConstructor() {
         // compare left boundary array
@@ -69,7 +67,6 @@ public class LaneTest {
         assertEquals(laneNo, testLane.getLaneNo());
     }
 
-    @Ignore
     @Test
     public void testConstructBoundaries() {
         testLane.constructBoundaries(2f);
@@ -88,7 +85,6 @@ public class LaneTest {
         }
     }
 
-    @Ignore
     @Test
     public void testGetLimitsAt() {
         testLane.constructBoundaries(2f);
@@ -98,7 +94,6 @@ public class LaneTest {
         assertTrue(Arrays.equals(expectedList, actualList));
     }
 
-    @Ignore
     @Test
     // Can't test objects
     public void testSpawnObstacles() {
