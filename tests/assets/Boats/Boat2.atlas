@@ -1,75 +1,75 @@
 Boat2.png
-size: 650, 288
+size: 1600, 766
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-001
+Boat2Frame1
   rotate: false
   xy: 0, 0
-  size: 65, 288
-  orig: 65, 288
+  size: 160, 766
+  orig: 160, 766
   offset: 0, 0
   index: -1
-002
+Boat2Frame2
   rotate: false
-  xy: 65, 0
-  size: 65, 288
-  orig: 65, 288
+  xy: 160, 0
+  size: 160, 766
+  orig: 160, 766
   offset: 0, 0
   index: -1
-003
+Boat2Frame3
   rotate: false
-  xy: 130, 0
-  size: 65, 288
-  orig: 65, 288
+  xy: 320, 0
+  size: 160, 766
+  orig: 160, 766
   offset: 0, 0
   index: -1
-004
+Boat2Frame4
   rotate: false
-  xy: 195, 0
-  size: 65, 288
-  orig: 65, 288
+  xy: 480, 0
+  size: 160, 766
+  orig: 160, 766
   offset: 0, 0
   index: -1
-005
+Boat2Frame5
   rotate: false
-  xy: 260, 0
-  size: 65, 288
-  orig: 65, 288
+  xy: 640, 0
+  size: 160, 766
+  orig: 160, 766
   offset: 0, 0
   index: -1
-006
+Boat2Frame6
   rotate: false
-  xy: 325, 0
-  size: 65, 288
-  orig: 65, 288
+  xy: 800, 0
+  size: 160, 766
+  orig: 160, 766
   offset: 0, 0
   index: -1
-007
+Boat2Frame7
   rotate: false
-  xy: 390, 0
-  size: 65, 288
-  orig: 65, 288
+  xy: 960, 0
+  size: 160, 766
+  orig: 160, 766
   offset: 0, 0
   index: -1
-008
+Boat2Frame8
   rotate: false
-  xy: 455, 0
-  size: 65, 288
-  orig: 65, 288
+  xy: 1120, 0
+  size: 160, 766
+  orig: 160, 766
   offset: 0, 0
   index: -1
-009
+Boat2Frame9
   rotate: false
-  xy: 520, 0
-  size: 65, 288
-  orig: 65, 288
+  xy: 1280, 0
+  size: 160, 766
+  orig: 160, 766
   offset: 0, 0
   index: -1
-010
+Boat2Frame10
   rotate: false
-  xy: 585, 0
-  size: 65, 288
-  orig: 65, 288
+  xy: 1440, 0
+  size: 160, 766
+  orig: 160, 766
   offset: 0, 0
   index: -1
