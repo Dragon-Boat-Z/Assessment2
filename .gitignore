@@ -1,5 +1,5 @@
 ## Java
-save_data/*.json
+/save_data/*.json
 
 *.class
 *.war

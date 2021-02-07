@@ -134,6 +134,9 @@ public class PauseUI extends UI {
             GameData.pauseState = false;
             GameData.mainMenuState = true;
             GameData.currentUI = new MenuUI();
+            // Change the music
+            GameData.music.stop();
+            GameData.music = Gdx.audio.newMusic(Gdx.files.internal("Vibing.ogg"));
         }
 
         // If save button is clicked
