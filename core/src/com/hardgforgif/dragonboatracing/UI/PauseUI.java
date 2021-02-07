@@ -38,7 +38,7 @@ public class PauseUI extends UI {
         scrollingBackground = new ScrollingBackground();
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setTargetSpeed(ScrollingBackground.getDefaultSpeed()/3);
+        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed()/3);
     }
 
     @Override
@@ -131,7 +131,12 @@ public class PauseUI extends UI {
                         clickPos.y  > EXIT_BUTTON_Y
         ) {
             // Close the game
-            Gdx.app.exit();
+            GameData.pauseState = false;
+            GameData.mainMenuState = true;
+            GameData.currentUI = new MenuUI();
+            // Change the music
+            GameData.music.stop();
+            GameData.music = Gdx.audio.newMusic(Gdx.files.internal("Vibing.ogg"));
         }
 
         // If save button is clicked

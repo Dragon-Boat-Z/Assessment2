@@ -27,7 +27,7 @@ public class PowerUpBomb extends PowerUp {
                 } else {
                     for (int j = 0; j < sortedObstacles.size(); j++) {
                         if (laneObstacles[i].getY() < sortedObstacles.get(j).getY()) {
-                            if (laneObstacles[i].isPowerUp()) {
+                            if (!laneObstacles[i].isPowerUp()) {
                                 sortedObstacles.add(j, laneObstacles[i]);
                             }
                             break;

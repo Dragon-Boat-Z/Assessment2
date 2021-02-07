@@ -243,7 +243,7 @@ public class Lane {
         return this.rightLayer;
     }
 
-    public Obstacle[] getObstacles() {
+    public Obstacle[] getObstacles(){
         return this.obstacles;
     }
 

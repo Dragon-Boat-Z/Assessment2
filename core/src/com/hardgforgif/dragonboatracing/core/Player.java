@@ -18,23 +18,21 @@ public class Player extends Boat{
      */
     public void updatePlayer(boolean[] pressedKeys, float delta) {
         // Check which angle you need to rotate to, then apply the roation
-        if (pressedKeys[1]){
+        if (pressedKeys[1])
             this.setTargetAngle(90f);
-        } else if (pressedKeys[3]){
+        else if (pressedKeys[3])
             this.setTargetAngle(-90f);
-        } else{
+        else
             this.setTargetAngle(0f);
-        }
         rotateBoat(this.getTargetAngle());
 
         // Move the boat
-        if (pressedKeys[0]){
+        if (pressedKeys[0])
             moveBoat(1);
-        } else if (pressedKeys[2]){
+        else if (pressedKeys[2])
             moveBoat(-1);
-        } else{
+        else
             moveBoat(0);
-        }
 
         // Update the sprite location to match the body
         this.getBoatSprite().setRotation((float)Math.toDegrees(this.getBoatBody().getAngle()));
@@ -42,7 +40,7 @@ public class Player extends Boat{
                 (this.getBoatBody().getPosition().y * GameData.METERS_TO_PIXELS) - this.getBoatSprite().getHeight() / 2);
 
         //Update stamina
-        if (this.getStamina() > 30f) { //Did this mean it was impossible to reach <30% stamina before?
+        if (this.getStamina() > 30f) //Did this mean it was impossible to reach <30% stamina before?
             //stamina -= 1.5 * delta;
             if(pressedKeys[0] || pressedKeys[1] || pressedKeys[3]) {
                 //Holding W, A, or D.
@@ -56,7 +54,23 @@ public class Player extends Boat{
                 //Not pressing any buttons.
                 this.setStamina(this.getStamina() + 2 * delta);
             }
-        }
+
+    }
+
+    public static Player from_json(JsonObject obj, Map map, World world) {
+        // First initialise the boat with it's stats.
+        Player b = new Player(obj.get("robustness").getAsFloat(), obj.get("speed").getAsFloat(),
+                obj.get("acceleration").getAsFloat(), obj.get("maneuverability").getAsFloat(),
+                obj.get("boat_type").getAsInt(), map.getLanes()[obj.get("lane").getAsInt()]);
+
+        // Then update the in play variables of that boat from the save-state.
+        b.setStamina(obj.get("stamina").getAsFloat());
+        b.setCurrentSpeed(obj.get("current_speed").getAsFloat());
+        b.setTurningSpeed(obj.get("turning_speed").getAsFloat());
+        b.setTargetAngle(obj.get("target_angle").getAsFloat());
+        b.createBoatBody(world, obj.get("x_position").getAsFloat()*(1/GameData.METERS_TO_PIXELS),obj.get("y_position").getAsFloat()*(1/GameData.METERS_TO_PIXELS), "Boat1.json");
+
+        return b;
     }
 
     public static Player from_json(JsonObject obj, Map map, World world) {

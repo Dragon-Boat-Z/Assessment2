@@ -28,7 +28,7 @@ public class GameOverUI extends UI{
     public GameOverUI(){
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setTargetSpeed(ScrollingBackground.getDefaultSpeed());
+        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed());
 
         gameOverTexture = new Texture(Gdx.files.internal("gameOver.png"));
         victoryTexture = new Texture(Gdx.files.internal("victory.png"));
@@ -66,12 +66,12 @@ public class GameOverUI extends UI{
         batch.begin();
         scrollingBackground.updateAndRender(delta, batch);
         // If this was the last leg and the player won, show the victory screen
-        if (GameData.currentLeg == 2 && GameData.standings[0] == 1)
+        if (GameData.currentLeg == (GameData.numberOfLegs - 1) && GameData.standings[0] == 1)
             firstPlaceSprite.draw(batch);
-        else if(GameData.currentLeg == 2 && GameData.standings[0] == 2) {
+        else if(GameData.currentLeg == (GameData.numberOfLegs - 1) && GameData.standings[0] == 2) {
             secondPlaceSprite.draw(batch);
         }
-        else if(GameData.currentLeg == 2 && GameData.standings[0] == 3) {
+        else if(GameData.currentLeg == (GameData.numberOfLegs - 1) && GameData.standings[0] == 3) {
             thirdPlaceSprite.draw(batch);
         }
         // Otherwise, the game is over with a loss

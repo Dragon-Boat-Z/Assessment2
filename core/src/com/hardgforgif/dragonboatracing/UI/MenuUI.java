@@ -41,7 +41,7 @@ public class MenuUI extends UI {
         scrollingBackground = new ScrollingBackground();
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setTargetSpeed(ScrollingBackground.getDefaultSpeed());
+        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed());
 
         playButtonActive = new Texture("PlaySelected.png");
         playButtonInactive = new Texture("PlayUnselected.png");

@@ -42,7 +42,7 @@ public class SaveUI extends UI {
         scrollingBackground = new ScrollingBackground();
         scrollingBackground.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         scrollingBackground.setSpeedFixed(true);
-        scrollingBackground.setTargetSpeed(ScrollingBackground.getDefaultSpeed()/3);
+        scrollingBackground.setSpeed(ScrollingBackground.getDefaultSpeed()/3);
     }
     @Override
     public void drawUI(Batch batch, Vector2 mousePos, float screenWidth, float delta) {
@@ -124,6 +124,9 @@ public class SaveUI extends UI {
                         GameData.saveState = false;
                         GameData.gamePlayState = true;
                         GameData.currentUI = new GamePlayUI();
+                        // Change the music
+                        GameData.music.stop();
+                        GameData.music = Gdx.audio.newMusic(Gdx.files.internal("Love_Drama.ogg"));
                     } catch (IOException e) {
                         System.out.println("IOException caught.");
                     }
@@ -148,6 +151,9 @@ public class SaveUI extends UI {
                         GameData.saveState = false;
                         GameData.gamePlayState = true;
                         GameData.currentUI = new GamePlayUI();
+                        // Change the music
+                        GameData.music.stop();
+                        GameData.music = Gdx.audio.newMusic(Gdx.files.internal("Love_Drama.ogg"));
                     } catch (IOException e) {
                         System.out.println("IOException caught.");
                     }
@@ -172,6 +178,9 @@ public class SaveUI extends UI {
                         GameData.saveState = false;
                         GameData.gamePlayState = true;
                         GameData.currentUI = new GamePlayUI();
+                        // Change the music
+                        GameData.music.stop();
+                        GameData.music = Gdx.audio.newMusic(Gdx.files.internal("Love_Drama.ogg"));
                     } catch (IOException e) {
                         System.out.println("IOException caught.");
                     }
