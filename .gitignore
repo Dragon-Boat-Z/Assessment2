@@ -130,5 +130,5 @@ Thumbs.db
 settings.json
 
 ##testing
-/tests/build/*
-/tests/bin/*
+tests/build/*
+tests/bin/*
