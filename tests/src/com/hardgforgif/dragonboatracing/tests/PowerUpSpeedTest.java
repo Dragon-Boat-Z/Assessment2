@@ -14,9 +14,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
+
 @RunWith(GdxTestRunner.class)
 public class PowerUpSpeedTest {
-
+    
     Lane mockLane;
     Boat testBoat;
     PowerUpSpeed testPowerUp;
@@ -35,7 +36,7 @@ public class PowerUpSpeedTest {
     }
 
     @Test
-    public void testApplyPowerUpSpeed() {
+    public void testApplyPowerUpSpeed(){
         testBoat.setCurrentSpeed(50);
         testPowerUp.applyPowerUp(testBoat);
         assertEquals(75, testBoat.getCurrentSpeed());

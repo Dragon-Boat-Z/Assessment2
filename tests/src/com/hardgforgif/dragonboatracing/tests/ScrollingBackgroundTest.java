@@ -1,29 +1,27 @@
 package com.hardgforgif.dragonboatracing.tests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.hardgforgif.dragonboatracing.UI.ScrollingBackground;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import com.hardgforgif.dragonboatracing.UI.*;
 import org.mockito.Mockito;
 
-@RunWith(GdxTestRunner.class)
-public class ScrollingBackgroundTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RunWith(GdxTestRunner.class)
+public class ScrollingBackgroundTest{
+    
     Batch mockBatch;
     ScrollingBackground testScrollingBackground;
 
     @Before
-    public void init() {
+    public void init(){
 
-        // Mock the opengl classes using mockito so that libgdx opengl functions can be
-        // used
+        //Mock the opengl classes using mockito so that libgdx opengl functions can be used
         Gdx.gl20 = Mockito.mock(GL20.class);
         Gdx.gl30 = Mockito.mock(GL30.class);
 
@@ -32,7 +30,7 @@ public class ScrollingBackgroundTest {
     }
 
     @Test
-    public void testScrollingBackgroundConstructor() {
+    public void testScrollingBackgroundConstructor(){
         assertEquals(0, testScrollingBackground.getY1());
         assertEquals(1024, testScrollingBackground.getY2());
         assertEquals(0, testScrollingBackground.getSpeed());
@@ -42,17 +40,17 @@ public class ScrollingBackgroundTest {
     }
 
     @Test
-    public void testScrollingBackgroundUpdateAndRender() {
+    public void testScrollingBackgroundUpdateAndRender(){
         // speed < targetSpeed, speedFixed = true;
         setup(0, true);
         assertEquals(864, testScrollingBackground.getY1());
         assertEquals(864, testScrollingBackground.getY2());
-
+        
         // speed > targetSpeed, speedFixed = true;
         setup(81, true);
         assertEquals(864, testScrollingBackground.getY1());
         assertEquals(864, testScrollingBackground.getY2());
-
+        
         // speed < targetSpeed, speedFixed = false;
         setup(0, false);
         assertEquals(664, testScrollingBackground.getY1());
@@ -65,22 +63,21 @@ public class ScrollingBackgroundTest {
     }
 
     @Test
-    public void testResize() {
+    public void testResize(){
         testScrollingBackground.resize(2048, 200);
         assertEquals(2, testScrollingBackground.getImageScale());
     }
-
+    
     /**
      * Setup method for testing UpdateAndRender
-     * 
-     * @param speed
+     * @param speed 
      * @param speedFixed
      */
-    void setup(int speed, boolean speedFixed) {
+    void setup(int speed, boolean speedFixed){
         testScrollingBackground.setSpeed(speed);
         testScrollingBackground.setSpeedFixed(speedFixed);
         testScrollingBackground.setY1(0);
         testScrollingBackground.setY2(1024);
         testScrollingBackground.updateAndRender(2f, mockBatch);
-    }
+        }
 }
