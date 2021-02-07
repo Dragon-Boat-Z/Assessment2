@@ -1,23 +1,22 @@
 package com.hardgforgif.dragonboatracing.tests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
-import com.hardgforgif.dragonboatracing.core.Lane;
-import com.hardgforgif.dragonboatracing.core.Player;
-
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import com.hardgforgif.dragonboatracing.core.*;
 import org.mockito.Mockito;
+import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.math.Vector2;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(GdxTestRunner.class)
 public class PlayerTest {
-
+    
     Lane mockLane;
     Player testPlayer;
 
@@ -29,16 +28,16 @@ public class PlayerTest {
     float rightTurningAngle = 90f;
     float leftTurningAngle = -90f;
     boolean keysPressed[];
-    boolean[] turnRight = new boolean[] { false, true, false, false };
-    boolean[] turnLeft = new boolean[] { false, false, false, true };
-    boolean[] moveUp = new boolean[] { true, false, false, false };
-    boolean[] moveDown = new boolean[] { false, false, true, false };
-    boolean[] noMovement = new boolean[] { false, false, false, false };
+    boolean[] turnRight = new boolean[]{false, true, false, false};
+    boolean[] turnLeft = new boolean[]{false, false, false, true};
+    boolean[] moveUp = new boolean[]{true, false, false, false};
+    boolean[] moveDown = new boolean[]{false,false,true,false};
+    boolean[] noMovement = new boolean[]{false,false,false,false};
+
 
     @Before
-    public void init() {
-        // Mock the opengl classes using mockito so that libgdx opengl functions can be
-        // used
+    public void init(){
+        //Mock the opengl classes using mockito so that libgdx opengl functions can be used
         Gdx.gl20 = Mockito.mock(GL20.class);
         Gdx.gl30 = Mockito.mock(GL30.class);
 
@@ -51,7 +50,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void testPlayerConstructor() {
+    public void testPlayerConstructor(){
         assertEquals(robustness, testPlayer.getRobustness());
         assertEquals(speed, testPlayer.getSpeed());
         assertEquals(acceleration, testPlayer.getAcceleration());
@@ -61,76 +60,75 @@ public class PlayerTest {
     }
 
     @Test
-    // Struggling to pass through the keys pressed to the instance method
-    // updatePlayer
-    public void testPlayerUpdatePlayerTurning() {
-        // TEST ROTATEBOAT
-        // right
+    //Struggling to pass through the keys pressed to the instance method updatePlayer
+    public void testPlayerUpdatePlayerTurning(){
+        //TEST ROTATEBOAT
+        //right
         testPlayer.updatePlayer(turnRight, 2f);
         assertEquals(rightTurningAngle, testPlayer.getTargetAngle());
-        // left
+        //left
         testPlayer.updatePlayer(turnLeft, 2f);
         assertEquals(leftTurningAngle, testPlayer.getTargetAngle());
-        // nothing
-        testPlayer.updatePlayer(noMovement, 2f);
+        //nothing
+        testPlayer.updatePlayer(noMovement,2f);
         assertEquals(0f, testPlayer.getTargetAngle());
     }
 
     @Test
-    public void testPlayerUpdatePlayerMove() {
-        float speedChange = 0.15f * ((acceleration * 0.8f) / 90) * (120f / 100);
+    public void testPlayerUpdatePlayerMove(){
+        float speedChange = 0.15f * ((acceleration * 0.8f)/90)  * (120f / 100);
         float expectedSpeed;
         float actualSpeed;
 
-        // up
+        //up
         testPlayer.updatePlayer(moveUp, 1f);
         expectedSpeed = (float) Math.round((20f + speedChange) * 10) / 10;
         actualSpeed = (float) Math.round(testPlayer.getCurrentSpeed() * 10) / 10;
         assertEquals(expectedSpeed, actualSpeed);
         assertEquals(2, 2);
-        // down
+        //down
         testPlayer.updatePlayer(moveDown, 1f);
         testPlayer.updatePlayer(moveDown, 1f);
         expectedSpeed = (float) Math.round((20f - speedChange) * 10) / 10;
         actualSpeed = (float) Math.round(testPlayer.getCurrentSpeed() * 10) / 10;
         assertEquals(expectedSpeed, actualSpeed);
-        // nothing
-        testPlayer.updatePlayer(noMovement, 1f);
+        //nothing
+        testPlayer.updatePlayer(noMovement,1f);
         actualSpeed = (float) Math.round(testPlayer.getCurrentSpeed() * 10) / 10;
         assertEquals(expectedSpeed, actualSpeed);
     }
 
     @Test
-    public void testPlayerUpdatePlayerSpriteRotation() {
+    public void testPlayerUpdatePlayerSpriteRotation(){
         float spriteRotation;
 
-        // set boat to aim ahead and reset stamina
+        //set boat to aim ahead and reset stamina
         testPlayer.rotateBoat(0f);
         testPlayer.getBoatSprite().setRotation(0f);
         testPlayer.setStamina(120f);
 
-        // up
+        //up
         testPlayer.updatePlayer(moveUp, 1f);
         spriteRotation = testPlayer.getBoatSprite().getRotation();
         assertEquals(0f, spriteRotation);
-
-        // down
+        
+        //down
         testPlayer.updatePlayer(moveDown, 1f);
         spriteRotation = testPlayer.getBoatSprite().getRotation();
         assertEquals(0f, spriteRotation);
 
-        // nothing
+        //nothing
         testPlayer.updatePlayer(noMovement, 1f);
         spriteRotation = testPlayer.getBoatSprite().getRotation();
         assertEquals(0f, spriteRotation);
 
-        // left
+        //left
         testPlayer.setStamina(120f);
         testPlayer.updatePlayer(turnLeft, 1f);
         spriteRotation = testPlayer.getBoatSprite().getRotation();
         assertEquals(-0.4714285731315613, spriteRotation);
 
-        // right
+        //right
         testPlayer.rotateBoat(0f);
         testPlayer.getBoatSprite().setRotation(0f);
         testPlayer.setStamina(120f);
@@ -140,47 +138,47 @@ public class PlayerTest {
     }
 
     @Test
-    public void testPlayerUpdatePlayerStamina() {
-        // testPlayer.setStamina(120f); //reset stamina
+    public void testPlayerUpdatePlayerStamina(){
+        //testPlayer.setStamina(120f); //reset stamina
         float initialStamina;
         float newStamina;
-        // up
+        //up
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(moveUp, 2f);
         newStamina = testPlayer.getStamina();
         assertEquals(initialStamina - 8, newStamina);
 
-        // up - different delta
+        //up - different delta
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(moveUp, 5f);
         newStamina = testPlayer.getStamina();
         assertEquals(initialStamina - 20, newStamina);
 
-        // left
+        //left
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(turnLeft, 3f);
         newStamina = testPlayer.getStamina();
         assertEquals(initialStamina - 12, newStamina);
 
-        // right
+        //right
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(turnRight, 4f);
         newStamina = testPlayer.getStamina();
         assertEquals(initialStamina - 16, newStamina);
 
-        // down
+        //down
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(moveDown, 6f);
         newStamina = testPlayer.getStamina();
         assertEquals(initialStamina + 18, newStamina);
 
-        // nothing
+        //nothing
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(noMovement, 8f);
         newStamina = testPlayer.getStamina();
         assertEquals(initialStamina + 16, newStamina);
 
-        // stamina below 30
+        //stamina below 30
         testPlayer.setStamina(25f);
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(moveUp, 2f);

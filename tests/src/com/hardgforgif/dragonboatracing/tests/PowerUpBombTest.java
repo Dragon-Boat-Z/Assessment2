@@ -1,5 +1,7 @@
 package com.hardgforgif.dragonboatracing.tests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
@@ -11,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+
 
 @RunWith(GdxTestRunner.class)
 public class PowerUpBombTest {
@@ -32,7 +35,7 @@ public class PowerUpBombTest {
     }
 
     @Test
-    public void testApplyPowerUpBomb() {
+    public void testApplyPowerUpBomb(){
         // do some testing
     }
 }
