@@ -25,13 +25,24 @@ public class BoatTest {
     World mockWorld;
     Boat testBoat;
 
+    float robustness = 120f;
+    float speed = 90f;
+    float acceleration = 100f;
+    float maneuverability = 110f;
+    int boatType = 3;
+
     @Before
     public void init(){
         //Mock the opengl classes using mockito so that libgdx opengl functions can be used
         Gdx.gl20 = Mockito.mock(GL20.class);
         Gdx.gl30 = Mockito.mock(GL30.class);
 
-        testBoat = new Boat(120f, 90f, 100f, 110f, 3, mockLane);
+        mockLane = Mockito.mock(Lane.class);
+        World world;
+        world = new World(new Vector2(0f, 0f), true);
+
+        testBoat = new Boat(robustness, speed, acceleration, maneuverability, boatType, mockLane);
+        testBoat.createBoatBody(world, 100f, 120f, "Boat1.json");
     }
 
     @Test
@@ -44,7 +55,6 @@ public class BoatTest {
         assertEquals(mockLane, testBoat.getLane());
     }
 
-    /**
     @Test
     public void testCreateBoatBody(){
         assertEquals(0.325f, testBoat.getBoatSprite().getScaleX());
@@ -177,5 +187,4 @@ public class BoatTest {
         testBoat.rotateBoat(-90f);
         assertEquals(-0.008227981f, testBoat.getBoatBody().getAngle());
     }
-     */
 }
