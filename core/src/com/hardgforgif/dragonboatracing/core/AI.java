@@ -210,8 +210,8 @@ public class AI extends Boat{
         }
         else {
             // 'hold S'
-            isBraking = true;
             isAccelerating = false;
+            isBraking = true;
             moveBoat(-1);
         }
 
@@ -266,7 +266,9 @@ public class AI extends Boat{
         return this.objectChecker;
     }
 
-    public boolean getIsDodging(){
-        return this.isDodging;
-    }
+    public boolean getIsDodging(){ return this.isDodging; }
+
+    public boolean getIsBraking(){ return this.isBraking; }
+
+    public boolean getIsAccelerating(){ return  this.isAccelerating; }
 }

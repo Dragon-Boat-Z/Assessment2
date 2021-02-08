@@ -17,6 +17,7 @@ import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(GdxTestRunner.class)
 public class AITest {
@@ -67,7 +68,28 @@ public class AITest {
         testAI.updateAI(2f);
         assertEquals(new Vector2(10000f,12493.6f), testAI.getLaneChecker());
         assertEquals(new Vector2(10000f,12393.6f), testAI.getObjectChecker());
-        assertFalse(testAI.getIsDodging());
+        assertFalse(testAI.getIsDodging()); 
+    }
+
+    @Test
+    public void testUpdateAIMovement(){
+        // test when stamina is above 50
+        testAI.setStamina(51);
+        testAI.updateAI(2f);
+        assertTrue(testAI.getIsAccelerating());
+        assertFalse(testAI.getIsBraking());
+        
+        // test when stamina is above 30
+        testAI.setStamina(31);
+        testAI.updateAI(2f);
+        assertFalse(testAI.getIsAccelerating());
+        assertFalse(testAI.getIsBraking());
+        
+        // test when stamina is below 30
+        testAI.setStamina(29);
+        testAI.updateAI(2f);
+        assertFalse(testAI.getIsAccelerating());
+        assertTrue(testAI.getIsBraking());
     }
 
     private void setupMockLane(){
