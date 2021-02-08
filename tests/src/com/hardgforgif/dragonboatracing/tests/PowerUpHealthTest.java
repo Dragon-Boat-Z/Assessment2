@@ -47,6 +47,11 @@ public class PowerUpHealthTest {
     }
 
     @Test
+    public void testIsPowerUp(){
+        assertEquals(true, testPowerUp.isPowerUp());
+    }
+    
+    @Test
     public void testApplyPowerUpHealth(){
         // test for when boat has lost health
         // set testBoat robustness to half

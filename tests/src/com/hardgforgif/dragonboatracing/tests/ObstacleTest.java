@@ -47,6 +47,11 @@ public class ObstacleTest {
         assertEquals(0, testObstacle.getY());
         assertFalse(testObstacle.isPowerUp());
     }
+    
+    @Test
+    public void testIsPowerUp(){
+        assertEquals(false, testObstacle.isPowerUp());
+    }
 
     @Test
     public void testObstacleConstructorSetPositions(){

@@ -37,6 +37,11 @@ public class PowerUpBombTest {
     }
 
     @Test
+    public void testIsPowerUp(){
+        assertEquals(true, testPowerUp.isPowerUp());
+    }
+    
+    @Test
     public void testPowerUpBombConstructor(){
         Texture texture = testPowerUp.getObstacleTexture();
         assertEquals("PowerUps/ObstacleClearer.png", texture.toString());
