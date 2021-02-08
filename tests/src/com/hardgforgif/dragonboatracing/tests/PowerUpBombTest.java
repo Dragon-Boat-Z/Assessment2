@@ -35,11 +35,6 @@ public class PowerUpBombTest {
         testBoat = new Boat(120, 110, 100, 80, 0, mockLane);
         testPowerUp = new PowerUpBomb();
     }
-
-    @Test
-    public void testIsPowerUp(){
-        assertEquals(true, testPowerUp.isPowerUp());
-    }
     
     @Test
     public void testPowerUpBombConstructor(){

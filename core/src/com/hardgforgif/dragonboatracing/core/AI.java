@@ -269,4 +269,9 @@ public class AI extends Boat{
     public boolean getIsDodging(){
         return this.isDodging;
     }
+
+    //setters
+    public void setIsDodging(boolean isDodging){
+        this.isDodging = isDodging;
+    }
 }
