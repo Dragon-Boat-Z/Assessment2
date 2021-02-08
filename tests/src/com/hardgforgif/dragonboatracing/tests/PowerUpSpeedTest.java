@@ -55,7 +55,7 @@ public class PowerUpSpeedTest {
         testBoat.setCurrentSpeed(110);
         testPowerUp.applyPowerUp(testBoat);
         assertEquals(165, testBoat.getCurrentSpeed());
-        assertEquals(1.5f, testBoat.getPowerUpTimer());
+        assertEquals(2f, testBoat.getPowerUpTimer());
 
         testBoat.setPowerUpTimer(8);
         testBoat.setCurrentSpeed(50);

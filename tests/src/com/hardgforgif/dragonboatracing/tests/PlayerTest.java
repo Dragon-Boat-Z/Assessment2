@@ -158,13 +158,13 @@ public class PlayerTest {
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(turnLeft, 3f);
         newStamina = testPlayer.getStamina();
-        assertEquals(initialStamina - 12, newStamina);
+        assertEquals(initialStamina, newStamina);
 
         //right
         initialStamina = testPlayer.getStamina();
         testPlayer.updatePlayer(turnRight, 4f);
         newStamina = testPlayer.getStamina();
-        assertEquals(initialStamina - 16, newStamina);
+        assertEquals(initialStamina, newStamina);
 
         //down
         initialStamina = testPlayer.getStamina();
@@ -178,11 +178,10 @@ public class PlayerTest {
         newStamina = testPlayer.getStamina();
         assertEquals(initialStamina + 16, newStamina);
 
-        //stamina below 30
-        testPlayer.setStamina(25f);
-        initialStamina = testPlayer.getStamina();
+        //stamina at zero
+        testPlayer.setStamina(0f);
         testPlayer.updatePlayer(moveUp, 2f);
         newStamina = testPlayer.getStamina();
-        assertEquals(initialStamina, newStamina);
+        assertEquals(0, newStamina);
     }
 }
