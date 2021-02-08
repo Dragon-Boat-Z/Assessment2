@@ -1,10 +1,12 @@
 package com.hardgforgif.dragonboatracing.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.Texture;
 import com.hardgforgif.dragonboatracing.core.Boat;
 import com.hardgforgif.dragonboatracing.core.Lane;
 import com.hardgforgif.dragonboatracing.core.PowerUpSpeed;
@@ -35,6 +37,15 @@ public class PowerUpSpeedTest {
         testPowerUp = new PowerUpSpeed();
     }
 
+    @Test
+    public void testPowerUpSpeedConstructor(){
+        Texture texture = testPowerUp.getObstacleTexture();
+        assertEquals("PowerUps/SpeedBoost.png", texture.toString());
+        assertEquals(0, testPowerUp.getX());
+        assertEquals(0, testPowerUp.getY());
+        assertTrue(testPowerUp.isPowerUp());
+    }
+    
     @Test
     public void testApplyPowerUpSpeed(){
         testBoat.setCurrentSpeed(50);
