@@ -44,9 +44,4 @@ public class PowerUpBombTest {
         assertEquals(0, testPowerUp.getY());
         assertTrue(testPowerUp.isPowerUp());
     }
-
-    @Test
-    public void testApplyPowerUpBomb(){
-        // do some testing
-    }
 }
