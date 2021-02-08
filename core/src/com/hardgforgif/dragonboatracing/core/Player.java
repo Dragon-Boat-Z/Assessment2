@@ -57,6 +57,13 @@ public class Player extends Boat{
 
     }
 
+    /**
+     * Custom deserializer for Boat class.
+     * @param obj JsonObject describing a Boat instance.
+     * @param map Map needed for lanes.
+     * @param world World needed to create a boat body.
+     * @return Player instance.
+     */
     public static Player from_json(JsonObject obj, Map map, World world) {
         // First initialise the boat with it's stats.
         Player b = new Player(obj.get("robustness").getAsFloat(), obj.get("speed").getAsFloat(),

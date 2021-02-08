@@ -603,8 +603,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		if (keycode == Input.Keys.D)
 			pressedKeys[3] = true;
         if (keycode == Input.Keys.ESCAPE) {
-            //System.out.println("Previous: " + GameData.previousState.getClass().getSimpleName() + "\nCurrent: " + GameData.currentUI.getClass().getSimpleName());
-
             // Logic for which screen to pause to and from.
             // If currently in pause screen.
             if (GameData.pauseState) {
@@ -648,13 +646,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
                     if (GameData.showResultsState) {
                         GameData.showResultsState = false;
                     }
+                    // If currently in save screen.
                     if (GameData.saveState) {
                         GameData.saveState = false;
                     }
                     GameData.currentUI = new PauseUI();
                 }
             }
-
         }
 		return true;
 	}
