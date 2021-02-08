@@ -14,8 +14,9 @@ public class PowerUpSpeed extends PowerUp {
         if(user.getPowerUpTimer() <= 0) {
             user.setCurrentSpeed(user.getCurrentSpeed() * 1.5f);
             if(user.getCurrentSpeed() > user.getSpeed()) {
+                //If the newly assigned speed exceeds this Boat type's max speed, don't cap it until 2 seconds have passed.
                 user.setSpeed(user.getCurrentSpeed());
-                user.setPowerUpTimer(1.5f);
+                user.setPowerUpTimer(2f);
             }
         }
     }

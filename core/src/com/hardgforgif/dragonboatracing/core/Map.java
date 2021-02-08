@@ -157,8 +157,8 @@ public class Map {
     }
 
     /**
-     * Creates the finish line at a fixed position
-     * @param textureFile The texture oof the finish line
+     * Creates the finish line at a fixed position.
+     * @param textureFile The texture of the finish line.
      */
     public void createFinishLine(String textureFile){
         // Create the texture and the sprite of the finish line
@@ -174,6 +174,10 @@ public class Map {
         finishLineSprite.setSize(width, 100);
     }
 
+    /**
+     * Creates the start line at a fixed position.
+     * @param textureFile The texture of the start line.
+     */
     public void createStartLine(String textureFile){
         // Create the texture and the sprite of the finish line
         startLineTexture = new Texture(textureFile);

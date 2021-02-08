@@ -40,9 +40,9 @@ public class Player extends Boat{
                 (this.getBoatBody().getPosition().y * GameData.METERS_TO_PIXELS) - this.getBoatSprite().getHeight() / 2);
 
         //Update stamina
-        if (this.getStamina() > 30f) //Did this mean it was impossible to reach <30% stamina before?
-            //stamina -= 1.5 * delta;
-            if(pressedKeys[0] || pressedKeys[1] || pressedKeys[3]) {
+        //stamina -= 1.5 * delta;
+        if(Math.round(this.getStamina()) >= 0) {
+            if(pressedKeys[0]) {
                 //Holding W, A, or D.
                 this.setStamina(this.getStamina() - 4 * delta);
             }
@@ -50,10 +50,13 @@ public class Player extends Boat{
                 //Holding S.
                 this.setStamina(this.getStamina() + 3 * delta);
             }
+            else if(pressedKeys[1] || pressedKeys[3]) {
+                //Turning left or right should leave stamina as is.
+            }
             else {
                 //Not pressing any buttons.
                 this.setStamina(this.getStamina() + 2 * delta);
-            }
+            }}
 
     }
 

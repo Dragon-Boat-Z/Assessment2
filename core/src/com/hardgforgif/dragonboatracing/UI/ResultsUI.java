@@ -40,9 +40,9 @@ public class ResultsUI extends UI{
         // Give the position of all the entries in the result table
         for (int i = 0; i < entrySprites.length; i++){
             entrySprites[i] = new Sprite(entryTexture);
-            entrySprites[i].setSize(Gdx.graphics.getWidth() - 500,100);
+            entrySprites[i].setSize(Gdx.graphics.getWidth() - 500,60);
             entrySprites[i].setPosition(250,
-                    Gdx.graphics.getHeight() - 150 - (i * 60));
+                    Gdx.graphics.getHeight() - 180 - (i * 60));
 
             resultFonts[i] = new BitmapFont();
             resultFonts[i].getData().setScale(1.2f);
@@ -54,7 +54,7 @@ public class ResultsUI extends UI{
     @Override
     public void drawUI(Batch batch, Vector2 mousePos, float screenWidth, float delta) {
         batch.begin();
-        titleFont.draw(batch, "Results", 200 + (Gdx.graphics.getWidth() - 100) / 2 - 30,
+        titleFont.draw(batch, "Results",(Gdx.graphics.getWidth()) / 2 - 30,
                 Gdx.graphics.getHeight() - 100);
 
         // Sort the currently available results in ascending order
@@ -105,6 +105,11 @@ public class ResultsUI extends UI{
 
         }
         timerFont.draw(batch, String.valueOf(Math.round(GameData.currentTimer * 10.0) / 10.0), 10, 700);
+
+        if(GameData.results.size() == GameData.numberOfBoats) {
+            titleFont.draw(batch, "Click to progress to the next leg.", 180, 100);
+        }
+
         batch.end();
 
         playMusic();

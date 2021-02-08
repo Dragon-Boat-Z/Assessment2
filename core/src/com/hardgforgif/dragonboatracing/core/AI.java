@@ -215,12 +215,10 @@ public class AI extends Boat{
             moveBoat(-1);
         }
 
-        //if (stamina > 30f)
-            //stamina -= 1.5 * delta;
         //Update stamina
-        if (this.getStamina() > 30f) //Did this mean it was impossible to reach <30% stamina before?
-            //stamina -= 1.5 * delta;
-            if(isDodging || isAccelerating) {
+        //stamina -= 1.5 * delta;
+        if(this.getStamina() >= 0f) {
+            if(isAccelerating) {
                 //AI is turning. Should also include accelerating!
                 this.setStamina(this.getStamina() - 4 * delta);
             }
@@ -228,11 +226,13 @@ public class AI extends Boat{
                 //AI is braking.
                 this.setStamina(this.getStamina() + 3 * delta);
             }
+            else if(isDodging) {
+                //Turning left or right should leave stamina as is.
+            }
             else {
                 //Not accelerating or braking.
                 this.setStamina(this.getStamina() + 2 * delta);
-            }
-        
+            }}
     }
 
     /**
