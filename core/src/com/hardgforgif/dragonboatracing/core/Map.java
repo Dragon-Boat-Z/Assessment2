@@ -188,6 +188,10 @@ public class Map {
         startLineSprite.setSize(width, 100);
     }
 
+    /**
+     * Custom Json serializer for Map class, implementing the Gson library.
+     * @returns JsonObject which contains a JsonArray for each Lane containing all the Obstacles in that Lane.
+     */
     public static class MapSerializer implements JsonSerializer<Map> {
         public JsonElement serialize(Map aMap, Type type, JsonSerializationContext jsonSerializationContext) {
             JsonObject obj = new JsonObject();

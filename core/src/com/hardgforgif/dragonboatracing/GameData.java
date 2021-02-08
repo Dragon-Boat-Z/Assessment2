@@ -53,7 +53,7 @@ public class GameData {
         {90, 100, 100, 130},
         {65, 120, 90, 65},
         {100, 110, 100, 110},
-        {150, 125, 90, 55},
+        {140, 125, 90, 55},
         {90, 100, 120, 90}
     };
 
@@ -107,11 +107,17 @@ public class GameData {
     //Difficulty selected start.
     public static int difficultySelected = 0;
 
+    /**
+     * Save function using custom serializers to save a game state.
+     * @param saveSlot slot 1-3 which the user wants to save the game into.
+     * @param map Map instance used to serialize the objects
+     * @return
+     * @throws IOException
+     */
     public static boolean saveGame(int saveSlot, Map map) throws IOException {
         // Create gson builder for converting from Java objects to Json format.
         GsonBuilder gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setLenient().setPrettyPrinting();
         // Allocate custom serializers for Lane, Boat and Obstacle classes.
-        gson.registerTypeAdapter(Lane.class, new Lane.LaneSerializer());
         gson.registerTypeAdapter(Boat.class, new Boat.BoatSerializer());
         gson.registerTypeAdapter(Map.class, new Map.MapSerializer());
 

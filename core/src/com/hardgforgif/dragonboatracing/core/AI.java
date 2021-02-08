@@ -235,6 +235,13 @@ public class AI extends Boat{
         
     }
 
+    /**
+     * Custom deserializer for AI class.
+     * @param obj JsonObject representing a Boat instance.
+     * @param map Map needed to get the lane.
+     * @param world needed to create the boat body.
+     * @return AI instance.
+     */
     public static AI from_json(JsonObject obj, Map map, World world) {
         // First initialise the boat with it's stats.
         AI b = new AI(obj.get("robustness").getAsFloat(), obj.get("speed").getAsFloat(),

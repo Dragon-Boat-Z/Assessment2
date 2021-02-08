@@ -66,6 +66,11 @@ public class Lane {
         }
     }
 
+    /**
+     * Gets left and right boundary of the map at a given y-position
+     * @param yPosition Y-position we want the boundaries of.
+     * @return float[] [x1,x2] where x1 is the left boundary and x2 is the right boundary.
+     */
     public float[] getLimitsAt(float yPosition){
         float[] lst = new float[2];
         int i;
@@ -102,7 +107,7 @@ public class Lane {
             //obstacles[i] = new Obstacle("Obstacles/Obstacle" + (randomIndex + 1) + ".png");
             //obstacles[i].setObstacleType(randomIndex+1);
 
-            float powerupDropChance = 0.5f;
+            float powerupDropChance = 0.2f - (0.05f * GameData.difficultySelected);
             String filePath = "";
             float scale = 0f;
             if(new Random().nextFloat() <= powerupDropChance) {
@@ -158,6 +163,12 @@ public class Lane {
         }
     }
 
+    /**
+     * Spawn obstacles on the lane, from a JsonArray
+     * @param world World to spawn obstacles in
+     * @param mapHeight Height of the map to draw on
+     * @param obstArray JsonArray containing every obstacle in every lane in the world
+     */
     public void spawnObstacles(World world, float mapHeight, JsonArray obstArray){
         int nrObstacles = obstArray.size();
         float scale, xPos, yPos;
@@ -205,16 +216,6 @@ public class Lane {
                 xPos = obj.get("x_position").getAsFloat();
                 obstacles[i].createObstacleBody(world, xPos / GameData.METERS_TO_PIXELS, yPos / GameData.METERS_TO_PIXELS, filepath + ".json", scale);
             }
-        }
-    }
-
-    /**
-     * JSON Serializer for Lane, will just return laneNo (0-6)
-     * @return laneNo in JSON form.
-     */
-    public static class LaneSerializer implements JsonSerializer<Lane> {
-        public JsonElement serialize(Lane aLane, Type type, JsonSerializationContext jsonSerializationContext) {
-            return new JsonPrimitive(aLane.laneNo);
         }
     }
 

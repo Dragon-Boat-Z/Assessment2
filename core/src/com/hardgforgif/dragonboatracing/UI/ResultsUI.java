@@ -14,8 +14,6 @@ import com.hardgforgif.dragonboatracing.core.Player;
 import java.util.Comparator;
 
 public class ResultsUI extends UI{
-    private Texture background;
-    private Sprite backgroundSprite;
     private Texture entryTexture;
     private Sprite[] entrySprites;
     private BitmapFont[] resultFonts;
@@ -37,19 +35,14 @@ public class ResultsUI extends UI{
         timerFont.getData().setScale(1.4f);
         timerFont.setColor(Color.BLACK);
 
-        background = new Texture(Gdx.files.internal("Background.png"));
-        backgroundSprite = new Sprite(background);
-        backgroundSprite.setPosition(200,150);
-        backgroundSprite.setSize(Gdx.graphics.getWidth() - 400,Gdx.graphics.getHeight() - 300);
-
         entryTexture = new Texture(Gdx.files.internal("Background.png"));
 
         // Give the position of all the entries in the result table
         for (int i = 0; i < entrySprites.length; i++){
             entrySprites[i] = new Sprite(entryTexture);
-            entrySprites[i].setSize(backgroundSprite.getWidth() - 100,50);
-            entrySprites[i].setPosition(backgroundSprite.getX() + 50,
-                    backgroundSprite.getY() + backgroundSprite.getHeight() - 200 - (i * 60));
+            entrySprites[i].setSize(Gdx.graphics.getWidth() - 500,100);
+            entrySprites[i].setPosition(250,
+                    Gdx.graphics.getHeight() - 150 - (i * 60));
 
             resultFonts[i] = new BitmapFont();
             resultFonts[i].getData().setScale(1.2f);
@@ -61,9 +54,8 @@ public class ResultsUI extends UI{
     @Override
     public void drawUI(Batch batch, Vector2 mousePos, float screenWidth, float delta) {
         batch.begin();
-        backgroundSprite.draw(batch);
-        titleFont.draw(batch, "Results", backgroundSprite.getX() + backgroundSprite.getWidth() / 2 - 30,
-                backgroundSprite.getY() + backgroundSprite.getHeight() - 50);
+        titleFont.draw(batch, "Results", 200 + (Gdx.graphics.getWidth() - 100) / 2 - 30,
+                Gdx.graphics.getHeight() - 100);
 
         // Sort the currently available results in ascending order
         GameData.results.sort(new Comparator<Float[]>() {
@@ -145,13 +137,6 @@ public class ResultsUI extends UI{
     }
 
     //getters
-    public Texture getBackground(){
-        return this.background;
-    }
-
-    public Sprite getBackgroundSprite(){
-        return this.backgroundSprite;
-    }
 
     public Texture getEntryTexture(){
         return this.entryTexture;
