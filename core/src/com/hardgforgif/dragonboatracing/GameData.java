@@ -102,7 +102,7 @@ public class GameData {
     public static float currentTimer = 0f;
 
     // Difficulty constants for the AI
-    public static float[] difficulty = new float[]{0.92f, 0.97f, 1f};
+    public static float[] difficulty = new float[]{0.92f, 0.94f, 0.97f, 1};
 
     //Difficulty selected start.
     public static int difficultySelected = 0;

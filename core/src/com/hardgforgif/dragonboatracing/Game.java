@@ -555,6 +555,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			clickPosition.set(0f,0f);
 	}
 
+    /**
+     * Reset game state and all variables. Create new map and nullify player and opponents.
+     */
 	public static void resetGame() {
         camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
         camera.update();
