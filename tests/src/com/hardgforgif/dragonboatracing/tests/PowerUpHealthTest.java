@@ -45,11 +45,6 @@ public class PowerUpHealthTest {
         assertEquals(0, testPowerUp.getY());
         assertTrue(testPowerUp.isPowerUp());
     }
-
-    @Test
-    public void testIsPowerUp(){
-        assertEquals(true, testPowerUp.isPowerUp());
-    }
     
     @Test
     public void testApplyPowerUpHealth(){

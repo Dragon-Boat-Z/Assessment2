@@ -47,11 +47,6 @@ public class PowerUpSpeedTest {
     }
     
     @Test
-    public void testIsPowerUp(){
-        assertEquals(true, testPowerUp.isPowerUp());
-    }
-    
-    @Test
     public void testApplyPowerUpSpeed(){
         testBoat.setCurrentSpeed(50);
         testPowerUp.applyPowerUp(testBoat);

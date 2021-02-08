@@ -266,9 +266,20 @@ public class AI extends Boat{
         return this.objectChecker;
     }
 
-    public boolean getIsDodging(){ return this.isDodging; }
+    public boolean getIsDodging(){ 
+        return this.isDodging; 
+    }
 
-    public boolean getIsBraking(){ return this.isBraking; }
+    public boolean getIsBraking(){ 
+        return this.isBraking; 
+    }
 
-    public boolean getIsAccelerating(){ return  this.isAccelerating; }
+    public boolean getIsAccelerating(){ 
+        return this.isAccelerating; 
+    }
+
+    //setters
+    public void setIsDodging(boolean isDodging){
+        this.isDodging = isDodging;
+    }
 }
