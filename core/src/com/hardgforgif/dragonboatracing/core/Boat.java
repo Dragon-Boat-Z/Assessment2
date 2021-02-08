@@ -132,6 +132,11 @@ public class Boat {
         rightLimit = lane.getRightBoundary()[i - 1][1];
     }
 
+    /**
+     * Gets left and right boundary of the lane at a given y-position
+     * @param yPosition Y-position we want the boundaries of.
+     * @return float[] [x1,x2] where x1 is the left boundary and x2 is the right boundary.
+     */
     public float[] getLimitsAt(float yPosition){
         float[] lst = new float[2];
         int i;
@@ -214,22 +219,30 @@ public class Boat {
         Vector2 target = new Vector2();
 
         // Calculate the x and y positions of the direction vector, based on the rotation of the boat
-        double auxAngle = boatSprite.getRotation() % 90;
-        if (boatSprite.getRotation() < 90 || boatSprite.getRotation() >= 180 && boatSprite.getRotation() < 270)
+        double auxAngle = boatSprite.getRotation() % 90.01;
+        if (boatSprite.getRotation() < 90 || boatSprite.getRotation() > 180 && boatSprite.getRotation() < 270)
             auxAngle = 90 - auxAngle;
         auxAngle = auxAngle * MathUtils.degRad;
         float x = (float) (Math.cos(auxAngle) * speed);
         float y = (float) (Math.sin(auxAngle) * speed);
 
         // Build the direction vector based on the position of the player's head
-        if (boatSprite.getRotation() < 90)
+        if(this.boatType == 0) {
+            System.out.println(boatSprite.getRotation());
+        }
+
+        if (boatSprite.getRotation() == -90f) {
+            target.set(boatHeadPos.x - x, boatHeadPos.y);
+        }
+        else if (boatSprite.getRotation() == 90f) {
+            target.set(boatHeadPos.x + x, boatHeadPos.y);
+        }
+        else if (boatSprite.getRotation() < 90) {
             target.set(boatHeadPos.x - x, boatHeadPos.y + y);
-        else if (boatSprite.getRotation() < 180)
-            target.set(boatHeadPos.x - x, boatHeadPos.y - y);
-        else if (boatSprite.getRotation() < 270)
-            target.set(boatHeadPos.x + x, boatHeadPos.y - y);
-        else
+        }
+        else {
             target.set(boatHeadPos.x + x, boatHeadPos.y + y);
+        }
 
         Vector2 direction = new Vector2();
         Vector2 velocity = new Vector2();

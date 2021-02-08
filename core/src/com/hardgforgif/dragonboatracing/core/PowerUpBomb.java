@@ -7,6 +7,10 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 public class PowerUpBomb extends PowerUp {
 
+    /**
+     * *** NOT FULLY FUNCTIONAL ***
+     */
+
     public PowerUpBomb() {
         super("PowerUps/ObstacleClearer.png");
         setObstacleType(7);

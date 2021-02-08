@@ -23,7 +23,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	private static Map[] map;
 	private Batch batch;
 	private Batch UIbatch;
-	private OrthographicCamera camera;
+	private static OrthographicCamera camera;
 	private static World[] world;
 
 
@@ -32,8 +32,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	private boolean[] pressedKeys = new boolean[4]; // W, A, S, D buttons status
 
 	private static ArrayList<Body> toBeRemovedBodies = new ArrayList<>();
-	private ArrayList<Body> toUpdateHealth = new ArrayList<>();
-	private ArrayList<Body[]> toApplyPowerUps = new ArrayList<>();
+	private static ArrayList<Body> toUpdateHealth = new ArrayList<>();
+	private static ArrayList<Body[]> toApplyPowerUps = new ArrayList<>();
 
 
 	@Override
@@ -91,7 +91,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	 * This method creates new ContactListener who's methods are executed when objects collide
 	 * @param world This is the physics world in which the collisions happen
 	 */
-	private void createContactListener(World world){
+	private static void createContactListener(World world){
 
 		world.setContactListener(new ContactListener() {
 			@Override
@@ -542,39 +542,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			}
 			// Otherwise we're coming from the endgame screen so we need to return to the main menu
 			else{
-				camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-				camera.update();
-				// Reset everything for the next game
-				world = new World[GameData.numberOfLegs];
-				map = new Map[GameData.numberOfLegs];
-				for (int i = 0; i < GameData.numberOfLegs; i++){
-					// Initialize the physics game World
-					world[i] = new World(new Vector2(0f, 0f), true);
-
-					// Initialize the map
-					map[i] = new Map("Map1/Map2.tmx", Gdx.graphics.getWidth());
-
-					// Calculate the ratio between pixels, meters and tiles
-					GameData.TILES_TO_METERS = map[i].getTilesToMetersRatio();
-					GameData.PIXELS_TO_TILES = 1/(GameData.METERS_TO_PIXELS * GameData.TILES_TO_METERS);
-
-					// Create the collision with the land
-					map[i].createMapCollisions("CollisionLayerLeft", world[i]);
-					map[i].createMapCollisions("CollisionLayerRight", world[i]);
-
-					// Create the lanes, and the obstacles in the physics game world
-					map[i].createLanes(world[i], 30 + (i * 5) + (GameData.difficultySelected * 5));
-
-					// Create the finish line
-					map[i].createFinishLine("finishLine.png");
-
-					// Create the start line
-					map[i].createStartLine("finishLine.png");
-
-					// Create a new collision handler for the world
-					createContactListener(world[i]);
-				}
-				GameData.currentLeg = 0;
+				resetGame();
 				GameData.mainMenuState = true;
 				GameData.currentUI = new MenuUI();
 			}
@@ -587,7 +555,47 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 			clickPosition.set(0f,0f);
 	}
 
+	public static void resetGame() {
+        camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+        camera.update();
+        // Reset everything for the next game
+        world = new World[GameData.numberOfLegs];
+        map = new Map[GameData.numberOfLegs];
+        for (int i = 0; i < GameData.numberOfLegs; i++){
+            // Initialize the physics game World
+            world[i] = new World(new Vector2(0f, 0f), true);
 
+            // Initialize the map
+            map[i] = new Map("Map1/Map2.tmx", Gdx.graphics.getWidth());
+
+            // Calculate the ratio between pixels, meters and tiles
+            GameData.TILES_TO_METERS = map[i].getTilesToMetersRatio();
+            GameData.PIXELS_TO_TILES = 1/(GameData.METERS_TO_PIXELS * GameData.TILES_TO_METERS);
+
+            // Create the collision with the land
+            map[i].createMapCollisions("CollisionLayerLeft", world[i]);
+            map[i].createMapCollisions("CollisionLayerRight", world[i]);
+
+            // Create the lanes, and the obstacles in the physics game world
+            map[i].createLanes(world[i], 30 + (i * 5) + (GameData.difficultySelected * 5));
+
+            // Create the finish line
+            map[i].createFinishLine("finishLine.png");
+
+            // Create the start line
+            map[i].createStartLine("finishLine.png");
+
+            // Create a new collision handler for the world
+            createContactListener(world[i]);
+        }
+        GameData.boats = new Boat[GameData.numberOfBoats];
+        GameData.boatTypes = new int[GameData.numberOfBoats];
+        GameData.currentTimer = 0f;
+        GameData.difficultySelected = 0;
+        GameData.currentLeg = 0;
+        player = null;
+        for(AI a : opponents) a = null;
+    }
 	public void dispose() {
 		world[GameData.currentLeg].dispose();
 	}
