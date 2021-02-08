@@ -12,6 +12,8 @@ import org.mockito.Mockito;
 import com.badlogic.gdx.physics.box2d.World;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
@@ -43,6 +45,7 @@ public class ObstacleTest {
         assertEquals("Obstacles/Obstacle1.png", texture.toString());
         assertEquals(0, testObstacle.getX());
         assertEquals(0, testObstacle.getY());
+        assertFalse(testObstacle.isPowerUp());
     }
 
     @Test
@@ -51,6 +54,7 @@ public class ObstacleTest {
         assertEquals("Obstacles/Obstacle1.png", texture.toString());
         assertEquals(120, testObstacle2.getX());
         assertEquals(40, testObstacle2.getY());
+        assertFalse(testObstacle.isPowerUp());
     }
 
     @Test
