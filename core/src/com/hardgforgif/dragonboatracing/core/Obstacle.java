@@ -38,6 +38,7 @@ public class Obstacle {
      * @param posX x location of the body, in meters
      * @param posY y location of the body, in meters
      * @param bodyFile the name of the box2D editor json file for the body fixture
+     * @param scale float preserving the scale of the obstacle sprite
      */
     public void createObstacleBody(World world, float posX, float posY, String bodyFile, float scale){
         this.positionX = posX;

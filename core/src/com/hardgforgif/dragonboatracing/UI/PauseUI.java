@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.hardgforgif.dragonboatracing.Game;
 import com.hardgforgif.dragonboatracing.GameData;
 import com.hardgforgif.dragonboatracing.core.Player;
 
@@ -134,6 +135,7 @@ public class PauseUI extends UI {
             GameData.pauseState = false;
             GameData.mainMenuState = true;
             GameData.currentUI = new MenuUI();
+            Game.resetGame();
             // Change the music
             GameData.music.stop();
             GameData.music = Gdx.audio.newMusic(Gdx.files.internal("Vibing.ogg"));

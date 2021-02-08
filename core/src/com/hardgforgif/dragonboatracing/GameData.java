@@ -43,7 +43,7 @@ public class GameData {
     public static float PIXELS_TO_TILES;
   
     //Number of legs
-    public static int numberOfLegs = 3;
+    public static int numberOfLegs = 4;
 
     // Create a list of possible boat stats
     // Ordered by: robustness, speed, acceleration, maneuverability
@@ -110,9 +110,9 @@ public class GameData {
     /**
      * Save function using custom serializers to save a game state.
      * @param saveSlot slot 1-3 which the user wants to save the game into.
-     * @param map Map instance used to serialize the objects
-     * @return
-     * @throws IOException
+     * @param map Map instance used to serialize the objects.
+     * @return boolean true if save has been completed.
+     * @throws IOException when folder /save_data cannot be seen.
      */
     public static boolean saveGame(int saveSlot, Map map) throws IOException {
         // Create gson builder for converting from Java objects to Json format.
@@ -140,6 +140,13 @@ public class GameData {
         return true;
     }
 
+    /**
+     * Load function using custom deserializers to load a saved state into the game.
+     * *** NOT FULLY FUNCTIONAL ***
+     * @param saveSlot slot 1-3 which the user wants to load from.
+     * @return true if load has been completed.
+     * @throws IOException when file /save_data/save_state_(1/2/3) can't be found.
+     */
     public static boolean loadGame(int saveSlot) throws IOException {
         // Create file handler with set file path in Assessment2/save_data.
         FileHandle fileHandle = Gdx.files.internal("save_data/save_state_" + saveSlot + ".json");

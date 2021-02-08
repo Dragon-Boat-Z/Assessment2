@@ -17,6 +17,7 @@ public class PowerUpHealth extends PowerUp {
             float maxRobustness = GameData.boatsStats[type][0];
             user.setRobustness(user.getRobustness() * 1.5f);
             if(user.getRobustness() > maxRobustness) {
+                //If the newly assigned robustness exceeds this Boat type's max robustness, cap it.
                 user.setRobustness(maxRobustness);
             };
         }
