@@ -128,7 +128,7 @@ public class GameData {
         data.add("difficulty", new JsonPrimitive(GameData.difficultySelected));
 
         // Create file handler with set file path in Assessment2/save_data.
-        FileHandle fileHandle = Gdx.files.internal("save_data/save_state_" + saveSlot + ".json");
+        FileHandle fileHandle = Gdx.files.local("save_state_" + saveSlot + ".json");
         String absolutePath = fileHandle.file().getAbsolutePath();
         FileWriter writer = new FileWriter(absolutePath);
 
@@ -149,7 +149,7 @@ public class GameData {
      */
     public static boolean loadGame(int saveSlot) throws IOException {
         // Create file handler with set file path in Assessment2/save_data.
-        FileHandle fileHandle = Gdx.files.internal("save_data/save_state_" + saveSlot + ".json");
+        FileHandle fileHandle = Gdx.files.local("save_state_" + saveSlot + ".json");
         String absolutePath = fileHandle.file().getAbsolutePath();
         FileReader reader = new FileReader(absolutePath);
         JsonStreamParser streamParser = new JsonStreamParser(reader);
