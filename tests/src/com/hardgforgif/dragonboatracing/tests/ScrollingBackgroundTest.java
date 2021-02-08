@@ -39,7 +39,7 @@ public class ScrollingBackgroundTest{
         assertEquals(0, testScrollingBackground.getImageScale());
         assertEquals(true, testScrollingBackground.getSpeedFixed());
     }
-    
+  
     @Test
     public void testScrollingBackgroundUpdateAndRender(){
         // speed < targetSpeed, speedFixed = true;

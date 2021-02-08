@@ -55,20 +55,4 @@ public class Player extends Boat{
                 this.setStamina(this.getStamina() + 2 * delta);
             }
     }
-
-    public static Player from_json(JsonObject obj, Map map, World world) {
-        // First initialise the boat with it's stats.
-        Player b = new Player(obj.get("robustness").getAsFloat(), obj.get("speed").getAsFloat(),
-                obj.get("acceleration").getAsFloat(), obj.get("maneuverability").getAsFloat(),
-                obj.get("boat_type").getAsInt(), map.getLanes()[obj.get("lane").getAsInt()]);
-
-        // Then update the in play variables of that boat from the save-state.
-        b.setStamina(obj.get("stamina").getAsFloat());
-        b.setCurrentSpeed(obj.get("current_speed").getAsFloat());
-        b.setTurningSpeed(obj.get("turning_speed").getAsFloat());
-        b.setTargetAngle(obj.get("target_angle").getAsFloat());
-        b.createBoatBody(world, obj.get("x_position").getAsFloat()*(1/GameData.METERS_TO_PIXELS),obj.get("y_position").getAsFloat()*(1/GameData.METERS_TO_PIXELS), "Boat1.json");
-
-        return b;
-    }
 }
