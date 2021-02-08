@@ -226,6 +226,9 @@ public class AI extends Boat{
                 //AI is braking.
                 this.setStamina(this.getStamina() + 3 * delta);
             }
+            else if(isDodging) {
+                //Turning left or right should leave stamina as is.
+            }
             else {
                 //Not accelerating or braking.
                 this.setStamina(this.getStamina() + 2 * delta);

@@ -50,6 +50,9 @@ public class Player extends Boat{
                 //Holding S.
                 this.setStamina(this.getStamina() + 3 * delta);
             }
+            else if(pressedKeys[1] || pressedKeys[3]) {
+                //Turning left or right should leave stamina as is.
+            }
             else {
                 //Not pressing any buttons.
                 this.setStamina(this.getStamina() + 2 * delta);
