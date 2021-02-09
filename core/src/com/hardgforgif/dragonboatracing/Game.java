@@ -306,25 +306,38 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 					// Create the AI boats
 					// If last leg, have less boats. Otherwise, have normal number of boats.
 					if(GameData.currentLeg == GameData.numberOfLegs - 1) {
-						opponents = new AI[GameData.numberOfFinalists - 1];
-						int incrementer = 0;
-						ArrayList<Integer> finalistTypes = new ArrayList<>();
-						while(finalistTypes.size() < opponents.length) {
-							//Add the first numberOfFinalists-1 boats from the latest results to the final.
-							//Goes through results looking for AI, has to skip a Player as it could be in any position.
-							if(GameData.results.get(incrementer)[0] != 0) {
-								finalistTypes.add(Math.round(GameData.results.get(incrementer)[2]));
+						//CHECKING FOR GAME OVER BY NOT BEING FAST ENOUGH AS OPPOSED TO REGULAR DNF METHOD:
+						boolean shouldBeInFinal = false;
+						for(int i = 0; i < GameData.numberOfFinalists; i++) {
+							if(GameData.results.get(i)[0] == 0) {
+								shouldBeInFinal = true;
+								break;
 							}
-							incrementer += 1;
 						}
-						for (int i = 0; i < opponents.length; i++) {
-							int AIBoatType = finalistTypes.get(i);
-							opponents[i] = new AI(GameData.boatsStats[AIBoatType][0], GameData.boatsStats[AIBoatType][1],
-									GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
-									AIBoatType, map[GameData.currentLeg].getLanes()[i + 1]);
-							opponents[i].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i + 1][0], GameData.startingPoints[i + 1][1], "Boat1.json");
-							GameData.boats[i + 1] = opponents[i];
-							opponents[i].setLimits(opponents[i].getLane().getLeftBoundary()[0][1], opponents[i].getLane().getRightBoundary()[0][1]);
+						if(shouldBeInFinal) {
+							opponents = new AI[GameData.numberOfFinalists - 1];
+							int incrementer = 0;
+							ArrayList<Integer> finalistTypes = new ArrayList<>();
+							while (finalistTypes.size() < opponents.length) {
+								//Add the first numberOfFinalists-1 boats from the latest results to the final.
+								//Goes through results looking for AI, has to skip a Player as it could be in any position.
+								if (GameData.results.get(incrementer)[0] != 0) {
+									finalistTypes.add(Math.round(GameData.results.get(incrementer)[2]));
+								}
+								incrementer += 1;
+							}
+							for (int i = 0; i < opponents.length; i++) {
+								int AIBoatType = finalistTypes.get(i);
+								opponents[i] = new AI(GameData.boatsStats[AIBoatType][0], GameData.boatsStats[AIBoatType][1],
+										GameData.boatsStats[AIBoatType][2], GameData.boatsStats[AIBoatType][3],
+										AIBoatType, map[GameData.currentLeg].getLanes()[i + 1]);
+								opponents[i].createBoatBody(world[GameData.currentLeg], GameData.startingPoints[i + 1][0], GameData.startingPoints[i + 1][1], "Boat1.json");
+								GameData.boats[i + 1] = opponents[i];
+								opponents[i].setLimits(opponents[i].getLane().getLeftBoundary()[0][1], opponents[i].getLane().getRightBoundary()[0][1]);
+							}
+						} else {
+							GameData.currentUI = new GameOverUI();
+							GameData.GameOverState = true;
 						}
 					}
 
@@ -347,172 +360,177 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 			}
 
-			//Iterate through the PowerUps that need applying.
-			for (Body[] bodyPair : toApplyPowerUps) {
-				if(player.getBoatBody() == bodyPair[0] && !player.hasFinished()) {
-					//The boat in question is the Player.
-					for (Lane lane : map[GameData.currentLeg].getLanes()) {
-						for (Obstacle obstacle : lane.getObstacles()) {
-							if (obstacle.getObstacleBody() == bodyPair[1]) {
-								obstacle.setObstacleBody(null);
-								((PowerUp) obstacle).applyPowerUp(player);
+			if(GameData.GameOverState) {
+
+			} else {
+
+				//Iterate through the PowerUps that need applying.
+				for (Body[] bodyPair : toApplyPowerUps) {
+					if(player.getBoatBody() == bodyPair[0] && !player.hasFinished()) {
+						//The boat in question is the Player.
+						for (Lane lane : map[GameData.currentLeg].getLanes()) {
+							for (Obstacle obstacle : lane.getObstacles()) {
+								if (obstacle.getObstacleBody() == bodyPair[1]) {
+									obstacle.setObstacleBody(null);
+									((PowerUp) obstacle).applyPowerUp(player);
+								}
 							}
 						}
 					}
-				}
-				else {
-					//The boat is one of the AI.
-					for(int i = 0; i < opponents.length; i++) {
-						if (opponents[i].getBoatBody() == bodyPair[0] && !opponents[i].hasFinished()) {
-							for (Lane lane : map[GameData.currentLeg].getLanes()) {
-								for (Obstacle obstacle : lane.getObstacles()) {
-									if (obstacle.getObstacleBody() == bodyPair[1]) {
-										obstacle.setObstacleBody(null);
-										((PowerUp) obstacle).applyPowerUp(opponents[i]);
+					else {
+						//The boat is one of the AI.
+						for(int i = 0; i < opponents.length; i++) {
+							if (opponents[i].getBoatBody() == bodyPair[0] && !opponents[i].hasFinished()) {
+								for (Lane lane : map[GameData.currentLeg].getLanes()) {
+									for (Obstacle obstacle : lane.getObstacles()) {
+										if (obstacle.getObstacleBody() == bodyPair[1]) {
+											obstacle.setObstacleBody(null);
+											((PowerUp) obstacle).applyPowerUp(opponents[i]);
+										}
 									}
 								}
 							}
 						}
 					}
 				}
-			}
 
-			// Iterate through the bodies that need to be removed from the world after a collision
-			for (Body body : toBeRemovedBodies){
-				// Find the obstacle that has this body and mark it as null
-				// so it's sprite doesn't get rendered in future frames
-				for (Lane lane : map[GameData.currentLeg].getLanes())
-					for (Obstacle obstacle : lane.getObstacles())
-						if (obstacle.getObstacleBody() == body) {
-							obstacle.setObstacleBody(null);
-						}
+				// Iterate through the bodies that need to be removed from the world after a collision
+				for (Body body : toBeRemovedBodies){
+					// Find the obstacle that has this body and mark it as null
+					// so it's sprite doesn't get rendered in future frames
+					for (Lane lane : map[GameData.currentLeg].getLanes())
+						for (Obstacle obstacle : lane.getObstacles())
+							if (obstacle.getObstacleBody() == body) {
+								obstacle.setObstacleBody(null);
+							}
 
-				// Remove the body from the world to avoid other collisions with it
-				if(body != null) {
-					world[GameData.currentLeg].destroyBody(body);
-				}
-			}
-
-			// Iterate through the bodies marked to be damaged after a collision
-			for (Body body : toUpdateHealth){
-				// if it's the player body
-				if (player.getBoatBody() == body && !player.hasFinished() && !player.isInvulnerable()){
-					// Reduce the health and the speed
-                    player.setRobustness(player.getRobustness()-10f);
-                    player.setCurrentSpeed(player.getCurrentSpeed()-10f);
-
-					// If all the health is lost
-					if(player.getRobustness() <= 0 && GameData.results.size() < GameData.numberOfBoats){
-						// Remove the body from the world, but keep it's sprite in place
-						world[GameData.currentLeg].destroyBody(player.getBoatBody());
-
-						// Add a DNF result
-						GameData.results.add(new Float[]{0f, Float.MAX_VALUE, Float.valueOf(player.getBoatType())});
-
-						// Transition to the show result screen
-						GameData.showResultsState = true;
-						GameData.currentUI = new ResultsUI();
+					// Remove the body from the world to avoid other collisions with it
+					if(body != null) {
+						world[GameData.currentLeg].destroyBody(body);
 					}
 				}
 
-				// Otherwise, one of the AI has to be updated similarly
-				else {
-					for (int i = 0; i < opponents.length; i++){
-						if (opponents[i].getBoatBody() == body && !opponents[i].hasFinished() && !opponents[i].isInvulnerable()) {
+				// Iterate through the bodies marked to be damaged after a collision
+				for (Body body : toUpdateHealth){
+					// if it's the player body
+					if (player.getBoatBody() == body && !player.hasFinished() && !player.isInvulnerable()){
+						// Reduce the health and the speed
+						player.setRobustness(player.getRobustness()-10f);
+						player.setCurrentSpeed(player.getCurrentSpeed()-10f);
 
-							opponents[i].setRobustness(opponents[i].getRobustness()-10f);
-							opponents[i].setCurrentSpeed(opponents[i].getCurrentSpeed()-10f);
+						// If all the health is lost
+						if(player.getRobustness() <= 0 && GameData.results.size() < GameData.numberOfBoats){
+							// Remove the body from the world, but keep it's sprite in place
+							world[GameData.currentLeg].destroyBody(player.getBoatBody());
 
-							if(opponents[i].getRobustness() < 0 && GameData.results.size() < GameData.numberOfBoats){
-								world[GameData.currentLeg].destroyBody(opponents[i].getBoatBody());
-								GameData.results.add(new Float[]{Float.valueOf(i + 1), Float.MAX_VALUE, Float.valueOf(opponents[i].getBoatType())});
+							// Add a DNF result
+							GameData.results.add(new Float[]{0f, Float.MAX_VALUE, Float.valueOf(player.getBoatType())});
+
+							// Transition to the show result screen
+							GameData.showResultsState = true;
+							GameData.currentUI = new ResultsUI();
+						}
+					}
+
+					// Otherwise, one of the AI has to be updated similarly
+					else {
+						for (int i = 0; i < opponents.length; i++){
+							if (opponents[i].getBoatBody() == body && !opponents[i].hasFinished() && !opponents[i].isInvulnerable()) {
+
+								opponents[i].setRobustness(opponents[i].getRobustness()-10f);
+								opponents[i].setCurrentSpeed(opponents[i].getCurrentSpeed()-10f);
+
+								if(opponents[i].getRobustness() < 0 && GameData.results.size() < GameData.numberOfBoats){
+									world[GameData.currentLeg].destroyBody(opponents[i].getBoatBody());
+									GameData.results.add(new Float[]{Float.valueOf(i + 1), Float.MAX_VALUE, Float.valueOf(opponents[i].getBoatType())});
+								}
 							}
 						}
 					}
 				}
-			}
 
-			toBeRemovedBodies.clear();
-			toUpdateHealth.clear();
-			toApplyPowerUps.clear();
+				toBeRemovedBodies.clear();
+				toUpdateHealth.clear();
+				toApplyPowerUps.clear();
 
-			// Advance the game world physics
-			world[GameData.currentLeg].step(1f/60f, 6, 2);
+				// Advance the game world physics
+				world[GameData.currentLeg].step(1f/60f, 6, 2);
 
-			// Update the timers
-			GameData.currentTimer += Gdx.graphics.getDeltaTime();
-			if(player.getPowerUpTimer() > 0) {
-				player.setPowerUpTimer(player.getPowerUpTimer() - Gdx.graphics.getDeltaTime());
-				if(player.getPowerUpTimer() < 0) {
-					player.setPowerUpTimer(0f);
-					player.setSpeed(GameData.boatsStats[player.getBoatType()][1]);
-					player.setInvulnerability(false);
-				}
-			}
-			for(int i = 0; i < opponents.length; i++) {
-				if(opponents[i].getPowerUpTimer() > 0) {
-					opponents[i].setPowerUpTimer(player.getPowerUpTimer() - Gdx.graphics.getDeltaTime());
-					if(opponents[i].getPowerUpTimer() < 0) {
-						opponents[i].setPowerUpTimer(0f);
-						opponents[i].setSpeed(GameData.boatsStats[opponents[i].getBoatType()][1]);
-						opponents[i].setInvulnerability(false);
+				// Update the timers
+				GameData.currentTimer += Gdx.graphics.getDeltaTime();
+				if(player.getPowerUpTimer() > 0) {
+					player.setPowerUpTimer(player.getPowerUpTimer() - Gdx.graphics.getDeltaTime());
+					if(player.getPowerUpTimer() < 0) {
+						player.setPowerUpTimer(0f);
+						player.setSpeed(GameData.boatsStats[player.getBoatType()][1]);
+						player.setInvulnerability(false);
 					}
 				}
-			}
-
-			// Update the player's and the AI's movement
-			player.updatePlayer(pressedKeys, Gdx.graphics.getDeltaTime());
-			for (AI opponent : opponents)
-				opponent.updateAI(Gdx.graphics.getDeltaTime());
-
-			// Set the camera as the batches projection matrix
-			batch.setProjectionMatrix(camera.combined);
-
-			// Render the map
-			map[GameData.currentLeg].renderMap(camera, batch);
-
-			// Render the player and the AIs
-			player.drawBoat(batch);
-			for (AI opponent : opponents)
-				opponent.drawBoat(batch);
-
-			// Render the objects that weren't destroyed yet
-			for (Lane lane : map[GameData.currentLeg].getLanes())
-				for (Obstacle obstacle : lane.getObstacles()){
-					if (obstacle.getObstacleBody() != null)
-						obstacle.drawObstacle(batch);
+				for(int i = 0; i < opponents.length; i++) {
+					if(opponents[i].getPowerUpTimer() > 0) {
+						opponents[i].setPowerUpTimer(player.getPowerUpTimer() - Gdx.graphics.getDeltaTime());
+						if(opponents[i].getPowerUpTimer() < 0) {
+							opponents[i].setPowerUpTimer(0f);
+							opponents[i].setSpeed(GameData.boatsStats[opponents[i].getBoatType()][1]);
+							opponents[i].setInvulnerability(false);
+						}
+					}
 				}
 
-			// Update the camera at the player's position
-			updateCamera(player);
+				// Update the player's and the AI's movement
+				player.updatePlayer(pressedKeys, Gdx.graphics.getDeltaTime());
+				for (AI opponent : opponents)
+					opponent.updateAI(Gdx.graphics.getDeltaTime());
 
-			updatePenalties();
+				// Set the camera as the batches projection matrix
+				batch.setProjectionMatrix(camera.combined);
 
-			// Update the standings of each boat
-			updateStandings();
+				// Render the map
+				map[GameData.currentLeg].renderMap(camera, batch);
 
-			// If it's been 15 seconds since the winner completed the race, dnf all boats who haven't finished yet
-			// Then transition to the result state
-			if(GameData.results.size() > 0 && GameData.results.size() < (opponents.length + 1) &&
-					GameData.currentTimer > GameData.results.get(0)[1] + 15f){
-				dnfRemainingBoats();
-				GameData.showResultsState = true;
-				GameData.currentUI = new ResultsUI();
+				// Render the player and the AIs
+				player.drawBoat(batch);
+				for (AI opponent : opponents)
+					opponent.drawBoat(batch);
+
+				// Render the objects that weren't destroyed yet
+				for (Lane lane : map[GameData.currentLeg].getLanes())
+					for (Obstacle obstacle : lane.getObstacles()){
+						if (obstacle.getObstacleBody() != null)
+							obstacle.drawObstacle(batch);
+					}
+
+				// Update the camera at the player's position
+				updateCamera(player);
+
+				updatePenalties();
+
+				// Update the standings of each boat
+				updateStandings();
+
+				// If it's been 15 seconds since the winner completed the race, dnf all boats who haven't finished yet
+				// Then transition to the result state
+				if(GameData.results.size() > 0 && GameData.results.size() < (opponents.length + 1) &&
+						GameData.currentTimer > GameData.results.get(0)[1] + 15f){
+					dnfRemainingBoats();
+					GameData.showResultsState = true;
+					GameData.currentUI = new ResultsUI();
+				}
+				// Otherwise keep checking for new results
+				else {
+					checkForResults();
+				}
+
+
+				// Choose which UI to display based on the current state
+				if(!GameData.showResultsState)
+					GameData.currentUI.drawPlayerUI(UIbatch, player);
+				else {
+					GameData.currentUI.drawUI(UIbatch, mousePosition, Gdx.graphics.getWidth(), Gdx.graphics.getDeltaTime());
+					GameData.currentUI.getInput(Gdx.graphics.getWidth(), clickPosition);
+				}
+
 			}
-			// Otherwise keep checking for new results
-			else {
-				checkForResults();
-			}
-
-
-			// Choose which UI to display based on the current state
-			if(!GameData.showResultsState)
-				GameData.currentUI.drawPlayerUI(UIbatch, player);
-			else {
-				GameData.currentUI.drawUI(UIbatch, mousePosition, Gdx.graphics.getWidth(), Gdx.graphics.getDeltaTime());
-				GameData.currentUI.getInput(Gdx.graphics.getWidth(), clickPosition);
-			}
-
 		}
 
 		// Otherwise we need need to reset elements of the game to prepare for the next race
