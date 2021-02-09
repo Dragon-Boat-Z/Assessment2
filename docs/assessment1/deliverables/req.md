@@ -8,7 +8,7 @@ permalink: /docs/assessment1/deliverables/req/
 
 # Requirements
 
-[Deliverable (.pdf)](/docs/assets/assessment1/deliverables/Req1.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Deliverable (.pdf)](/Assessment2/docs/assets/assessment1/deliverables/Req1.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 {: .no_toc }
 
