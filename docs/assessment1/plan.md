@@ -1,7 +1,9 @@
 ---
 layout: default
 title: Method selection and planning
-parent: Assessment 1
+parent: Deliverables
+grand_parent: Assessment 1
+permalink: /docs/assessment1/deliverables/plan/
 ---
 
 # Method selection and planning

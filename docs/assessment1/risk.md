@@ -1,7 +1,9 @@
 ---
 layout: default
 title: Risk assessment
-parent: Assessment 1
+parent: Deliverables
+grand_parent: Assessment 1
+permalink: /docs/assessment1/deliverables/risk/
 ---
 
 # Risk assessment
