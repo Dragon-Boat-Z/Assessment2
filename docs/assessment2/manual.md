@@ -4,7 +4,7 @@ title: Game Manual
 parent: Assessment 2
 ---
 
-PUT A PDF LINK HERE 
+[Game Manuak (.pdf)](https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment2/deliverables/Game%20Manual.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } 
 
 {: .no_toc }
 
@@ -100,19 +100,19 @@ Whilst navigating the obstacles, you will have to make sure to stay in your lane
 Amongst the obstacles, there is a collection of power ups that you can collide with. They provide the following benefits:
 
 * Speed
-![Speed](/core/assets/PowerUps/SpeedBoost.png "Speed")
+![Speed](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/master/core/assets/PowerUps/SpeedBoost.png "Speed")
     * The player receives a speed boost for 2 seconds.
 * Stamina
-![Stamina](/core/assets/PowerUps/StaminaBoost.png "Stamina")
+![Stamina](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/master/core/assets/PowerUps/StaminaBoost.png "Stamina")
     * The player receives a boost to their current stamina.
 * Invulnerability
-![Invulnerability](/core/assets/PowerUps/Invulnerability.png "Invulnerability")
+![Invulnerability](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/master/core/assets/PowerUps/Invulnerability.png "Invulnerability")
     * The player becomes invulnerable to damage for 7 seconds.
 * Health
-![Health](/core/assets/PowerUps/HealthBoost.png "Health")
+![Health](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/master/core/assets/PowerUps/HealthBoost.png "Health")
     * The player receives a boost to their current health.
 * Bomb
-![Bomb](/core/assets/PowerUps/ObstacleClearer.png "Bomb")
+![Bomb](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/master/core/assets/PowerUps/ObstacleClearer.png "Bomb")
     * The bomb clears the current path of obstacles in the players lane.
 
 ## Pause Menu
