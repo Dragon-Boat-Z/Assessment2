@@ -99,20 +99,21 @@ Whilst navigating the obstacles, you will have to make sure to stay in your lane
 
 Amongst the obstacles, there is a collection of power ups that you can collide with. They provide the following benefits:
 
-* Speed
+
 ![Speed](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/master/core/assets/PowerUps/SpeedBoost.png "Speed")
+* Speed
     * The player receives a speed boost for 2 seconds.
-* Stamina
 ![Stamina](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/master/core/assets/PowerUps/StaminaBoost.png "Stamina")
+* Stamina
     * The player receives a boost to their current stamina.
-* Invulnerability
 ![Invulnerability](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/master/core/assets/PowerUps/Invulnerability.png "Invulnerability")
+* Invulnerability
     * The player becomes invulnerable to damage for 7 seconds.
-* Health
 ![Health](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/master/core/assets/PowerUps/HealthBoost.png "Health")
+* Health
     * The player receives a boost to their current health.
-* Bomb
 ![Bomb](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/master/core/assets/PowerUps/ObstacleClearer.png "Bomb")
+* Bomb
     * The bomb clears the current path of obstacles in the players lane.
 
 ## Pause Menu
