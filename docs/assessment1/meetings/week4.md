@@ -14,7 +14,7 @@ The main priority was designing code that is highly reusable, focusing a lot on 
 
 Furthermore, we have also finished our requirements. So the people focussing on documentation, pivoted over to updating the risk assessment to include risks that we had discovered from starting to develop the game properly. 
 
-![Collision demo](/assets/static/30-29.gif "Collision demo")
+![Collision demo](https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment1/static/30-29.gif?raw=true "Collision demo")
 
 ## Meeting 5 (27/10/2020)
 

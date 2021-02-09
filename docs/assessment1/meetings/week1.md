@@ -12,7 +12,7 @@ We went through the requirements exploding them out into smaller more manageable
 
 The main focus was understanding the project, getting to know each other and coming up with ideas for some of the key features of the game.
 
-![gantt chart](/assets/static/week1.png "Gantt chart")
+![gantt chart](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment1/static/week1.png "Gantt chart")
 
 ## Meeting 1 (14/10/2020)
 

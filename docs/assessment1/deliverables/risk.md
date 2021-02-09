@@ -8,7 +8,7 @@ permalink: /docs/assessment1/deliverables/risk/
 
 # Risk assessment
 
-[Deliverable (.pdf)](/Assessment2/docs/assets/assessment1/deliverables/Risk1.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Deliverable (.pdf)](https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment1/deliverables/Risk1.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 {: .no_toc }
 

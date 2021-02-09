@@ -13,9 +13,9 @@ This is where the agile “SCRUM” approach came in handy, as we were modifying
 Meanwhile, the development of the game continued with adding new features and merging core aspects of the game with UI elements.  
 
 
-![gantt chart](/assets/static/week5.png "Gantt chart")
+![gantt chart](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment1/static/week5.png "Gantt chart")
 
-![game menu draft](/assets/static/menu.png "Game menu draft")
+![game menu draft](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment1/static/menu.png "Game menu draft")
 
 ## Meeting 7 (03/11/2020)
 

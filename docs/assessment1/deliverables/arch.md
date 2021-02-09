@@ -8,7 +8,7 @@ permalink: /docs/assessment1/deliverables/arch/
 
 # Architecture
 
-[Deliverable (.pdf)](docs/assets/assessment1/deliverables/Arch1.pdf) {: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Deliverable (.pdf)](https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment1/deliverables/Arch1.pdf) {: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 {: .no_toc }
 
@@ -24,12 +24,12 @@ permalink: /docs/assessment1/deliverables/arch/
 ---
 ## Abstract architecture diagram
 
-![abstract architecture diagram](/Assessment2/docs/assets/assessment1/static/arch/ab.png "Abstract architecture diagram")
+![abstract architecture diagram](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment1/static/arch/ab.png "Abstract architecture diagram")
 
 ## Concrete architecture diagram
 
-![concrete architecture diagram](/Assessment2/docs/assets/assessment1/static/arch/con1.png "Concrete architecture diagram")
-![concrete architecture diagram](/Assessment2/docs/assets/assessment1/static/arch/con2.png "Concrete architecture diagram")
+![concrete architecture diagram](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment1/static/arch/con1.png "Concrete architecture diagram")
+![concrete architecture diagram](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment1/static/arch/con2.png "Concrete architecture diagram")
 
 
 ## Abstract

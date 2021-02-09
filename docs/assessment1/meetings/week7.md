@@ -22,9 +22,9 @@ Other miscellaneous things included:
 * AI development
 * Improved HUD
 
-![gantt chart](/assets/static/week7.png "Gantt chart")
+![gantt chart](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment1/static/week7.png "Gantt chart")
 
-![Collision demo](/assets/static/11-09.gif "Collision demo")
+![Collision demo](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment1/static/11-09.gif "Collision demo")
 
 
 ## Meeting 10 (17/11/2020)

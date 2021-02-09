@@ -8,7 +8,7 @@ permalink: /docs/assessment1/deliverables/plan/
 
 # Method selection and planning
 
-[Deliverable (.pdf)](/Assessment2/docs/assets/assessment1/deliverables/Plan1.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Deliverable (.pdf)](https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment1/deliverables/Plan1.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 {: .no_toc }
 
@@ -64,7 +64,7 @@ Overall, these meetings helped us focus on what needed attention, where we would
 
 ## Systematic plan
 
-![gantt chart](/assets/assessment1/static/week8.png "Gantt chart")
+![gantt chart](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment1/static/week8.png "Gantt chart")
 
 The plan for the project was to build the game using an agile method approach, allowing us to modify existing elements as we progress through the project. So with our agile approach, we decided to put ourselves on two week sprints. 
 To map our progress we also produced a new gantt chart every two weeks. The one provided here is the final one, but on our website there are multiple available. 
