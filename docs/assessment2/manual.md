@@ -26,7 +26,7 @@ In Dragon Boat Racing 2021, the player competes against 6 AI opponents, racing t
 
 ## Starting the Game
 
-![Main Menu](/docs/assets/assessment2/static/mainmenu.png "Main Menu")
+![Main Menu](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment2/static/mainmenu.png "Main Menu")
 
 Upon starting up the game you will be presented with the main menu screen. In this screen you will have three options: 
 * Play
@@ -40,7 +40,7 @@ Using your mouse, click on which option you would like to proceed with.
 
 ## Selecting a Boat
 
-![Boat Selection](/docs/assets/assessment2/static/boatselection.png "Boat Selection")
+![Boat Selection](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment2/static/boatselection.png "Boat Selection")
 
 In this screen you will be able to select one of seven boats as the boat you would like to race with. Every boat has 4 statistics with each boat having a different distribution of these statistics. To view each boat's statistics, hover your mouse cursor over the desired boat. Clicking on your desired boat will take you to the difficulty selection screen.
 
@@ -61,7 +61,7 @@ In this screen you will be able to select one of seven boats as the boat you wou
 
 ## Game Difficulty
 
-![Game Difficulty](/docs/assets/assessment2/static/difficulty.png "Game Difficulty")
+![Game Difficulty](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment2/static/difficulty.png "Game Difficulty")
 
 You will be presented with three difficulty options on screen:
 * Easy
@@ -72,7 +72,7 @@ Game difficulty affects the statistics of AI boats and the number of obstacles t
 
 ## Starting the Race
 
-![In Game](docs/assets/assessment2/static/ingame.png "In Game")
+![In Game](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment2/static/ingame.png "In Game")
 
 After selecting a difficulty, you will begin the race immediately. Every time you play the game you will be in the left most lane. You will have to try and get to the finish line in the fastest time possible.
 
@@ -117,7 +117,7 @@ Amongst the obstacles, there is a collection of power ups that you can collide w
 
 ## Pause Menu
 
-![Pause Menu](/docs/assets/assessment2/static/pausemenu.png "Pause Menu")
+![Pause Menu](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment2/static/pausemenu.png "Pause Menu")
 
 The pause menu can be accessed by pressing “Esc” at any point during the race. You can remain paused for as long as you wish.
 In the pause menu, you can select between three options:
@@ -130,7 +130,7 @@ In the pause menu, you can select between three options:
 
 ## Saving a Game
 
-![Saving Game](/docs/assets/assessment2/static/savemenu.png "Saving Game")
+![Saving Game](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment2/static/savemenu.png "Saving Game")
 
 In the save selection screen you will be able to save your current game progress into any of three save slots. These save slots will store your current game progress allowing you to return to that game later upon loading a save slot. Game save states will remain even after closing down the game allowing you to return to your game at any point. Saving a game into a save slot that already stores a game state will override that save causing you to replace your current save with your previous save.
 
