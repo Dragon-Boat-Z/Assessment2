@@ -8,5 +8,6 @@ permalink: /docs/assessment2/deliverables/change2/
 
 # Change Report
 
-https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment2/deliverables/Change2.pdf
+[Deliverable (.pdf)](https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment2/deliverables/Change2.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+
 

@@ -13,4 +13,4 @@ The Sprint would cover finalising Black Box Test cases, writing the traceability
 As we would begin implementing missing and new features, White Box testing should be written before this process. As a perquisite to this, we all needed to understand Junit and Mockito. 
 As CI Infrastructure had been setup in the GitHub repository, we began writing up the CI deliverable.
 
-![Sprint 7](/docs/assets/assessment2/static/sprints/Sprint7.png "Sprint 7")
+![Sprint 7](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment2/static/sprints/Sprint7.png "Sprint 7")

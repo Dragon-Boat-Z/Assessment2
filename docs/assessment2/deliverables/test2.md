@@ -8,4 +8,4 @@ permalink: /docs/assessment2/deliverables/test2/
 
 # Testing
 
-https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment2/deliverables/Test2.pdf
+[Deliverable (.pdf)](https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment2/deliverables/Test2.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
