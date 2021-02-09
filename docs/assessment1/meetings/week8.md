@@ -1,7 +1,9 @@
 ---
 layout: default
 title: Week 8
-parent: Previous Team Meetings
+parent: Team Meetings
+grand_parent: Assessment 1
+permalink: /docs/assessment1/meetings/week8/
 ---
 
 # Week 8

@@ -1,7 +1,9 @@
 ---
 layout: default
 title: Week 2
-parent: Previous Team Meetings
+parent: Team Meetings
+grand_parent: Assessment 1
+permalink: /docs/assessment1/meetings/week2/
 ---
 
 # Week 2

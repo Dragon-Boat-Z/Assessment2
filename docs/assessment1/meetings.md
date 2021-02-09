@@ -1,6 +1,7 @@
 ---
 layout: default
-title: Previous Team Meetings
+title: Team Meetings
+parent: Assessment 1
 has_children: true
 ---
 
