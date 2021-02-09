@@ -1,7 +1,9 @@
 ---
 layout: default
 title: Architecture
-parent: Assessment 2
+parent: Deliverables
+grand_parent: Assessment 2
+permalink: /docs/assessment2/deliverables/arch2/
 ---
 
 # Architecture
