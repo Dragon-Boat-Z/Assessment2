@@ -2,8 +2,10 @@ package com.hardgforgif.dragonboatracing.UI;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.hardgforgif.dragonboatracing.GameData;
@@ -21,6 +23,7 @@ public class GameOverUI extends UI{
     private Sprite secondPlaceSprite;
     private Texture thirdPlaceTexture;
     private Sprite thirdPlaceSprite;
+    private BitmapFont titleFont;
 
     private ScrollingBackground scrollingBackground = new ScrollingBackground();
 
@@ -41,6 +44,10 @@ public class GameOverUI extends UI{
         firstPlaceSprite = new Sprite(firstPlaceTexture);
         secondPlaceSprite = new Sprite(secondPlaceTexture);
         thirdPlaceSprite = new Sprite(thirdPlaceTexture);
+
+        titleFont = new BitmapFont();
+        titleFont.getData().setScale(1.8f);
+        titleFont.setColor(Color.BLACK);
 
         int gameOverX = 400;
         int gameOverY = 200;
@@ -77,6 +84,7 @@ public class GameOverUI extends UI{
         // Otherwise, the game is over with a loss
         else
             gameOverSprite.draw(batch);
+        titleFont.draw(batch, "Click to go back to the main menu.", 180, 100);
         batch.end();
         playMusic();
     }
@@ -97,6 +105,7 @@ public class GameOverUI extends UI{
             // Switch the music to the main menu music
             GameData.music.stop();
             GameData.music = Gdx.audio.newMusic(Gdx.files.internal("Vibing.ogg"));
+
         }
     }
 
