@@ -8,7 +8,7 @@ permalink: /docs/assessment2/deliverables/ci2/
 
 # Continuous Integration
 
-[Deliverable (.pdf)](/docs/assets/assessment2/deliverables/CI2.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Deliverable (.pdf)](https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment2/deliverables/CI2.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 {: .no_toc }
 

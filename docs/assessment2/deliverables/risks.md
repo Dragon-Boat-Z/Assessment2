@@ -10,8 +10,8 @@ permalink: /docs/assessment2/deliverables/risks/
 
 ## Risk1
 
-[Deliverable (.pdf)](/Assessment2/docs/assets/assessment2/deliverables/risk1.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Deliverable (.pdf)](https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment2/deliverables/Risk1.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 ## Risk2
 
-[Deliverable (.pdf)](/Assessment2/docs/assets/assessment2/deliverables/risk2.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Deliverable (.pdf)](https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment2/deliverables/Risk2.pdf){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
