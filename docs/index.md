@@ -18,7 +18,7 @@ Individual PDF deliverables are available on each document page. Weekly snapshot
 
 ## Downloads
 
-[Assessment 1 deliverables (.zip)](/website/assets/deliverables/combined.zip){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Assessment 2 deliverables (.zip)](/website/assets/deliverables/combined.zip){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Game download (.jar)](https://github.com/hardgforgifs/game/releases/download/1.0.3/DragonBoatRacing.v1.0.3.jar){: .btn .fs-5 .mb-4 .mb-md-0 }
+[Assessment 1 deliverables (.zip)](/website/assets/deliverables/combined.zip){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Assessment 2 deliverables (.zip)](/website/assets/deliverables/combined.zip){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Game download (.jar)](https://github.com/Dragon-Boat-Z/Assessment2/releases/download/v1.2.2/DragonBoat.v1.2.2.jar){: .btn .fs-5 .mb-4 .mb-md-0 }
 ---
 
 ## Useful links
