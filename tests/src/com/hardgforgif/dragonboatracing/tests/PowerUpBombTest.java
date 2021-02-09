@@ -16,7 +16,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-
+/**
+ * Tests the PowerUpBomb class
+ */
 @RunWith(GdxTestRunner.class)
 public class PowerUpBombTest {
     Lane mockLane;
@@ -35,13 +37,13 @@ public class PowerUpBombTest {
         testBoat = new Boat(120, 110, 100, 80, 0, mockLane);
         testPowerUp = new PowerUpBomb();
     }
-    
+
     @Test
-    public void testPowerUpBombConstructor(){
+    public void testPowerUpBombConstructor() {
         Texture texture = testPowerUp.getObstacleTexture();
-        assertEquals("PowerUps/ObstacleClearer.png", texture.toString());
-        assertEquals(0, testPowerUp.getX());
-        assertEquals(0, testPowerUp.getY());
-        assertTrue(testPowerUp.isPowerUp());
+        assertEquals("PowerUps/ObstacleClearer.png", texture.toString(), "Texture file incorrect");
+        assertEquals(0, testPowerUp.getX(), "X position incorrect");
+        assertEquals(0, testPowerUp.getY(), "Y position incorrect");
+        assertTrue(testPowerUp.isPowerUp(), "Should be a powerup obstacle");
     }
 }

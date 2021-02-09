@@ -16,10 +16,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-
+/**
+ * Tests the PowerUpHealth class
+ */
 @RunWith(GdxTestRunner.class)
 public class PowerUpHealthTest {
-    
+
     Lane mockLane;
     Boat testBoat;
     PowerUpHealth testPowerUp;
@@ -38,28 +40,28 @@ public class PowerUpHealthTest {
     }
 
     @Test
-    public void testPowerUpHealthConstructor(){
+    public void testPowerUpHealthConstructor() {
         Texture texture = testPowerUp.getObstacleTexture();
-        assertEquals("PowerUps/HealthBoost.png", texture.toString());
-        assertEquals(0, testPowerUp.getX());
-        assertEquals(0, testPowerUp.getY());
-        assertTrue(testPowerUp.isPowerUp());
+        assertEquals("PowerUps/HealthBoost.png", texture.toString(), "Texture file incorrect");
+        assertEquals(0, testPowerUp.getX(), "X position incorrect");
+        assertEquals(0, testPowerUp.getY(), "Y position incorrect");
+        assertTrue(testPowerUp.isPowerUp(), "Should be a powerup obstacle");
     }
-    
+
     @Test
-    public void testApplyPowerUpHealth(){
+    public void testApplyPowerUpHealth() {
         // test for when boat has lost health
         // set testBoat robustness to half
         testBoat.setRobustness(60);
         // apply power up to testBoat
         testPowerUp.applyPowerUp(testBoat);
-        assertEquals(90, testBoat.getRobustness());
+        assertEquals(90, testBoat.getRobustness(), "Robustness increase incorrect");
 
         // test for when testBoat already has max robustness
         // set testBoat robustness to max robustness
         testBoat.setRobustness(120);
         // apply power up to testBoat
         testPowerUp.applyPowerUp(testBoat);
-        assertEquals(120, testBoat.getRobustness());
+        assertEquals(120, testBoat.getRobustness(), "Robustness at max, shouldn't change");
     }
 }

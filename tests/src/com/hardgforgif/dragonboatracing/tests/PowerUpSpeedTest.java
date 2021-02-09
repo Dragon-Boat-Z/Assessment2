@@ -16,10 +16,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-
 @RunWith(GdxTestRunner.class)
 public class PowerUpSpeedTest {
-    
+
     Lane mockLane;
     Boat testBoat;
     PowerUpSpeed testPowerUp;
@@ -38,28 +37,30 @@ public class PowerUpSpeedTest {
     }
 
     @Test
-    public void testPowerUpSpeedConstructor(){
+    public void testPowerUpSpeedConstructor() {
         Texture texture = testPowerUp.getObstacleTexture();
-        assertEquals("PowerUps/SpeedBoost.png", texture.toString());
-        assertEquals(0, testPowerUp.getX());
-        assertEquals(0, testPowerUp.getY());
-        assertTrue(testPowerUp.isPowerUp());
+        assertEquals("PowerUps/SpeedBoost.png", texture.toString(), "Texture file incorrect");
+        assertEquals(0, testPowerUp.getX(), "X position incorrect");
+        assertEquals(0, testPowerUp.getY(), "Y position incorrect");
+        assertTrue(testPowerUp.isPowerUp(), "Should be a powerup obstacle");
     }
-    
+
     @Test
-    public void testApplyPowerUpSpeed(){
+    public void testApplyPowerUpSpeed() {
+        // boat at lower speed
         testBoat.setCurrentSpeed(50);
         testPowerUp.applyPowerUp(testBoat);
-        assertEquals(75, testBoat.getCurrentSpeed());
+        assertEquals(75, testBoat.getCurrentSpeed(), "Speed increase incorrect (below limit)");
 
+        // boat at top speed
         testBoat.setCurrentSpeed(110);
         testPowerUp.applyPowerUp(testBoat);
-        assertEquals(165, testBoat.getCurrentSpeed());
-        assertEquals(2f, testBoat.getPowerUpTimer());
+        assertEquals(165, testBoat.getCurrentSpeed(), "Speed increase incorrect (above limit)");
+        assertEquals(2f, testBoat.getPowerUpTimer(), "Shorter powerup timer set incorrect");
 
         testBoat.setPowerUpTimer(8);
         testBoat.setCurrentSpeed(50);
         testPowerUp.applyPowerUp(testBoat);
-        assertEquals(50, testBoat.getCurrentSpeed());
+        assertEquals(50, testBoat.getCurrentSpeed(), "Speed shouldn't be changed");
     }
 }

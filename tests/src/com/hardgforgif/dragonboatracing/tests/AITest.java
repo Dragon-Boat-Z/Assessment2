@@ -1,27 +1,30 @@
 package com.hardgforgif.dragonboatracing.tests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
+import com.hardgforgif.dragonboatracing.core.AI;
+import com.hardgforgif.dragonboatracing.core.Lane;
+import com.hardgforgif.dragonboatracing.core.Obstacle;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import com.hardgforgif.dragonboatracing.core.*;
-import com.badlogic.gdx.physics.box2d.*;
-
 import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+/**
+ * Tests the AI class
+ */
 @RunWith(GdxTestRunner.class)
 public class AITest {
-    
+
     Lane mockLane;
     Obstacle mockObstacle;
     Sprite mockObstacleSprite;
@@ -34,8 +37,9 @@ public class AITest {
     int boatType = 3;
 
     @Before
-    public void init(){
-        //Mock the opengl classes using mockito so that libgdx opengl functions can be used
+    public void init() {
+        // Mock the opengl classes using mockito so that libgdx opengl functions can be
+        // used
         Gdx.gl20 = Mockito.mock(GL20.class);
         Gdx.gl30 = Mockito.mock(GL30.class);
 
@@ -54,71 +58,73 @@ public class AITest {
     }
 
     @Test
-    public void testAIConstructor(){
-        assertEquals(110.4f, Math.round(testAI.getRobustness() * 1000f) / 1000f);
-        assertEquals(82.8f, Math.round(testAI.getSpeed() * 1000f) / 1000f);
-        assertEquals(92f, Math.round(testAI.getAcceleration() * 1000f) / 1000f);
-        assertEquals(101.2f, Math.round(testAI.getManeuverability() * 1000f) / 1000f);
-        assertEquals(0.275f, testAI.getTurningSpeed());
-        assertEquals(mockLane, testAI.getLane());
+    public void testAIConstructor() {
+        assertEquals(110.4f, Math.round(testAI.getRobustness() * 1000f) / 1000f, "Robustness incorrect");
+        assertEquals(82.8f, Math.round(testAI.getSpeed() * 1000f) / 1000f, "Speed incorrect");
+        assertEquals(92f, Math.round(testAI.getAcceleration() * 1000f) / 1000f, "Acceleration incorrect");
+        assertEquals(101.2f, Math.round(testAI.getManeuverability() * 1000f) / 1000f, "Maneuverability incorrect");
+        assertEquals(0.275f, testAI.getTurningSpeed(), "Turning speed incorrect");
+        assertEquals(mockLane, testAI.getLane(), "Lane incorrect");
     }
 
     @Test
-    public void testUpdateAI(){
+    public void testUpdateAI() {
         testAI.updateAI(2f);
-        assertEquals(new Vector2(10000f,12493.6f), testAI.getLaneChecker());
-        assertEquals(new Vector2(10000f,12393.6f), testAI.getObjectChecker());
-        assertFalse(testAI.getIsDodging()); 
+        assertEquals(new Vector2(10000f, 12493.6f), testAI.getLaneChecker(), "Lane checker incorrect");
+        assertEquals(new Vector2(10000f, 12393.6f), testAI.getObjectChecker(), "Object checker incorrect");
+        assertFalse(testAI.getIsDodging(), "isDodging should be false");
     }
 
     @Test
-    public void testUpdateAIMovement(){
+    public void testUpdateAIMovement() {
         // test when stamina is above 50
         testAI.setStamina(51);
         testAI.updateAI(2f);
-        assertTrue(testAI.getIsAccelerating());
-        assertFalse(testAI.getIsBraking());
-        
+        assertTrue(testAI.getIsAccelerating(), "Should be accelerating when stamina above 50");
+        assertFalse(testAI.getIsBraking(), "Shouldn't be braking when stamina above 50");
+
         // test when stamina is above 30
         testAI.setStamina(31);
         testAI.updateAI(2f);
-        assertFalse(testAI.getIsAccelerating());
-        assertFalse(testAI.getIsBraking());
-        
+        assertFalse(testAI.getIsAccelerating(), "Shouldn't be accelerating when stamina above 30, below 50");
+        assertFalse(testAI.getIsBraking(), "Should be braking when stamina above 30, below 50");
+
         // test when stamina is below 30
         testAI.setStamina(29);
         testAI.updateAI(2f);
-        assertFalse(testAI.getIsAccelerating());
-        assertTrue(testAI.getIsBraking());
+        assertFalse(testAI.getIsAccelerating(), "Should be accelerating when stamina below 30");
+        assertTrue(testAI.getIsBraking(), "Shouldn't be braking when stamina below 30");
     }
 
-    private void setupMockLane(){
+    /**
+     * Sets up attributes for the mock lane
+     */
+    private void setupMockLane() {
+        // left iterator and boundaries
         Mockito.when(mockLane.getLeftIterator()).thenReturn(5);
-        float[][] leftBoundaries = {{0,0},
-                                    {15,5},
-                                    {30,10},
-                                    {45,15},
-                                    {60,20}};
+        float[][] leftBoundaries = { { 0, 0 }, { 15, 5 }, { 30, 10 }, { 45, 15 }, { 60, 20 } };
         Mockito.when(mockLane.getLeftBoundary()).thenReturn(leftBoundaries);
 
+        // right iterator and boundaries
         Mockito.when(mockLane.getRightIterator()).thenReturn(5);
-        float[][] rightBoundaries = {{10,0},
-                                     {25,5},
-                                     {40,10},
-                                     {55,15},
-                                     {70,20}};
+        float[][] rightBoundaries = { { 10, 0 }, { 25, 5 }, { 40, 10 }, { 55, 15 }, { 70, 20 } };
         Mockito.when(mockLane.getRightBoundary()).thenReturn(rightBoundaries);
 
+        // add array with single mock obstacle
         setupMockObstacle();
-        Obstacle[] obstacles = {mockObstacle};
+        Obstacle[] obstacles = { mockObstacle };
         Mockito.when(mockLane.getObstacles()).thenReturn(obstacles);
     }
 
-    private void setupMockObstacle(){
+    private void setupMockObstacle() {
         Mockito.doReturn(mockObstacleSprite).when(mockObstacle).getObstacleSprite();
     }
 
-    public void setupMockObstacleSprite(){
+    /**
+     * Sets up the attributes for the mock obstacle
+     */
+    public void setupMockObstacleSprite() {
+        // mock has width, height, x and y
         Mockito.when(mockObstacleSprite.getWidth()).thenReturn(20f);
         Mockito.when(mockObstacleSprite.getHeight()).thenReturn(20f);
         Mockito.when(mockObstacleSprite.getX()).thenReturn(45f);

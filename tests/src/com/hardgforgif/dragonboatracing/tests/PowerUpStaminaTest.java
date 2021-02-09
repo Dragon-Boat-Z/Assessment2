@@ -16,10 +16,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-
 @RunWith(GdxTestRunner.class)
 public class PowerUpStaminaTest {
-    
+
     Lane mockLane;
     Boat testBoat;
     PowerUpStamina testPowerUp;
@@ -38,23 +37,25 @@ public class PowerUpStaminaTest {
     }
 
     @Test
-    public void testPowerUpSpeedConstructor(){
+    public void testPowerUpSpeedConstructor() {
         Texture texture = testPowerUp.getObstacleTexture();
-        assertEquals("PowerUps/StaminaBoost.png", texture.toString());
-        assertEquals(0, testPowerUp.getX());
-        assertEquals(0, testPowerUp.getY());
-        assertTrue(testPowerUp.isPowerUp());
+        assertEquals("PowerUps/StaminaBoost.png", texture.toString(), "Texture file incorrect");
+        assertEquals(0, testPowerUp.getX(), "X position incorrect");
+        assertEquals(0, testPowerUp.getY(), "Y position incorrect");
+        assertTrue(testPowerUp.isPowerUp(), "Should be a powerup obstacle");
     }
 
     @Test
-    public void testApplyPowerUpStamina(){
+    public void testApplyPowerUpStamina() {
+        // timer at zero
         testBoat.setStamina(40);
         testPowerUp.applyPowerUp(testBoat);
-        assertEquals(60, testBoat.getStamina());
+        assertEquals(60, testBoat.getStamina(), "Stamina increased incorrectly");
 
+        // powerup currently applied
         testBoat.setStamina(40);
         testBoat.setPowerUpTimer(4);
         testPowerUp.applyPowerUp(testBoat);
-        assertEquals(40, testBoat.getStamina());
+        assertEquals(40, testBoat.getStamina(), "Stamina shouldn't have changed (powerup shouldn't apply)");
     }
 }
