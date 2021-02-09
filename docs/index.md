@@ -5,7 +5,7 @@
 layout: default
 title: Home
 nav_order: 1
-description: "Useful links for team 10"
+description: "Useful links for team 18"
 ---
 
 # ENG1 - Team 18 - DragonBoatZ
@@ -14,7 +14,7 @@ We took over Hard G for GIFs game "York Dragon Boat Racing 2021".
 
 Individual PDF deliverables are available on each document page. Weekly snapshots are available through our meetings.
 
-[Assessment 1](assessment1){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Assessment 2](assessment2){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Meetings](meetings){: .btn .fs-5 .mb-4 .mb-md-0 }
+[Assessment 1](assessment1){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Assessment 2](assessment2){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Contact](contact){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ## Downloads
 
@@ -25,33 +25,7 @@ Individual PDF deliverables are available on each document page. Weekly snapshot
 
 - [GitHub organisation](https://github.com/Dragon-Boat-Z)
 - [Repository](https://github.com/Dragon-Boat-Z/Assessment2)
+- [Previous Team Repository](https://github.com/hardgforgifs/game)
 
-## Contact
 
-### Team Members
 
-These are the members working on the project, feel free to either get in touch with via email or reaching out through github.
-
-#### Ben Jenner
-
-[github]() • [email]() 
-
-#### James Wilkinson
-
-[github](https://github.com/jamesrwilkinson) • [email](jrm567@york.ac.uk) 
-
-#### Joe Lonsdale
-
-[github]() • [email]() 
-
-#### Richard Upton
-
-[github]() • [email]()
-
-#### Will Dalgleish
-
-[github]() • [email]() 
-
-#### Xinyi Zhang
-
-[github]() • [email]() 
