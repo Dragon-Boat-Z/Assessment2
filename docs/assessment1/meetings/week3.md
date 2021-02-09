@@ -20,7 +20,7 @@ After a week of work we were ready to move to the next step.
 
 
 
-![gantt chart](https://github.com/Dragon-Boat-Z/Assessment2/blob/website/docs/assets/assessment1/static/week3.png "Gantt chart")
+![gantt chart](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment1/static/week3.png "Gantt chart")
 
 ## Meeting 4 (22/10/2020)
 
