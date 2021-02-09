@@ -22,6 +22,10 @@ Final round of Black Box Testing after development.
 
 [Black Box Final (.xlsx)](https://github.com/Dragon-Boat-Z/Assessment2/raw/website/docs/assets/assessment2/testing_material/BlackBox%20Final.xlsx){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
+## Black Box Testing - Final Fail Cases
+
+![Fail Cases](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment2/testing_material/FailedTests.png "Black Box Testing Fail Cases")
+
 ## Traceability Matrix
 
 [Traceability Matrix (.xlsx)](https://github.com/Dragon-Boat-Z/Assessment2/raw/website/docs/assets/assessment2/testing_material/Traceability%20matrix.xlsx){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
