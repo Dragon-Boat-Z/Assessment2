@@ -157,6 +157,8 @@ In the main menu you can select “Load” to load a save slot that you have pre
 
 ## Winning the Game
 
+![First Place](https://raw.githubusercontent.com/Dragon-Boat-Z/Assessment2/website/docs/assets/assessment2/static/firstplace.png "First Place")
+
 If the player manages to achieve one of the 3 fastest times across the 3 legs, they will qualify for the final race where they will compete against the other 3 fastest boats. 
 
 Upon completing the final race, the player will place first, second or third respective to their finishing position.
