@@ -46,18 +46,21 @@ In this screen you will be able to select one of seven boats as the boat you wou
 
 ## Boat Statistics
 
-* Robustness
-    * Determines how much damage a boat can take.
-    * A boat with higher robustness will lose a smaller percentage damage to the durability upon collision with an obstacle.
-* Manoeuvrability
-    * Determines how fast the boat can avoid obstacles.
-    * A boat with higher manoeuvrability will be able to move side to side better without losing speed.
-* Max Speed
-    * Determines how fast a boat can go.
-    * A boat with higher max speed will be able to go faster than other boats.
-* Acceleration
-    * Determines how quickly a boat can achieve its max speed.
-    * A boat with higher acceleration will achieve its max speed before other boats.
+### Robustness
+* Determines how much damage a boat can take.
+* A boat with higher robustness will lose a smaller percentage damage to the durability upon collision with an obstacle.
+
+### Manoeuvrability
+* Determines how fast the boat can avoid obstacles.
+* A boat with higher manoeuvrability will be able to move side to side better without losing speed.
+
+### Max Speed
+* Determines how fast a boat can go.
+* A boat with higher max speed will be able to go faster than other boats.
+
+### Acceleration
+* Determines how quickly a boat can achieve its max speed.
+* A boat with higher acceleration will achieve its max speed before other boats.
 
 ## Game Difficulty
 
